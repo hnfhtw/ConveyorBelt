@@ -9,12 +9,14 @@
 
 using namespace std;
 
+KeyboardHandler* pKeyboardHandler;
+
 SysControl::SysControl(MotorControl* pMctrl, DisplayControl* pDctrl){
 	m_pMotorControl = pMctrl;
 	m_pDisplayControl = pDctrl;
 	m_pTCPHandler_Chain = new TCPHandler_Chain(this);
 	m_pTCPHandler_UI = new TCPHandler_UI(this, m_pMotorControl);
-	m_pKeyboardHandler = new KeyboardHandler(this, m_pMotorControl);
+	pKeyboardHandler = new KeyboardHandler(this, m_pMotorControl);
 	m_StateOpMode = OPMODE_INIT;
 	m_StateSysState = STATE_IDLE;
 	m_RequestPending = false;	
@@ -25,10 +27,10 @@ SysControl::~SysControl(){
 	m_pDisplayControl = NULL;
 	delete m_pTCPHandler_Chain;
 	delete m_pTCPHandler_UI;
-	delete m_pKeyboardHandler;
+	delete pKeyboardHandler;
 	m_pTCPHandler_Chain = NULL;
 	m_pTCPHandler_UI = NULL;
-	m_pKeyboardHandler = NULL;
+	pKeyboardHandler = NULL;
 }
 
 void SysControl::setCommand(Command cmd){
@@ -49,4 +51,20 @@ OpMode SysControl::getOpMode(){
 
 SysState SysControl::getSysState(){
 	return m_StateSysState;
+}
+
+TCPHandler_Chain* SysControl::getTCPHandler_Chain(){
+	return m_pTCPHandler_Chain;
+}
+
+KeyboardHandler* SysControl::getKeyboardHandler(){
+	return pKeyboardHandler;
+}
+
+void SysControl::setRequestPending(bool req){
+	m_RequestPending = req;
+}
+
+bool SysControl::getRequestPending(){
+	return m_RequestPending;
 }

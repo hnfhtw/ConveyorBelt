@@ -115,6 +115,7 @@ ConveyorBelt_partialImage/Debug/Objects/ConveyorBelt/statemachine/systemManager.
   C:/_HP/ConveyorBelt/statemachine/myFunctions.h \
   C:/_HP/ConveyorBelt/syscontrol/SysControl.h \
   C:/_HP/ConveyorBelt/syscontrol/TCPHandler_Chain.h \
+  C:/_HP/ConveyorBelt/syscontrol/Command.h \
   C:/_HP/ConveyorBelt/syscontrol/TCPHandler_UI.h \
   C:/_HP/ConveyorBelt/syscontrol/MotorControl.h \
   C:/_HP/ConveyorBelt/syscontrol/DisplayControl.h \
@@ -122,7 +123,7 @@ ConveyorBelt_partialImage/Debug/Objects/ConveyorBelt/statemachine/systemManager.
   C:/_HP/ConveyorBelt/syscontrol/KeyboardHandler.h \
   C:/_HP/ConveyorBelt/syscontrol/OpMode.h \
   C:/_HP/ConveyorBelt/syscontrol/SysState.h \
-  C:/_HP/ConveyorBelt/syscontrol/Command.h
+  C:/_HP/ConveyorBelt/hwfiles/hwFunc.h
 
 C:/_HP/ConveyorBelt/statemachine/systemManager.h:
 
@@ -354,6 +355,8 @@ C:/_HP/ConveyorBelt/syscontrol/SysControl.h:
 
 C:/_HP/ConveyorBelt/syscontrol/TCPHandler_Chain.h:
 
+C:/_HP/ConveyorBelt/syscontrol/Command.h:
+
 C:/_HP/ConveyorBelt/syscontrol/TCPHandler_UI.h:
 
 C:/_HP/ConveyorBelt/syscontrol/MotorControl.h:
@@ -368,5 +371,5 @@ C:/_HP/ConveyorBelt/syscontrol/OpMode.h:
 
 C:/_HP/ConveyorBelt/syscontrol/SysState.h:
 
-C:/_HP/ConveyorBelt/syscontrol/Command.h:
+C:/_HP/ConveyorBelt/hwfiles/hwFunc.h:
 

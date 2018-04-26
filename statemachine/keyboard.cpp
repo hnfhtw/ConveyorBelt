@@ -2,7 +2,9 @@
 #include <sysLib.h>
 #include <stdLib.h>
 #include "keyboard.h"
-
+extern "C"{
+	#include "kbd.h"
+}
 int keyCount;
 
 Keyboard :: Keyboard() {
@@ -17,7 +19,6 @@ Keyboard :: ~Keyboard() {
 
 char Keyboard::getPressedKey( )
 {
-	printf(".");
-//	pressedKey = getKey();
+	char pressedKey = getKey();
 	return pressedKey;
 }

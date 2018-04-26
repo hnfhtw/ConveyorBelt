@@ -6,8 +6,12 @@
  */
 
 #include "KeyboardHandler.h"
+#include "stateMachine.h"
+extern "C"{
+	#include "hwFunc.h"
+}
 
-using namespace std;
+StateMachine* pStateMachine;
 
 KeyboardHandler::KeyboardHandler(SysControl* pSctrl, MotorControl* pMctrl){
 	m_pMotorControl = pMctrl;
@@ -23,7 +27,39 @@ KeyboardHandler::~KeyboardHandler(){
 }
 
 void KeyboardHandler::evaluateKey(){
-	// char return value is not necessary
-	// todo: check if key of keyboard is pressed
-	//		 if yes: inform SysControl or MotorControl depending on the pressed key
+	char ch = getKey();
+	
+	int finalSpeed;
+
+	switch(ch){
+		case 'A':	pStateMachine->sendEvent("setOpMode(OPMODE_LOCAL)");
+					printf("Key A pressed\n");
+					break;
+		case 'B':	pStateMachine->sendEvent("setOpMode(OPMODE_CHAIN)");
+					printf("Key B pressed\n");
+					break;
+		case 'D':	if( (m_pSysControl->getOpMode() == OPMODE_LOCAL) && (m_pMotorControl->getMotorState() == MOTOR_STOP) ){
+						m_pMotorControl->setDirection(!(m_pMotorControl->getDirection()));
+					}
+					break;
+		case 'F':	if( (m_pSysControl->getOpMode() == OPMODE_LOCAL) && (m_pMotorControl->getMotorState() == MOTOR_STOP) ){
+						finalSpeed = m_pMotorControl->getMotorSpeedFinal();
+						if(finalSpeed <= 1700){
+							m_pMotorControl->setMotorSpeedFinal(finalSpeed + 100);
+						}
+					}
+					break;
+		case 'C':	if( (m_pSysControl->getOpMode() == OPMODE_LOCAL) && (m_pMotorControl->getMotorState() == MOTOR_STOP) ){
+						finalSpeed = m_pMotorControl->getMotorSpeedFinal();
+						if(finalSpeed >= 200){
+							m_pMotorControl->setMotorSpeedFinal(finalSpeed - 100);
+						}
+					}
+					break;
+		case 'E':	pStateMachine->sendEvent("startRamp()");
+					break;
+		default:	break;
+	}
+
+	return;
 }

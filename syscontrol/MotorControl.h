@@ -19,11 +19,9 @@ private:
 	DisplayControl*	m_pDisplayControl;
 	SysControl*		m_pSysControl;
 	MotorState		m_MotorState;
-	bool			m_Direction;
+	bool			m_Direction;				// TRUE = clockwise, FALSE = counter clockwise
 	int				m_MotorSpeedFinal;
 	int				m_TargetSpeed;
-	void decreaseSpeed();
-	void increaseSpeed();
 public:
 	int				cMotorSpeedSlow; //= 100;
 	int				cTimeTransition; //= 6000;
@@ -33,11 +31,18 @@ public:
 	void moveSlow();
 	void startRamp();
 	void stop();
+	void setMotorState(MotorState state);
 	MotorState getMotorState();
 	void setMotorSpeedFinal(int speed);
+	int getMotorSpeedFinal();
 	void setDirection(bool dir);
+	bool getDirection();
 	//void setDisplayControl(DisplayControl* pDctrl);	// pointer provided in constructor already
 	void setSysControl(SysControl* pSysctrl);
+	void setTargetSpeed(int speed);
+	int getTargetSpeed();
+	void decreaseSpeed();
+	void increaseSpeed();
 };
 
 #endif /* MOTORCONTROL_H_ */

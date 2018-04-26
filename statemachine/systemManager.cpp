@@ -7,6 +7,10 @@
 #include "MotorControl.h"
 #include "DisplayControl.h"
 #include "stateMachine.h"
+extern "C"{
+	#include "hwFunc.h"
+}
+
 
 #define	RECEIVE_TIME			1000
 #define	STEP_TIME		  		50
@@ -15,7 +19,7 @@
 
 int n, m;
 StateMachine* pStateMachine;
-Keyboard* myKeyboard;
+KeyboardHandler* pKeyboardHandler;
 SysControl* pSysControl;
 MotorControl* pMotorControl;
 DisplayControl* pDisplayControl;
@@ -80,7 +84,7 @@ SystemManager :: SystemManager() {
 	diagrams = 4;
 	
 	// Create instance of my Keyboard
-	myKeyboard = new Keyboard;
+	//pKeyboard = new Keyboard;
 	
 	// Create instances of other classes
     pDisplayControl = new DisplayControl;
@@ -92,6 +96,8 @@ SystemManager :: SystemManager() {
     pDisplayControl->setSysControl(pSysControl);
     pMotorControl->setSysControl(pSysControl);
 
+   // pKeyboardHandler = pSysControl->getKeyboardHandler();
+    
 	// Create instance of state machine
 	pStateMachine = new StateMachine;
 
@@ -113,225 +119,204 @@ SystemManager :: ~SystemManager() {
 }
 
 void trig00_action(){
-	//m_SysControl->setOpMode(OPMODE_CHAIN);
-		// setMotorSpeedFinal(1800);
-		// setDirection(TRUE);	
-		// updateDisplay();
+	pSysControl->setOpMode(OPMODE_CHAIN);
+	pMotorControl->setMotorSpeedFinal(1800);
+	pMotorControl->setDirection(TRUE);	
+	pDisplayControl->updateDisplay();
+	printf("OPMODE_CHAIN entered\n");
+	//writeToDisplay (10, 10, "OPMODE_CHAIN entered");
 	return;
 }
 
 void trig01_action(){
-	//m_SysCotrol->setOpMode(OPMODE_LOCAL);
-		// updateDisplay();
+	pSysControl->setOpMode(OPMODE_LOCAL);
+	pDisplayControl->updateDisplay();
 	printf("OPMODE_LOCAL entered\n");
+	//writeToDisplay (10, 10, "OPMODE_LOCAL entered");
 	return;
 }
 
 void trig02_action(){
-	//m_SysCotrol->setOpMode(OPMODE_LOCAL);
-		// updateDisplay();
+	pSysControl->setOpMode(OPMODE_LOCAL);
+	pDisplayControl->updateDisplay();
+	printf("OPMODE_LOCAL entered\n");
+	//writeToDisplay (10, 10, "OPMODE_LOCAL entered");
 	return;
 }
 
 void trig03_action(){
-	//m_SysControl->setOpMode(OPMODE_CHAIN);
-		// setMotorSpeedFinal(1800);
-		// setDirection(TRUE);	
-		// updateDisplay();
+	pSysControl->setOpMode(OPMODE_CHAIN);
+	pMotorControl->setMotorSpeedFinal(1800);
+	pMotorControl->setDirection(TRUE);	
+	pDisplayControl->updateDisplay();
+	printf("OPMODE_CHAIN entered\n");
+	//writeToDisplay (10, 10, "OPMODE_CHAIN entered");
 	return;
 }
 
 void trig10_action(){
-	//m_SysControl->setSysState(STATE_RECEIVEPACKET);
-		// sendToLCB(READY);
-		// moveSlow();
-		// updateDisplay();
+	pSysControl->setSysState(STATE_RECEIVEPACKET);
+	pSysControl->getTCPHandler_Chain()->sendToLCB(READY);
+	pMotorControl->moveSlow();
+	pDisplayControl->updateDisplay();
+		pStateMachine->sendEvent("moveSlow()");
 	return;
 }
 
 void trig11_action(){
-	// m_RequestPending = true;
-	// updateDisplay();
+	pSysControl->setRequestPending(true);
+	pDisplayControl->updateDisplay();
 	return;
 }
 
 void trig12_action(){
-	//m_SysControl->setSysState(STATE_TRANSFERPACKET);
-		// sendToLCB(RELEASE);
-		// startRamp();
-		// updateDisplay();
+	pSysControl->setSysState(STATE_TRANSFERPACKET);
+	pSysControl->getTCPHandler_Chain()->sendToLCB(RELEASE);
+	pMotorControl->startRamp();
+	pDisplayControl->updateDisplay();
+		pStateMachine->sendEvent("startRamp()");
 	return;
 }
 
 void trig13_action(){
-	// m_RequestPending = true;
-	// updateDisplay();
+	pSysControl->setRequestPending(true);
+	pDisplayControl->updateDisplay();
 	return;
 }
 
 void trig14_action(){
-	//m_SysControl->setSysState(STATE_WAITFORRCB);
-		// sendToRCB(REQUEST);
-		// updateDisplay();
+	pSysControl->setSysState(STATE_WAITFORRCB);
+	pSysControl->getTCPHandler_Chain()->sendToRCB(REQUEST);
+	pDisplayControl->updateDisplay();
 	return;
 }
 
 void trig15_action(){
-	// m_RequestPending = TRUE;
-	// updateDisplay();
+	pSysControl->setRequestPending(true);
+	pDisplayControl->updateDisplay();
 	return;
 }
 
 void trig16_action(){
-	// updateDisplay();
+	pDisplayControl->updateDisplay();
 	return;
 }
 
 void trig17_action(){
-	//m_SysControl->setSysState(STATE_DELIVERPACKET);
-		// moveSlow();
-		// updateDisplay();
+	pSysControl->setSysState(STATE_DELIVERPACKET);
+	pMotorControl->moveSlow();
+	pDisplayControl->updateDisplay();
+		pStateMachine->sendEvent("moveSlow()");
 	return;
 }
 
 void trig18_action(){
-	// m_RequestPending = TRUE;
-	// updateDisplay();
+	pSysControl->setRequestPending(true);
+	pDisplayControl->updateDisplay();
 	return;
 }
 
 void trig19_action(){
-	//m_SysControl->setSysState(STATE_IDLE);
-		// stop()
-		// updateDisplay();
+	pSysControl->setSysState(STATE_IDLE);
+	pMotorControl->stop();
+	pDisplayControl->updateDisplay();
+		pStateMachine->sendEvent("stop()");
 	return;
 }
 
 void trig110_action(){
-	//m_SysControl->setSysState(STATE_RECEIVEPACKET);
-		// stop()
-		// m_RequestPending = FALSE;
-		// sendToLCB(READY);
-		// moveSlow()
-		// updateDisplay();
+	pSysControl->setSysState(STATE_RECEIVEPACKET);
+	pMotorControl->stop();
+	pSysControl->setRequestPending(false);
+	pSysControl->getTCPHandler_Chain()->sendToLCB(READY);
+	pMotorControl->moveSlow();
+	pDisplayControl->updateDisplay();
+		pStateMachine->sendEvent("moveSlow()");
 	return;
 }
 
 void trig20_action(){
-	// m_MotorControl->setMotorState(MOTOR_SLOW);
-		// setTargetSpeed(cMotorSpeedSlow);
-		// updateDisplay();
+	pMotorControl->setMotorState(MOTOR_SLOW);
+	pMotorControl->setTargetSpeed(pMotorControl->cMotorSpeedSlow);
+	pDisplayControl->updateDisplay();
 	return;
 }
 
 void trig21_action(){
-	// m_MotorControl->setMotorState(MOTOR_RAMPUP);
-		// updateDisplay();
+	pMotorControl->setMotorState(MOTOR_RAMPUP);
+	pDisplayControl->updateDisplay();
 	return;
 }
 
 void trig22_action(){
-	// m_MotorControl->setMotorState(MOTOR_STOP);
-		// setTargetSpeed(0);
-		// updateDisplay();
+	pMotorControl->setMotorState(MOTOR_STOP);
+	pMotorControl->setTargetSpeed(0);
+	pDisplayControl->updateDisplay();
 	return;
 }
 
 void trig23_action(){
-	// m_MotorControl->setMotorState(MOTOR_RAMPUP);
-		// updateDisplay();
+	pMotorControl->setMotorState(MOTOR_RAMPUP);
+	pDisplayControl->updateDisplay();
 	return;
 }
 
 void trig24_action(){
-	// increaseSpeed();
-	// updateDisplay();
+	pMotorControl->increaseSpeed();
+	pDisplayControl->updateDisplay();
 	return;
 }
 
 void trig25_action(){
-	// m_MotorControl->setMotorState(MOTOR_FULLSPEED);
-		// setTargetSpeed(m_MotorSpeedFinal);
-		// updateDisplay();
+	pMotorControl->setMotorState(MOTOR_FULLSPEED);
+	pMotorControl->setTargetSpeed(pMotorControl->getMotorSpeedFinal());
+	pDisplayControl->updateDisplay();
 	return;
 }
 
 void trig26_action(){
-	// m_MotorControl->setMotorState(MOTOR_RAMPDOWN);
-		// updateDisplay();
+	pMotorControl->setMotorState(MOTOR_RAMPDOWN);
+	pDisplayControl->updateDisplay();
 	return;
 }
 
 void trig27_action(){
-	// decreaseSpeed();
-	// updateDisplay();
+	pMotorControl->decreaseSpeed();
+	pDisplayControl->updateDisplay();
 	return;
 }
 
 void trig28_action(){
-	// m_MotorControl->setMotorState(MOTOR_STOP);
-		// setTargetSpeed(0);
-		// setSysState(STATE_WAITFORRCB);
-		// updateDisplay();
+	pMotorControl->setMotorState(MOTOR_STOP);
+	pMotorControl->setTargetSpeed(0);
+	pSysControl->setSysState(STATE_WAITFORRCB);
+	pDisplayControl->updateDisplay();
+		pStateMachine->sendEvent("setSysState(STATE_WAITFORRCB)");
 	return;
 }
 
 void trig30_action(){
-	char ch = myKeyboard->getPressedKey();
+	
+	/*char ch = pKeyboard->getPressedKey();
 	if(ch == 'A'){
 		pStateMachine->sendEvent("setOpMode(OPMODE_LOCAL)");
 		printf("Key A pressed\n");
 	}
-	// evaluateKey()
+	else if(ch == 'B'){
+		pStateMachine->sendEvent("setOpMode(OPMODE_CHAIN)");
+		printf("Key B pressed\n");
+	}*/
+	//(pSysControl->getKeyboardHandler())   ->evaluateKey();
+	//KeyboardHandler* pHandler = pSysControl->getKeyboardHandler();
+	//pHandler->evaluateKey();
+	
+	pKeyboardHandler->evaluateKey();
 	return;
 }
 
-/*
-void myAction00(){
-	printf(" StateA -> Transition00 -> StateA\n\r"); 
-	n++;
-	return;
-}
+// pStateMachine->sendEvent("Trigg0");
 
-void myAction01(){
-	printf(" StateA -> Transition01 -> StateB\n\r"); 
-	pStateMachine->sendEvent("Trigg1");
-	return;
-}
 
-void myAction02(){
-	printf(" StateB -> Transition02 -> StateA\n\r"); 
-	n = 0;
-	return;
-}
-
-void myAction10(){
-	printf(" StateC -> Transition10 -> StateD\n\r"); 
-	m = 0;
-	return;
-}
-
-void myAction11(){
-	printf(" StateD -> Transition11 -> StateD\n\r"); 
-	m++;
-	return;
-}
-
-void myAction12(){
-	printf(" StateD -> Transition12 -> StateE\n\r"); 
-	return;
-}
-
-void myAction13(){
-	printf(" StateE -> Transition13 -> StateC\n\r"); 
-	pStateMachine->sendEvent("Trigg0");
-	return;
-}
-
-void myAction20(){
-	myKeyboard->getPressedKey();
-	return;
-}*/
 
 bool myConditionTrue(){
 	return TRUE;

@@ -25,7 +25,7 @@ class SysControl{			// todo: update class diagram
 private:
 	TCPHandler_Chain*	m_pTCPHandler_Chain;
 	TCPHandler_UI*		m_pTCPHandler_UI;
-	KeyboardHandler*	m_pKeyboardHandler;
+	
 	MotorControl*		m_pMotorControl;
 	DisplayControl*		m_pDisplayControl;
 	OpMode				m_StateOpMode;
@@ -40,6 +40,10 @@ public:
 	void setSysState(SysState state);
 	OpMode getOpMode();
 	SysState getSysState();
+	TCPHandler_Chain* getTCPHandler_Chain();
+	KeyboardHandler* getKeyboardHandler();
+	void setRequestPending(bool req);
+	bool getRequestPending();
 	//void setMotorControl(MotorControl* pMctrl);		// not needed as provided in constructor
 	//void setDisplayControl(DisplayControl* pDctrl);
 };

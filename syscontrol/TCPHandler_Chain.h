@@ -9,6 +9,7 @@
 #define TCPHANDLER_CHAIN_H_
 
 #include "SysControl.h"
+#include "Command.h"
 #include <string>
 using namespace std;
 
@@ -26,8 +27,8 @@ public:
 	TCPHandler_Chain(SysControl* pSctrl);
 	~TCPHandler_Chain();
 	bool getAddrRCBset();
-	void sendToRCB(string str);
-	void sendToLCB(string str);
+	void sendToRCB(Command cmd);
+	void sendToLCB(Command cmd);
 	void startServer();
 };
 

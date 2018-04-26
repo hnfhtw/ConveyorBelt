@@ -10,6 +10,10 @@
 #include <intLib.h>
 #include <sysLib.h>
 #include <stdLib.h>
+extern "C"{
+	#include "hwFunc.h"
+}
+
 #include "ifLib.h"			 // check
 #include "systemManager.h"	// check
 #include "stateMachine.h"	// check
@@ -26,6 +30,8 @@ int main (void) {
 	
 	// Set local IP address according to MAC table
 	setLocalIp();
+	
+	initHardware(0);
 	
     // create objects
     /*pDisplayControl = new DisplayControl;

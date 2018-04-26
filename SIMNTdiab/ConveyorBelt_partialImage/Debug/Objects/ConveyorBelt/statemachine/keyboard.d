@@ -60,7 +60,8 @@ ConveyorBelt_partialImage/Debug/Objects/ConveyorBelt/statemachine/keyboard.o: \
   C:/Windriver/vxworks-6.9/target/h/sioLibCommon.h \
   C:/Windriver/vxworks-6.9/target/h/drv/timer/timerDev.h \
   C:/Windriver/vxworks-6.9/target/h/stdlib.h \
-  C:/_HP/ConveyorBelt/statemachine/keyboard.h
+  C:/_HP/ConveyorBelt/statemachine/keyboard.h \
+  C:/_HP/ConveyorBelt/hwfiles/kbd.h
 
 C:/Windriver/vxworks-6.9/target/h/stdio.h:
 
@@ -183,4 +184,6 @@ C:/Windriver/vxworks-6.9/target/h/drv/timer/timerDev.h:
 C:/Windriver/vxworks-6.9/target/h/stdlib.h:
 
 C:/_HP/ConveyorBelt/statemachine/keyboard.h:
+
+C:/_HP/ConveyorBelt/hwfiles/kbd.h:
 

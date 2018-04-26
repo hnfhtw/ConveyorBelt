@@ -33,10 +33,10 @@ bool TCPHandler_Chain::getAddrRCBset(){
 	return m_AddrRCBset;
 }
 
-void TCPHandler_Chain::sendToRCB(string str){
+void TCPHandler_Chain::sendToRCB(Command cmd){
 	// do something
 }
 
-void TCPHandler_Chain::sendToLCB(string str){
+void TCPHandler_Chain::sendToLCB(Command cmd){
 	// do something
 }

@@ -3,6 +3,7 @@ ConveyorBelt_partialImage/Debug/Objects/ConveyorBelt/syscontrol/DisplayControl.o
   C:/_HP/ConveyorBelt/syscontrol/DisplayControl.h \
   C:/_HP/ConveyorBelt/syscontrol/SysControl.h \
   C:/_HP/ConveyorBelt/syscontrol/TCPHandler_Chain.h \
+  C:/_HP/ConveyorBelt/syscontrol/Command.h \
   C:/Windriver/diab/5.9.1.0/include/cpp/std/string \
   C:/Windriver/diab/5.9.1.0/include/cpp/std/istream \
   C:/Windriver/diab/5.9.1.0/include/cpp/std/ostream \
@@ -107,13 +108,15 @@ ConveyorBelt_partialImage/Debug/Objects/ConveyorBelt/syscontrol/DisplayControl.o
   C:/_HP/ConveyorBelt/syscontrol/KeyboardHandler.h \
   C:/_HP/ConveyorBelt/syscontrol/OpMode.h \
   C:/_HP/ConveyorBelt/syscontrol/SysState.h \
-  C:/_HP/ConveyorBelt/syscontrol/Command.h
+  C:/_HP/ConveyorBelt/hwfiles/hwFunc.h
 
 C:/_HP/ConveyorBelt/syscontrol/DisplayControl.h:
 
 C:/_HP/ConveyorBelt/syscontrol/SysControl.h:
 
 C:/_HP/ConveyorBelt/syscontrol/TCPHandler_Chain.h:
+
+C:/_HP/ConveyorBelt/syscontrol/Command.h:
 
 C:/Windriver/diab/5.9.1.0/include/cpp/std/string:
 
@@ -323,5 +326,5 @@ C:/_HP/ConveyorBelt/syscontrol/OpMode.h:
 
 C:/_HP/ConveyorBelt/syscontrol/SysState.h:
 
-C:/_HP/ConveyorBelt/syscontrol/Command.h:
+C:/_HP/ConveyorBelt/hwfiles/hwFunc.h:
 
