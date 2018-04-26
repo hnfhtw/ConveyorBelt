@@ -1,0 +1,397 @@
+
+#include "systemManager.h"
+#include "stateMachine.h"
+#include "keyboard.h"
+#include "myFunctions.h"
+
+#define	RECEIVE_TIME			1000
+#define	STEP_TIME		  		50
+#define TRANSITION_TIME			6000
+#define KEYBOARD_UPDATE_RATE	50
+
+int n, m;
+StateMachine * myStateMachine;
+Keyboard * myKeyboard;
+
+SystemManager :: SystemManager() {
+	// Initialize table for all diagrams, event time in ms (POSIX)
+	// The maximum size of the table is defined in stateTable.h:
+	// MAXDIA = 9, MAXLINES = 66
+	// Should these be exceeded, please correct!
+
+	/*tab[0][0] = new TableEntry ("StateA","StateA","Timer0",2000,myAction00,myCondition00);
+	tab[0][1] = new TableEntry ("StateA","StateB","Timer0",2000,myAction01,myCondition01);
+	tab[0][2] = new TableEntry ("StateB","StateA","Trigg0",0,myAction02,myConditionTrue);
+
+	tab[1][0] = new TableEntry ("StateC","StateD","Trigg1",0,myAction10,myConditionTrue);
+	tab[1][1] = new TableEntry ("StateD","StateD","Timer1",4000,myAction11,myCondition11);
+	tab[1][2] = new TableEntry ("StateD","StateE","Timer1",4000,myAction12,myCondition12);
+	tab[1][3] = new TableEntry ("StateE","StateC","Timer1",3000,myAction13,myConditionTrue);
+
+	tab[2][0] = new TableEntry ("StateK","StateK","Timer2",200,myAction20,myConditionTrue);*/
+	
+	tab[0][0] = new TableEntry ("OPMODE_INIT","OPMODE_CHAIN","trig00_setOpMode(OPMODE_CHAIN)",0,trig00_action,trig00_condition);
+	tab[0][1] = new TableEntry ("OPMODE_INIT","OPMODE_LOCAL","trig01_setOpMode(OPMODE_LOCAL)",0,trig01_action,myConditionTrue);
+	tab[0][2] = new TableEntry ("OPMODE_CHAIN","OPMODE_LOCAL","trig02_setOpMode(OPMODE_LOCAL)",0,trig02_action,trig02_condition);
+	tab[0][3] = new TableEntry ("OPMODE_LOCAL","OPMODE_CHAIN","trig03_setOpMode(OPMODE_CHAIN)",0,trig03_action,trig03_condition);
+	
+	tab[1][0] = new TableEntry ("STATE_IDLE","STATE_RECEIVEPACKET","trig10_setCommand(REQUEST)",0,trig10_action,myConditionTrue);
+	tab[1][1] = new TableEntry ("STATE_RECEIVEPACKET","STATE_RECEIVEPACKET","trig11_setCommand(REQUEST)",0,trig11_action,myConditionTrue);
+	tab[1][2] = new TableEntry ("STATE_RECEIVEPACKET","STATE_TRANSFERPACKET","Timer0",RECEIVE_TIME,trig12_action,myConditionTrue);
+	tab[1][3] = new TableEntry ("STATE_TRANSFERPACKET","STATE_TRANSFERPACKET","trig13_setCommand(REQUEST)",0,trig13_action,myConditionTrue);
+	tab[1][4] = new TableEntry ("STATE_TRANSFERPACKET","STATE_WAITFORRCB","trig14_setSysState(STATE_WAITFORRCB)",0,trig14_action,myConditionTrue);
+	tab[1][5] = new TableEntry ("STATE_WAITFORRCB","STATE_WAITFORRCB","trig15_setCommand(REQUEST)",0,trig15_action,myConditionTrue);
+	tab[1][6] = new TableEntry ("STATE_WAITFORRCB","STATE_WAITFORRCB","trig16_setCommand(WAIT)",0,trig16_action,myConditionTrue);
+	tab[1][7] = new TableEntry ("STATE_WAITFORRCB","STATE_DELIVERPACKET","trig17_setCommand(READY)",0,trig17_action,myConditionTrue);
+	tab[1][8] = new TableEntry ("STATE_DELIVERPACKET","STATE_DELIVERPACKET","trig18_setCommand(REQUEST)",0,trig18_action,myConditionTrue);
+	tab[1][9] = new TableEntry ("STATE_DELIVERPACKET","STATE_IDLE","trig19_setCommand(RELEASE)",0,trig19_action,trig19_condition);
+	tab[1][10] = new TableEntry ("STATE_DELIVERPACKET","STATE_RECEIVEPACKET","trig110_setCommand(RELEASE)",0,trig110_action,trig110_condition);
+	
+	tab[2][0] = new TableEntry ("MOTOR_STOP","MOTOR_SLOW","trig20_moveSlow()",0,trig20_action,myConditionTrue);
+	tab[2][1] = new TableEntry ("MOTOR_STOP","MOTOR_RAMPUP","trig21_startRamp()",0,trig21_action,myConditionTrue);
+	tab[2][2] = new TableEntry ("MOTOR_SLOW","MOTOR_STOP","trig22_stop()",0,trig22_action,myConditionTrue);
+	tab[2][3] = new TableEntry ("MOTOR_SLOW","MOTOR_RAMPUP","trig23_startRamp()",0,trig23_action,myConditionTrue);
+	tab[2][4] = new TableEntry ("MOTOR_RAMPUP","MOTOR_RAMPUP","Timer1",STEP_TIME,trig24_action,trig24_condition);
+	tab[2][5] = new TableEntry ("MOTOR_RAMPUP","MOTOR_FULLSPEED","Timer1",STEP_TIME,trig25_action,trig25_condition);
+	tab[2][6] = new TableEntry ("MOTOR_FULLSPEED","MOTOR_RAMPDOWN","Timer2",TRANSITION_TIME,trig26_action,myConditionTrue);
+	tab[2][7] = new TableEntry ("MOTOR_RAMPDOWN","MOTOR_RAMPDOWN","Timer1",STEP_TIME,trig27_action,trig27_condition);
+	tab[2][8] = new TableEntry ("MOTOR_RAMPDOWN","MOTOR_STOP","Timer1",STEP_TIME,trig28_action,trig28_condition);
+	
+	tab[3][0] = new TableEntry ("WAIT_FOR_KEY","WAIT_FOR_KEY","Timer3",KEYBOARD_UPDATE_RATE,myAction30,myConditionTrue);
+	
+	
+	// Initialize timer names for all diagrams
+	// Timer names are always Timer followed by the diagram number
+	timerNames[0] = "Timer0";
+	timerNames[1] = "Timer1";
+	timerNames[2] = "Timer2";
+
+	// Initialize line numbers for all diagrams
+	lines[0] = 3;
+	lines[1] = 4;
+	lines[2] = 1;
+
+	// Initialize first state for all diagrams
+	actualState[0] = "StateA";
+	actualState[1] = "StateC";
+	actualState[2] = "StateK";
+	
+	// Set the actual number of diagrams
+	diagrams = 3;
+	
+	// Create instance of my Keyboard
+	myKeyboard = new Keyboard;
+
+	// Create instance of state machine
+	myStateMachine = new StateMachine;
+
+	// Start timer for each diagram which needs one in the first state!
+	// In my case these are diagram 0 and 2
+	myStateMachine->diaTimerTable[0]->startTimer(tab[0][0]->eventTime);
+	myStateMachine->diaTimerTable[2]->startTimer(tab[2][0]->eventTime);
+
+	// Initial actions can be done here, if needed!
+	n = 0;
+	m = 0;
+
+	return;
+}
+
+SystemManager :: ~SystemManager() {
+	return;
+}
+
+void trig00_action(){
+	// setMotorSpeedFinal(1800);
+	// setDirection(TRUE);	
+	// updateDisplay();
+	return;
+}
+
+void trig01_action(){
+	// updateDisplay();
+	return;
+}
+
+void trig02_action(){
+	// updateDisplay();
+	return;
+}
+
+void trig03_action(){
+	// setMotorSpeedFinal(1800);
+	// setDirection(TRUE);	
+	// updateDisplay();
+	return;
+}
+
+void trig10_action(){
+	// sendToLCB(READY);
+	// moveSlow();
+	// updateDisplay();
+	return;
+}
+
+void trig11_action(){
+	// m_RequestPending = true;
+	// updateDisplay();
+	return;
+}
+
+void trig12_action(){
+	// sendToLCB(RELEASE);
+	// startRamp();
+	// updateDisplay();
+	return;
+}
+
+void trig13_action(){
+	// m_RequestPending = true;
+	// updateDisplay();
+	return;
+}
+
+void trig14_action(){
+	// sendToRCB(REQUEST);
+	// updateDisplay();
+	return;
+}
+
+void trig15_action(){
+	// m_RequestPending = TRUE;
+	// updateDisplay();
+	return;
+}
+
+void trig16_action(){
+	// updateDisplay();
+	return;
+}
+
+void trig17_action(){
+	// moveSlow();
+	// updateDisplay();
+	return;
+}
+
+void trig18_action(){
+	// m_RequestPending = TRUE;
+	// updateDisplay();
+	return;
+}
+
+void trig19_action(){
+	// stop()
+	// updateDisplay();
+	return;
+}
+
+void trig110_action(){
+	// stop()
+	// m_RequestPending = FALSE;
+	// sendToLCB(READY);
+	// moveSlow()
+	// updateDisplay();
+	return;
+}
+
+void trig20_action(){
+	// setTargetSpeed(cMotorSpeedSlow);
+	// updateDisplay();
+	return;
+}
+
+void trig21_action(){
+	// updateDisplay();
+	return;
+}
+
+void trig22_action(){
+	// setTargetSpeed(0);
+	// updateDisplay();
+	return;
+}
+
+void trig23_action(){
+	// updateDisplay();
+	return;
+}
+
+void trig24_action(){
+	// increaseSpeed();
+	// updateDisplay();
+	return;
+}
+
+void trig25_action(){
+	// setTargetSpeed(m_MotorSpeedFinal);
+	// updateDisplay();
+	return;
+}
+
+void trig26_action(){
+	// updateDisplay();
+	return;
+}
+
+void trig27_action(){
+	// decreaseSpeed();
+	// updateDisplay();
+	return;
+}
+
+void trig28_action(){
+	// setTargetSpeed(0);
+	// setSysState(STATE_WAITFORRCB);
+	// updateDisplay();
+	return;
+}
+
+void trig30_action(){
+	// evaluateKey()
+	return;
+}
+
+void myAction00(){
+	printf(" StateA -> Transition00 -> StateA\n\r"); 
+	n++;
+	return;
+}
+
+void myAction01(){
+	printf(" StateA -> Transition01 -> StateB\n\r"); 
+	myStateMachine->sendEvent("Trigg1");
+	return;
+}
+
+void myAction02(){
+	printf(" StateB -> Transition02 -> StateA\n\r"); 
+	n = 0;
+	return;
+}
+
+void myAction10(){
+	printf(" StateC -> Transition10 -> StateD\n\r"); 
+	m = 0;
+	return;
+}
+
+void myAction11(){
+	printf(" StateD -> Transition11 -> StateD\n\r"); 
+	m++;
+	return;
+}
+
+void myAction12(){
+	printf(" StateD -> Transition12 -> StateE\n\r"); 
+	return;
+}
+
+void myAction13(){
+	printf(" StateE -> Transition13 -> StateC\n\r"); 
+	myStateMachine->sendEvent("Trigg0");
+	return;
+}
+
+void myAction20(){
+	myKeyboard->getPressedKey();
+	return;
+}
+
+bool myConditionTrue(){
+	return TRUE;
+}
+
+bool trig00_condition(){
+	/*if (getAddrRCBset() == TRUE) {
+		return TRUE;
+	}
+	else return FALSE;
+	*/
+}
+
+bool trig02_condition(){
+	/*if (getMotorState() == MOTOR_STOP) {
+		return TRUE;
+	}
+	else return FALSE;
+	*/
+}
+
+bool trig03_condition(){
+	/*if ( (getMotorState() == MOTOR_STOP) && (getAddrRCBset() == TRUE) ) {
+		return TRUE;
+	}
+	else return FALSE;
+	*/
+}
+
+bool trig19_condition(){
+	/*if ( m_RequestPending == TRUE ) {
+		return FALSE;
+	}
+	else return TRUE;
+	*/
+}
+
+bool trig110_condition(){
+	/*if ( m_RequestPending == TRUE ) {
+		return TRUE;
+	}
+	else return FALSE;
+	*/
+}
+
+bool trig24_condition(){
+	/*if ( m_TargetSpeed >= m_MotorSpeedFinal == TRUE ) {
+		return FALSE;
+	}
+	else return TRUE;
+	*/
+}
+
+bool trig25_condition(){
+	/*if ( m_TargetSpeed >= m_MotorSpeedFinal == TRUE ) {
+		return TRUE;
+	}
+	else return FALSE;
+	*/
+}
+
+bool trig27_condition(){
+	/*if ( m_TargetSpeed <= 0 ) {
+		return FALSE;
+	}
+	else return TRUE;
+	*/
+}
+
+bool trig28_condition(){
+	/*if ( m_TargetSpeed <= 0 ) {
+		return TRUE;
+	}
+	else return FALSE;
+	*/
+}
+
+bool myCondition00(){
+	if (n < 5) {
+		return TRUE;
+	}
+	else return FALSE;
+}
+
+bool myCondition01(){
+	if (n >= 5) return TRUE;
+	else return FALSE;
+}
+
+bool myCondition11(){
+	if (m < 4) return TRUE;
+	else return FALSE;
+}
+
+bool myCondition12(){
+	if (m >= 4) return TRUE;
+	else return FALSE;
+}
