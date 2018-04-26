@@ -79,10 +79,10 @@ void DisplayControl::updateDisplay(){
 		default:					break;
 	}		   
 	
-	char speed[30];
-	sprintf(speed, "Motor Actual Target Speed:  %d    ", targetSpeed);
+	char speed[40];
+	sprintf(speed, "Motor Actual Target Speed:  %d", targetSpeed);
 	writeToDisplay (11, 5, speed);	
-	sprintf(speed, "Motor Final Speed:          %d    ", finalSpeed);
+	sprintf(speed, "Motor Final Speed:          %d", finalSpeed);
 	writeToDisplay (12, 5, speed);	
 	
 	if(mode == OPMODE_LOCAL){

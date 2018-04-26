@@ -310,7 +310,45 @@ void trig30_action(){
 	//KeyboardHandler* pHandler = pSysControl->getKeyboardHandler();
 	//pHandler->evaluateKey();
 	
-	pKeyboardHandler->evaluateKey();
+	
+	//pKeyboardHandler->evaluateKey();							// ORIGINAL - Member Funktion vom Keyboard Handler aufrufen -> Programm stürzt ab
+	
+	
+	char ch = getKey();											// VERSUCH - Code aus KeyboardHandler Funktion rauskopiert -> stürzt auch ab
+		
+		int finalSpeed;
+
+		switch(ch){
+			case 'A':	pStateMachine->sendEvent("setOpMode(OPMODE_LOCAL)");
+						printf("Key A pressed\n");
+						break;
+			case 'B':	pStateMachine->sendEvent("setOpMode(OPMODE_CHAIN)");
+						printf("Key B pressed\n");
+						break;
+			case 'D':	if( (pSysControl->getOpMode() == OPMODE_LOCAL) && (pMotorControl->getMotorState() == MOTOR_STOP) ){
+							pMotorControl->setDirection(!(pMotorControl->getDirection()));
+						}
+						break;
+			case 'F':	if( (pSysControl->getOpMode() == OPMODE_LOCAL) && (pMotorControl->getMotorState() == MOTOR_STOP) ){
+							finalSpeed = pMotorControl->getMotorSpeedFinal();
+							if(finalSpeed <= 1700){
+								pMotorControl->setMotorSpeedFinal(finalSpeed + 100);
+							}
+						}
+						break;
+			case 'C':	if( (pSysControl->getOpMode() == OPMODE_LOCAL) && (pMotorControl->getMotorState() == MOTOR_STOP) ){
+							finalSpeed = pMotorControl->getMotorSpeedFinal();
+							if(finalSpeed >= 200){
+								pMotorControl->setMotorSpeedFinal(finalSpeed - 100);
+							}
+						}
+						break;
+			case 'E':	pStateMachine->sendEvent("startRamp()");
+						break;
+			default:	break;
+		}
+		
+		
 	return;
 }
 
