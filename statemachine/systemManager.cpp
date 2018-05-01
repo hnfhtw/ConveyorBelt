@@ -11,15 +11,12 @@ extern "C"{
 	#include "hwFunc.h"
 }
 
-
 #define	RECEIVE_TIME			1000
 #define	STEP_TIME		  		50
 #define TRANSITION_TIME			6000
 #define KEYBOARD_UPDATE_RATE	50
 
-int n, m;
 StateMachine* pStateMachine;
-KeyboardHandler* pKeyboardHandler;
 SysControl* pSysControl;
 MotorControl* pMotorControl;
 DisplayControl* pDisplayControl;
@@ -60,7 +57,6 @@ SystemManager :: SystemManager() {
 	
 	tab[3][0] = new TableEntry ("WAIT_FOR_KEY","WAIT_FOR_KEY","Timer3",KEYBOARD_UPDATE_RATE,trig30_action,myConditionTrue);
 	
-	
 	// Initialize timer names for all diagrams
 	// Timer names are always Timer followed by the diagram number
 	timerNames[0] = "Timer0";
@@ -82,34 +78,25 @@ SystemManager :: SystemManager() {
 	
 	// Set the actual number of diagrams
 	diagrams = 4;
-	
-	// Create instance of my Keyboard
-	//pKeyboard = new Keyboard;
-	
+		
 	// Create instances of other classes
-    pDisplayControl = new DisplayControl;
-    pMotorControl = new MotorControl(pDisplayControl);
-    pSysControl = new SysControl(pMotorControl, pDisplayControl);
+  pDisplayControl = new DisplayControl;
+  pMotorControl = new MotorControl(pDisplayControl);
+  pSysControl = new SysControl(pMotorControl, pDisplayControl);
     
-    // add missing links between objects
-    pDisplayControl->setMotorControl(pMotorControl);
-    pDisplayControl->setSysControl(pSysControl);
-    pMotorControl->setSysControl(pSysControl);
-
-   // pKeyboardHandler = pSysControl->getKeyboardHandler();
+  // add missing links between objects
+  pDisplayControl->setMotorControl(pMotorControl);
+  pDisplayControl->setSysControl(pSysControl);
+  pMotorControl->setSysControl(pSysControl);
     
 	// Create instance of state machine
 	pStateMachine = new StateMachine;
 
 	// Start timer for each diagram which needs one in the first state!
-	// In my case these are diagram 0 and 2
-	//pStateMachine->diaTimerTable[0]->startTimer(tab[0][0]->eventTime);
 	pStateMachine->diaTimerTable[3]->startTimer(tab[3][0]->eventTime);
 
 	// Initial actions can be done here, if needed!
-	//updateDisplay();
-	//n = 0;
-	//m = 0;
+	pDisplayControl->updateDisplay();
 
 	return;
 }
@@ -123,24 +110,18 @@ void trig00_action(){
 	pMotorControl->setMotorSpeedFinal(1800);
 	pMotorControl->setDirection(TRUE);	
 	pDisplayControl->updateDisplay();
-	printf("OPMODE_CHAIN entered\n");
-	//writeToDisplay (10, 10, "OPMODE_CHAIN entered");
 	return;
 }
 
 void trig01_action(){
 	pSysControl->setOpMode(OPMODE_LOCAL);
 	pDisplayControl->updateDisplay();
-	printf("OPMODE_LOCAL entered\n");
-	//writeToDisplay (10, 10, "OPMODE_LOCAL entered");
 	return;
 }
 
 void trig02_action(){
 	pSysControl->setOpMode(OPMODE_LOCAL);
 	pDisplayControl->updateDisplay();
-	printf("OPMODE_LOCAL entered\n");
-	//writeToDisplay (10, 10, "OPMODE_LOCAL entered");
 	return;
 }
 
@@ -148,9 +129,7 @@ void trig03_action(){
 	pSysControl->setOpMode(OPMODE_CHAIN);
 	pMotorControl->setMotorSpeedFinal(1800);
 	pMotorControl->setDirection(TRUE);	
-	pDisplayControl->updateDisplay();
-	printf("OPMODE_CHAIN entered\n");
-	//writeToDisplay (10, 10, "OPMODE_CHAIN entered");
+	pDisplayControl->updateDisplay();´
 	return;
 }
 
@@ -159,7 +138,7 @@ void trig10_action(){
 	pSysControl->getTCPHandler_Chain()->sendToLCB(READY);
 	pMotorControl->moveSlow();
 	pDisplayControl->updateDisplay();
-		pStateMachine->sendEvent("moveSlow()");
+	pStateMachine->sendEvent("moveSlow()");
 	return;
 }
 
@@ -174,7 +153,7 @@ void trig12_action(){
 	pSysControl->getTCPHandler_Chain()->sendToLCB(RELEASE);
 	pMotorControl->startRamp();
 	pDisplayControl->updateDisplay();
-		pStateMachine->sendEvent("startRamp()");
+	pStateMachine->sendEvent("startRamp()");
 	return;
 }
 
@@ -206,7 +185,7 @@ void trig17_action(){
 	pSysControl->setSysState(STATE_DELIVERPACKET);
 	pMotorControl->moveSlow();
 	pDisplayControl->updateDisplay();
-		pStateMachine->sendEvent("moveSlow()");
+	pStateMachine->sendEvent("moveSlow()");
 	return;
 }
 
@@ -220,7 +199,7 @@ void trig19_action(){
 	pSysControl->setSysState(STATE_IDLE);
 	pMotorControl->stop();
 	pDisplayControl->updateDisplay();
-		pStateMachine->sendEvent("stop()");
+	pStateMachine->sendEvent("stop()");
 	return;
 }
 
@@ -231,7 +210,7 @@ void trig110_action(){
 	pSysControl->getTCPHandler_Chain()->sendToLCB(READY);
 	pMotorControl->moveSlow();
 	pDisplayControl->updateDisplay();
-		pStateMachine->sendEvent("moveSlow()");
+	pStateMachine->sendEvent("moveSlow()");
 	return;
 }
 
@@ -291,162 +270,79 @@ void trig28_action(){
 	pMotorControl->setTargetSpeed(0);
 	pSysControl->setSysState(STATE_WAITFORRCB);
 	pDisplayControl->updateDisplay();
-		pStateMachine->sendEvent("setSysState(STATE_WAITFORRCB)");
+  pStateMachine->sendEvent("setSysState(STATE_WAITFORRCB)");
 	return;
 }
 
-void trig30_action(){
-	
-	/*char ch = pKeyboard->getPressedKey();
-	if(ch == 'A'){
-		pStateMachine->sendEvent("setOpMode(OPMODE_LOCAL)");
-		printf("Key A pressed\n");
-	}
-	else if(ch == 'B'){
-		pStateMachine->sendEvent("setOpMode(OPMODE_CHAIN)");
-		printf("Key B pressed\n");
-	}*/
-	//(pSysControl->getKeyboardHandler())   ->evaluateKey();
-	//KeyboardHandler* pHandler = pSysControl->getKeyboardHandler();
-	//pHandler->evaluateKey();
-	
-	
-	//pKeyboardHandler->evaluateKey();							// ORIGINAL - Member Funktion vom Keyboard Handler aufrufen -> Programm stürzt ab
-	
-	
-	char ch = getKey();											// VERSUCH - Code aus KeyboardHandler Funktion rauskopiert -> stürzt auch ab
-		
-		int finalSpeed;
-
-		switch(ch){
-			case 'A':	pStateMachine->sendEvent("setOpMode(OPMODE_LOCAL)");
-						printf("Key A pressed\n");
-						break;
-			case 'B':	pStateMachine->sendEvent("setOpMode(OPMODE_CHAIN)");
-						printf("Key B pressed\n");
-						break;
-			case 'D':	if( (pSysControl->getOpMode() == OPMODE_LOCAL) && (pMotorControl->getMotorState() == MOTOR_STOP) ){
-							pMotorControl->setDirection(!(pMotorControl->getDirection()));
-						}
-						break;
-			case 'F':	if( (pSysControl->getOpMode() == OPMODE_LOCAL) && (pMotorControl->getMotorState() == MOTOR_STOP) ){
-							finalSpeed = pMotorControl->getMotorSpeedFinal();
-							if(finalSpeed <= 1700){
-								pMotorControl->setMotorSpeedFinal(finalSpeed + 100);
-							}
-						}
-						break;
-			case 'C':	if( (pSysControl->getOpMode() == OPMODE_LOCAL) && (pMotorControl->getMotorState() == MOTOR_STOP) ){
-							finalSpeed = pMotorControl->getMotorSpeedFinal();
-							if(finalSpeed >= 200){
-								pMotorControl->setMotorSpeedFinal(finalSpeed - 100);
-							}
-						}
-						break;
-			case 'E':	pStateMachine->sendEvent("startRamp()");
-						break;
-			default:	break;
-		}
-		
-		
+void trig30_action(){	
+	pSysControl->getKeyboardHandler()->evaluateKey();
 	return;
 }
-
-// pStateMachine->sendEvent("Trigg0");
-
-
 
 bool myConditionTrue(){
 	return TRUE;
 }
 
 bool trig00_condition(){
-	/*if (getAddrRCBset() == TRUE) {
+	if (pSysControl->getTCPHandler_Chain()->getAddrRCBset() == TRUE) {
 		return TRUE;
 	}
 	else return FALSE;
-	*/
-	
-	return TRUE;
 }
 
 bool trig02_condition(){
-	/*if (getMotorState() == MOTOR_STOP) {
+	if (pMotorControl->getMotorState() == MOTOR_STOP) {
 		return TRUE;
 	}
 	else return FALSE;
-	*/
-	
-	return TRUE;
 }
 
 bool trig03_condition(){
-	/*if ( (getMotorState() == MOTOR_STOP) && (getAddrRCBset() == TRUE) ) {
+	if ( (pMotorControl->getMotorState() == MOTOR_STOP) && (pSysControl->getTCPHandler_Chain()->getAddrRCBset() == TRUE) ) {
 		return TRUE;
 	}
 	else return FALSE;
-	*/
-	
-	return TRUE;
 }
 
 bool trig19_condition(){
-	/*if ( m_RequestPending == TRUE ) {
+	if (pSysControl->getRequestPending() == TRUE) {
 		return FALSE;
 	}
 	else return TRUE;
-	*/
-	
-	return TRUE;
 }
 
 bool trig110_condition(){
-	/*if ( m_RequestPending == TRUE ) {
+	if (pSysControl->getRequestPending() == TRUE) {
 		return TRUE;
 	}
 	else return FALSE;
-	*/
-	
-	return TRUE;
 }
 
 bool trig24_condition(){
-	/*if ( m_TargetSpeed >= m_MotorSpeedFinal == TRUE ) {
+	if ( pMotorControl->getTargetSpeed() >= pMotorControl->getMotorSpeedFinal() ) {
 		return FALSE;
 	}
 	else return TRUE;
-	*/
-	
-	return TRUE;
 }
 
 bool trig25_condition(){
-	/*if ( m_TargetSpeed >= m_MotorSpeedFinal == TRUE ) {
+	if ( pMotorControl->getTargetSpeed() >= pMotorControl->getMotorSpeedFinal() ) {
 		return TRUE;
 	}
 	else return FALSE;
-	*/
-	
-	return TRUE;
 }
 
 bool trig27_condition(){
-	/*if ( m_TargetSpeed <= 0 ) {
+	if ( pMotorControl->getTargetSpeed() <= 0 ) {
 		return FALSE;
 	}
 	else return TRUE;
-	*/
-	
-	return TRUE;
 }
 
 bool trig28_condition(){
-	/*if ( m_TargetSpeed <= 0 ) {
+	if ( pMotorControl->getTargetSpeed() <= 0 ) {
 		return TRUE;
 	}
 	else return FALSE;
-	*/
-	
-	return TRUE;
 }
 
