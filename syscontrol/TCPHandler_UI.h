@@ -20,7 +20,6 @@ class TCPHandler_UI{		// todo: update class diagram
 private:
 	MotorControl*	m_pMotorControl;	
 	SysControl*		m_pSysControl;		
-	int				m_serverTaskID;
 public:
 	TCPHandler_UI(SysControl* pSctrl, MotorControl* pMctrl);
 	~TCPHandler_UI();

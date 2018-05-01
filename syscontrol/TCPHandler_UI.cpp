@@ -38,7 +38,6 @@ STATUS tskTCPServerUI (TCPHandler_UI* pHandler);
 TCPHandler_UI::TCPHandler_UI(SysControl* pSctrl, MotorControl* pMctrl){
 	m_pSysControl = pSctrl;
 	m_pMotorControl = pMctrl;
-	m_serverTaskID = 0;
 }
 
 TCPHandler_UI::~TCPHandler_UI(){
@@ -47,7 +46,7 @@ TCPHandler_UI::~TCPHandler_UI(){
 }
 
 void TCPHandler_UI::startServer(){
-	m_serverTaskID = taskSpawn ("TCP_Server_UI", 122, 0,0x1000, (FUNCPTR) tskTCPServerUI,(int)this,0,0,0,0,0,0,0,0,0);
+	taskSpawn ("TCP_Server_UI", 122, 0,0x1000, (FUNCPTR) tskTCPServerUI,(int)this,0,0,0,0,0,0,0,0,0);
 }
 
 /****************************************************************************

@@ -25,10 +25,10 @@ static char replyMsg[] =	"YOU ARE CONNECTED TO CHAIN-MODE SERVER\n";
 
 StateMachine* pStateMachine;
 STATUS tskTCPServerChain (TCPHandler_Chain* pHandler);
+STATUS tskTCPClientChain(TCPHandler_Chain* pHandler);
 
 TCPHandler_Chain::TCPHandler_Chain(SysControl* pSctrl, string addrMaster){
 	m_pSysControl = pSctrl;
-	m_serverTaskID = 0;
 	m_AddrMaster = addrMaster;
 	m_AddrRCB = "";
 	m_AddrLCB = "";
@@ -40,11 +40,11 @@ TCPHandler_Chain::~TCPHandler_Chain(){
 }
 
 void TCPHandler_Chain::startServer(){
-	m_serverTaskID = taskSpawn ("TCP_Server_Chain", 123, 0,0x1000, (FUNCPTR) tskTCPServerChain,(int)this,0,0,0,0,0,0,0,0,0);
+	taskSpawn ("TCP_Server_Chain", 123, 0,0x1000, (FUNCPTR) tskTCPServerChain,(int)this,0,0,0,0,0,0,0,0,0);
 }
 
 void TCPHandler_Chain::startClient(){
-	// do something
+	taskSpawn ("TCP_Client_Chain", 124, 0,0x1000, (FUNCPTR) tskTCPClientChain,(int)this,0,0,0,0,0,0,0,0,0);
 }
 
 bool TCPHandler_Chain::getAddrRCBset(){
@@ -60,11 +60,53 @@ string TCPHandler_Chain::getAddrRCB(){
 }
 
 void TCPHandler_Chain::sendToRCB(Command cmd){
-	// do something
+	char command[9];
+	switch(cmd){
+		case READY:		sprintf(command , "Ready\r\n  ");
+						break;
+		case REQUEST:	sprintf(command , "Request\r\n  ");
+						break;
+		case WAIT:		sprintf(command , "Wait\r\n  ");
+						break;
+		case RELEASE:	sprintf(command , "Release\r\n  ");
+						break;
+		default:		return;
+	}
+
+	 write(m_SocketRCB, command, sizeof (command));
 }
 
 void TCPHandler_Chain::sendToLCB(Command cmd){
-	// do something
+	char command[9];
+	switch(cmd){
+		case READY:		sprintf(command , "Ready\r\n  ");
+						break;
+		case REQUEST:	sprintf(command , "Request\r\n  ");
+						break;
+		case WAIT:		sprintf(command , "Wait\r\n  ");
+						break;
+		case RELEASE:	sprintf(command , "Release\r\n  ");
+						break;
+		default:		return;
+	}
+
+	 write(m_SocketLCB, command, sizeof (command));
+}
+
+void TCPHandler_Chain::setSocketRCB(int sFd){
+	m_SocketRCB = sFd;
+}
+
+void TCPHandler_Chain::setSocketLCB(int sFd){
+	m_SocketLCB = sFd;
+}
+
+int TCPHandler_Chain::getSocketRCB(){
+	return m_SocketRCB;
+}
+
+int TCPHandler_Chain::getSocketLCB(){
+	return m_SocketLCB;
 }
 
 /****************************************************************************
@@ -77,6 +119,8 @@ void TCPHandler_Chain::processMasterRequest(char myBuffer[80], int sFd){
 		m_AddrRCB = string(myBuffer+6, 10);
 		m_AddrRCBset = true;
 		m_AddrMaster = "";			// DEBUG ONLY - to work as RCB from same computer as before as Master
+		startClient();
+		pStateMachine->sendEvent("setOpMode(OPMODE_CHAIN)");
 		sprintf(myBuffer ,"RIGHT NEIGHBOR ADRESS SET TO : %s!\n", m_AddrRCB.c_str());
 		printf(myBuffer);					/* print to console    */
 	}
@@ -116,7 +160,8 @@ void TCPHandler_Chain::processClientRequest(char myBuffer[80], int sFd){
 }
 
 /****************************************************************************
- * --------------------------  TCP-WORKS TASK  -------------------------
+ * --------------------------  TCP-WORKER TASK  -------------------------
+ * For connections with Master and LCB
  ***************************************************************************/
 void tcpServerChainWorkTask(int sFd, char* address, u_short port, TCPHandler_Chain* pHandler){ // server's socket fd,  client's socket address, client's socket port
 	char myBuffer[80];
@@ -124,19 +169,24 @@ void tcpServerChainWorkTask(int sFd, char* address, u_short port, TCPHandler_Cha
     
     write (sFd, replyMsg, sizeof (replyMsg));	// send reply message to client
     
-    while ( (nRead = fioRdString (sFd, myBuffer, sizeof (myBuffer))) > 0 ){
-    	// Ausgabe in der Konsole
-        printf ("MESSAGE FROM CLIENT (Internet Address %s, port %d):\n%s\n", address, port, myBuffer); 
-        /************ porcessing of received Input ************************/
-        //Request from Master?
-        if(strcmp(address, (pHandler->getAddrMaster()).c_str())==0){
-        	pHandler->processMasterRequest(myBuffer, sFd);
-        }
-        else{
-        	pHandler->processClientRequest(myBuffer, sFd);
-        }
-        /******************************************************************/
-    } 
+    while(true){		// DEBUG - leave connection alive
+		//while ( (nRead = fioRdString (sFd, myBuffer, sizeof (myBuffer))) > 0 ){
+    	if( (nRead = fioRdString (sFd, myBuffer, sizeof (myBuffer))) > 0 ){
+			// Ausgabe in der Konsole
+			printf ("MESSAGE FROM CLIENT (Internet Address %s, port %d):\n%s\n", address, port, myBuffer); 
+			/************ porcessing of received Input ************************/
+			//Request from Master?
+			if(strcmp(address, (pHandler->getAddrMaster()).c_str())==0){
+				pHandler->processMasterRequest(myBuffer, sFd);
+				
+			}
+			else{
+				pHandler->processClientRequest(myBuffer, sFd);
+				pHandler->setSocketLCB(sFd);
+			}
+			/******************************************************************/
+		}
+    }
  
     if (nRead == ERROR)                 /* error from read() */ 
         perror ("read"); 
@@ -146,10 +196,9 @@ void tcpServerChainWorkTask(int sFd, char* address, u_short port, TCPHandler_Cha
 
 /****************************************************************************
  * ------------------------------  TCP-Server  ------------------------------
+ * For connections to Master and LCB
  ***************************************************************************/
-
-STATUS tskTCPServerChain  (TCPHandler_Chain* pHandler) 
-	{ 
+STATUS tskTCPServerChain(TCPHandler_Chain* pHandler){ 
 	struct sockaddr_in  serverAddr;    /* server's socket address */ 
 	struct sockaddr_in  clientAddr;    /* client's socket address */ 
 	int                 sockAddrSize;  /* size of socket address structure */ 
@@ -206,4 +255,61 @@ STATUS tskTCPServerChain  (TCPHandler_Chain* pHandler)
 			close (newFd); 
 			} 
 		} 
-	} 
+} 
+
+/****************************************************************************
+ * ------------------------------  TCP-Client  ------------------------------
+ * For connection to RCB
+ ***************************************************************************/
+STATUS tskTCPClientChain(TCPHandler_Chain* pHandler){
+	//struct request      myRequest;     /* request to send to server */
+	struct sockaddr_in  serverAddr;    /* server's socket address */
+	char                replyBuf[REPLY_MSG_SIZE]; /* buffer for reply */
+	char                reply;         /* if TRUE, expect reply back */
+	int                 sockAddrSize;  /* size of socket address structure */
+	int                 sFd;           /* socket file descriptor */
+	int                 nRead;          /* length of message */
+	char myBuffer[80];
+	
+	/* create client's socket */
+	if ((sFd = socket (AF_INET, SOCK_STREAM, 0)) == ERROR){
+		perror ("socket");
+		return (ERROR);
+	}
+	
+	/* bind not required - port number is dynamic */
+	/* build server socket address */
+	sockAddrSize = sizeof (struct sockaddr_in);
+	bzero ((char *) &serverAddr, sockAddrSize);
+	serverAddr.sin_family = AF_INET;
+	serverAddr.sin_len = (u_char) sockAddrSize;
+	serverAddr.sin_port = htons (SERVER_PORT_NUM);
+	
+	if ( (serverAddr.sin_addr.s_addr = inet_addr(pHandler->getAddrRCB().c_str())) == ERROR){
+		perror ("unknown server name");
+		close (sFd);
+		return (ERROR);
+	}
+	
+	/* connect to server */
+	if (connect (sFd, (struct sockaddr *) &serverAddr, sockAddrSize) == ERROR){
+		perror ("connect");
+		close (sFd);
+		return (ERROR);
+	}
+	
+	pHandler->setSocketRCB(sFd);
+	
+	while(true){
+		if( (nRead = fioRdString (sFd, myBuffer, sizeof (myBuffer))) > 0 ){
+			// Ausgabe in der Konsole
+			printf ("MESSAGE FROM RCB:\n%s\n", myBuffer); 
+			/************ porcessing of received Input ************************/
+			pHandler->processClientRequest(myBuffer, sFd);
+			/******************************************************************/
+		}
+	}
+	
+	close (sFd);
+	return (OK);
+}

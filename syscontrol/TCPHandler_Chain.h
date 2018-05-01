@@ -18,11 +18,12 @@ class SysControl;
 class TCPHandler_Chain{				// todo: update class diagram
 private:
 	SysControl*	m_pSysControl;
-	int			m_serverTaskID;
 	string		m_AddrMaster;
 	string		m_AddrRCB;
 	string		m_AddrLCB;
 	bool		m_AddrRCBset;
+	int			m_SocketRCB;
+	int			m_SocketLCB;
 	void startClient();
 public:
 	TCPHandler_Chain(SysControl* pSctrl, string addrMaster);
@@ -35,6 +36,10 @@ public:
 	void sendToLCB(Command cmd);
 	void processMasterRequest(char myBuffer[80], int sFd);
 	void processClientRequest(char myBuffer[80], int sFd);
+	void setSocketRCB(int sFd);
+	void setSocketLCB(int sFd);
+	int getSocketRCB();
+	int getSocketLCB();
 };
 
 #endif /* TCPHANDLER_CHAIN_H_ */
