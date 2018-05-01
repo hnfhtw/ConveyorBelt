@@ -12,13 +12,14 @@ using namespace std;
 SysControl::SysControl(MotorControl* pMctrl, DisplayControl* pDctrl){
 	m_pMotorControl = pMctrl;
 	m_pDisplayControl = pDctrl;
-	m_pTCPHandler_Chain = new TCPHandler_Chain(this);
+	m_pTCPHandler_Chain = new TCPHandler_Chain(this, "91.0.0.105");		// only for debug, actual master IP is 91.0.0.91 
 	m_pTCPHandler_UI = new TCPHandler_UI(this, m_pMotorControl);
 	m_pKeyboardHandler = new KeyboardHandler(this, m_pMotorControl);
 	m_StateOpMode = OPMODE_INIT;
 	m_StateSysState = STATE_IDLE;
 	m_RequestPending = false;
 	m_pTCPHandler_UI->startServer();
+	m_pTCPHandler_Chain->startServer();
 }
 
 SysControl::~SysControl(){

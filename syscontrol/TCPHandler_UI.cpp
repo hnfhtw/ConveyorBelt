@@ -12,7 +12,6 @@
 #include "strLib.h" 
 #include "fioLib.h"
 
-
 #define SERVER_PORT_NUM         4444   /* server's port number for bind() */ 
 #define SERVER_WORK_PRIORITY    100    /* priority of server's work task */ 
 #define SERVER_STACK_SIZE       0x10000  /* stack size of server's work task */ 
@@ -34,7 +33,7 @@ static char replyMsg[] =	"YOU ARE NOW CONNECTED TO THE CONVEYOR BELT \n"
 							"stop  : To stop the belt \n";
 
 StateMachine* pStateMachine;
-STATUS tskTCPServer (TCPHandler_UI* pHandler);
+STATUS tskTCPServerUI (TCPHandler_UI* pHandler);
 
 TCPHandler_UI::TCPHandler_UI(SysControl* pSctrl, MotorControl* pMctrl){
 	m_pSysControl = pSctrl;
@@ -48,13 +47,13 @@ TCPHandler_UI::~TCPHandler_UI(){
 }
 
 void TCPHandler_UI::startServer(){
-	m_serverTaskID = taskSpawn ("TCP_Server", 122, 0,0x1000, (FUNCPTR) tskTCPServer,(int)this,0,0,0,0,0,0,0,0,0);
+	m_serverTaskID = taskSpawn ("TCP_Server_UI", 122, 0,0x1000, (FUNCPTR) tskTCPServerUI,(int)this,0,0,0,0,0,0,0,0,0);
 }
 
 /****************************************************************************
  * --------------------------  Input Processing -------------------------
  ***************************************************************************/
-void TCPHandler_UI::processingRequest(char myBuffer[80], int sFd){
+void TCPHandler_UI::processRequest(char myBuffer[80], int sFd){
 	
 	if(strncmp(myBuffer, "mode1",5)==0){
 		pStateMachine->sendEvent("setOpMode(OPMODE_LOCAL)");
@@ -173,7 +172,7 @@ void tcpServerWorkTask(int sFd, char* address, u_short port, TCPHandler_UI* pHan
     	// Ausgabe in der Konsole
         printf ("MESSAGE FROM CLIENT (Internet Address %s, port %d):\n%s\n", address, port, myBuffer); 
         /************ porcessing of received Input ************************/
-        pHandler->processingRequest(myBuffer, sFd);
+        pHandler->processRequest(myBuffer, sFd);
         /******************************************************************/
     } 
  
@@ -188,7 +187,7 @@ void tcpServerWorkTask(int sFd, char* address, u_short port, TCPHandler_UI* pHan
  * ------------------------------  TCP-Server  ------------------------------
  ***************************************************************************/
 
-STATUS tskTCPServer (TCPHandler_UI* pHandler) 
+STATUS tskTCPServerUI (TCPHandler_UI* pHandler) 
 	{ 
 	struct sockaddr_in  serverAddr;    /* server's socket address */ 
 	struct sockaddr_in  clientAddr;    /* client's socket address */ 

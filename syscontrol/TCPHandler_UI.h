@@ -25,7 +25,7 @@ public:
 	TCPHandler_UI(SysControl* pSctrl, MotorControl* pMctrl);
 	~TCPHandler_UI();
 	void startServer();
-	void processingRequest(char myBuffer[80], int sFd);
+	void processRequest(char myBuffer[80], int sFd);
 };
 
 #endif /* TCPHANDLER_UI_H_ */
