@@ -23,9 +23,6 @@ private:
 	int				m_MotorSpeedFinal;
 	int				m_TargetSpeed;
 public:
-	int				cMotorSpeedSlow; //= 100;
-	int				cTimeTransition; //= 6000;
-	int				cTimeStep; // = 50;
 	MotorControl(DisplayControl* pDctrl);
 	~MotorControl();
 	void moveSlow();

@@ -25,7 +25,7 @@ class SysControl{			// todo: update class diagram
 private:
 	TCPHandler_Chain*	m_pTCPHandler_Chain;
 	TCPHandler_UI*		m_pTCPHandler_UI;
-	
+	KeyboardHandler*	m_pKeyboardHandler;
 	MotorControl*		m_pMotorControl;
 	DisplayControl*		m_pDisplayControl;
 	OpMode				m_StateOpMode;

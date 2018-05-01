@@ -58,6 +58,8 @@ void _STI___17_systemManager_cpp_7f75c8d8();
 
 void _STI___19_KeyboardHandler_cpp_7f75c8d8();
 
+void _STI___17_TCPHandler_UI_cpp_7f75c8d8();
+
 extern void (*_ctors[])();
 void (*_ctors[])() =
     {
@@ -68,6 +70,7 @@ void (*_ctors[])() =
     _STI___14_stateTable_cpp_7f75c8d8,
     _STI___17_systemManager_cpp_7f75c8d8,
     _STI___19_KeyboardHandler_cpp_7f75c8d8,
+    _STI___17_TCPHandler_UI_cpp_7f75c8d8,
     0
     };
 

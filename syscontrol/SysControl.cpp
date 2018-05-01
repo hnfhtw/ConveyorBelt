@@ -9,17 +9,16 @@
 
 using namespace std;
 
-KeyboardHandler* pKeyboardHandler;
-
 SysControl::SysControl(MotorControl* pMctrl, DisplayControl* pDctrl){
 	m_pMotorControl = pMctrl;
 	m_pDisplayControl = pDctrl;
 	m_pTCPHandler_Chain = new TCPHandler_Chain(this);
 	m_pTCPHandler_UI = new TCPHandler_UI(this, m_pMotorControl);
-	pKeyboardHandler = new KeyboardHandler(this, m_pMotorControl);
+	m_pKeyboardHandler = new KeyboardHandler(this, m_pMotorControl);
 	m_StateOpMode = OPMODE_INIT;
 	m_StateSysState = STATE_IDLE;
-	m_RequestPending = false;	
+	m_RequestPending = false;
+	m_pTCPHandler_UI->startServer();
 }
 
 SysControl::~SysControl(){
@@ -27,10 +26,10 @@ SysControl::~SysControl(){
 	m_pDisplayControl = NULL;
 	delete m_pTCPHandler_Chain;
 	delete m_pTCPHandler_UI;
-	delete pKeyboardHandler;
+	delete m_pKeyboardHandler;
 	m_pTCPHandler_Chain = NULL;
 	m_pTCPHandler_UI = NULL;
-	pKeyboardHandler = NULL;
+	m_pKeyboardHandler = NULL;
 }
 
 void SysControl::setCommand(Command cmd){
@@ -58,7 +57,7 @@ TCPHandler_Chain* SysControl::getTCPHandler_Chain(){
 }
 
 KeyboardHandler* SysControl::getKeyboardHandler(){
-	return pKeyboardHandler;
+	return m_pKeyboardHandler;
 }
 
 void SysControl::setRequestPending(bool req){

@@ -11,7 +11,6 @@
 
 #include "MotorControl.h"
 #include "SysControl.h"
-
 #include <string>
 using namespace std;
 
@@ -21,12 +20,12 @@ class TCPHandler_UI{		// todo: update class diagram
 private:
 	MotorControl*	m_pMotorControl;	
 	SysControl*		m_pSysControl;		
-	string			m_AddrUser;
-	void startClient();
+	int				m_serverTaskID;
 public:
 	TCPHandler_UI(SysControl* pSctrl, MotorControl* pMctrl);
 	~TCPHandler_UI();
-	void startServer();	
+	void startServer();
+	void processingRequest(char myBuffer[80], int sFd);
 };
 
 #endif /* TCPHANDLER_UI_H_ */

@@ -216,7 +216,7 @@ void trig110_action(){
 
 void trig20_action(){
 	pMotorControl->setMotorState(MOTOR_SLOW);
-	pMotorControl->setTargetSpeed(pMotorControl->cMotorSpeedSlow);
+	pMotorControl->setTargetSpeed(100);
 	pDisplayControl->updateDisplay();
 	return;
 }
