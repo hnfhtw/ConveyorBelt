@@ -129,7 +129,7 @@ void trig03_action(){
 	pSysControl->setOpMode(OPMODE_CHAIN);
 	pMotorControl->setMotorSpeedFinal(1800);
 	pMotorControl->setDirection(TRUE);	
-	pDisplayControl->updateDisplay();´
+	pDisplayControl->updateDisplay();
 	return;
 }
 
@@ -268,9 +268,11 @@ void trig27_action(){
 void trig28_action(){
 	pMotorControl->setMotorState(MOTOR_STOP);
 	pMotorControl->setTargetSpeed(0);
-	pSysControl->setSysState(STATE_WAITFORRCB);
+	if(pSysControl->getOpMode() == OPMODE_CHAIN){
+		pSysControl->setSysState(STATE_WAITFORRCB);
+		pStateMachine->sendEvent("setSysState(STATE_WAITFORRCB)");
+	}
 	pDisplayControl->updateDisplay();
-  pStateMachine->sendEvent("setSysState(STATE_WAITFORRCB)");
 	return;
 }
 

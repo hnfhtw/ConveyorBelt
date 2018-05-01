@@ -241,10 +241,6 @@ ConveyorBelt_partialImage/$(MODE_DIR)/Objects/ConveyorBelt/syscontrol/TCPHandler
 	$(TRACE_FLAG)if [ ! -d "`dirname "$@"`" ]; then mkdir -p "`dirname "$@"`"; fi;echo "building $@"; $(TOOL_PATH)dcc $(DEBUGFLAGS_C++-Compiler) $(CC_ARCH_SPEC) -W:c:,-Xclib-optim-off -W:c++:,-Xclib-optim-off -Xansi -Xlocal-data-area-static-only  -W:c++:.CPP -ei1518,4177,4223,4301,4550,5409,1606 -ei4193,4826,4381,4237,1573,4007,4082,4177,4223,4260,4550,5361,5828,2273,5387,5388 -ei1522,4092,4111,4152,4167,4171,4174,4186,4188,4191,4192,4223,4231,4236,4284,4375,4494,4513,5152,5457 -Xforce-declarations   -Xmake-dependency=0xd $(IDE_DEFINES) $(DEFINES) $(ADDED_C++FLAGS) $(IDE_INCLUDES) $(ADDED_INCLUDES) -o "$@" -c "$<"
 
 
-ConveyorBelt_partialImage/$(MODE_DIR)/Objects/ConveyorBelt/syscontrol/main.o : $(PRJ_ROOT_DIR)/syscontrol/main.cpp $(FORCE_FILE_BUILD)
-	$(TRACE_FLAG)if [ ! -d "`dirname "$@"`" ]; then mkdir -p "`dirname "$@"`"; fi;echo "building $@"; $(TOOL_PATH)dcc $(DEBUGFLAGS_C++-Compiler) $(CC_ARCH_SPEC) -W:c:,-Xclib-optim-off -W:c++:,-Xclib-optim-off -Xansi -Xlocal-data-area-static-only  -W:c++:.CPP -ei1518,4177,4223,4301,4550,5409,1606 -ei4193,4826,4381,4237,1573,4007,4082,4177,4223,4260,4550,5361,5828,2273,5387,5388 -ei1522,4092,4111,4152,4167,4171,4174,4186,4188,4191,4192,4223,4231,4236,4284,4375,4494,4513,5152,5457 -Xforce-declarations   -Xmake-dependency=0xd $(IDE_DEFINES) $(DEFINES) $(ADDED_C++FLAGS) $(IDE_INCLUDES) $(ADDED_INCLUDES) -o "$@" -c "$<"
-
-
 OBJECTS_ConveyorBelt_partialImage = ConveyorBelt_partialImage/$(MODE_DIR)/Objects/ConveyorBelt/hwfiles/disp.o \
 	 ConveyorBelt_partialImage/$(MODE_DIR)/Objects/ConveyorBelt/hwfiles/hwFunc.o \
 	 ConveyorBelt_partialImage/$(MODE_DIR)/Objects/ConveyorBelt/hwfiles/kbd.o \
@@ -260,8 +256,7 @@ OBJECTS_ConveyorBelt_partialImage = ConveyorBelt_partialImage/$(MODE_DIR)/Object
 	 ConveyorBelt_partialImage/$(MODE_DIR)/Objects/ConveyorBelt/syscontrol/MotorControl.o \
 	 ConveyorBelt_partialImage/$(MODE_DIR)/Objects/ConveyorBelt/syscontrol/SysControl.o \
 	 ConveyorBelt_partialImage/$(MODE_DIR)/Objects/ConveyorBelt/syscontrol/TCPHandler_Chain.o \
-	 ConveyorBelt_partialImage/$(MODE_DIR)/Objects/ConveyorBelt/syscontrol/TCPHandler_UI.o \
-	 ConveyorBelt_partialImage/$(MODE_DIR)/Objects/ConveyorBelt/syscontrol/main.o
+	 ConveyorBelt_partialImage/$(MODE_DIR)/Objects/ConveyorBelt/syscontrol/TCPHandler_UI.o
 
 ifeq ($(TARGET_JOBS),1)
 ConveyorBelt_partialImage/$(MODE_DIR)/ConveyorBelt_partialImage.o : $(OBJECTS_ConveyorBelt_partialImage)
@@ -289,7 +284,7 @@ DEP_FILES := ConveyorBelt_partialImage/$(MODE_DIR)/Objects/ConveyorBelt/hwfiles/
 	 ConveyorBelt_partialImage/$(MODE_DIR)/Objects/ConveyorBelt/statemachine/setMyIP.d ConveyorBelt_partialImage/$(MODE_DIR)/Objects/ConveyorBelt/statemachine/stateMachine.d ConveyorBelt_partialImage/$(MODE_DIR)/Objects/ConveyorBelt/statemachine/stateTable.d \
 	 ConveyorBelt_partialImage/$(MODE_DIR)/Objects/ConveyorBelt/statemachine/systemManager.d ConveyorBelt_partialImage/$(MODE_DIR)/Objects/ConveyorBelt/syscontrol/DisplayControl.d ConveyorBelt_partialImage/$(MODE_DIR)/Objects/ConveyorBelt/syscontrol/KeyboardHandler.d \
 	 ConveyorBelt_partialImage/$(MODE_DIR)/Objects/ConveyorBelt/syscontrol/MotorControl.d ConveyorBelt_partialImage/$(MODE_DIR)/Objects/ConveyorBelt/syscontrol/SysControl.d ConveyorBelt_partialImage/$(MODE_DIR)/Objects/ConveyorBelt/syscontrol/TCPHandler_Chain.d \
-	 ConveyorBelt_partialImage/$(MODE_DIR)/Objects/ConveyorBelt/syscontrol/TCPHandler_UI.d ConveyorBelt_partialImage/$(MODE_DIR)/Objects/ConveyorBelt/syscontrol/main.d
+	 ConveyorBelt_partialImage/$(MODE_DIR)/Objects/ConveyorBelt/syscontrol/TCPHandler_UI.d
 -include $(DEP_FILES)
 
 

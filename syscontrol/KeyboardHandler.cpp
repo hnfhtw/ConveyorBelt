@@ -16,9 +16,6 @@ StateMachine* pStateMachine;
 KeyboardHandler::KeyboardHandler(SysControl* pSctrl, MotorControl* pMctrl){
 	m_pMotorControl = pMctrl;
 	m_pSysControl = pSctrl;
-	m_BufferSpeed = 0;
-	m_Direction = false;
-	m_Buffer = 0;
 }
 
 KeyboardHandler::~KeyboardHandler(){
@@ -44,7 +41,7 @@ void KeyboardHandler::evaluateKey(){
 					break;
 		case 'F':	if( (m_pSysControl->getOpMode() == OPMODE_LOCAL) && (m_pMotorControl->getMotorState() == MOTOR_STOP) ){
 						finalSpeed = m_pMotorControl->getMotorSpeedFinal();
-						if(finalSpeed <= 1700){
+						if(finalSpeed <= 2100){
 							m_pMotorControl->setMotorSpeedFinal(finalSpeed + 100);
 						}
 					}
@@ -56,7 +53,9 @@ void KeyboardHandler::evaluateKey(){
 						}
 					}
 					break;
-		case 'E':	pStateMachine->sendEvent("startRamp()");
+		case 'E':	if( (m_pSysControl->getOpMode() == OPMODE_LOCAL) && (m_pMotorControl->getMotorState() == MOTOR_STOP) ){
+						pStateMachine->sendEvent("startRamp()");
+					}
 					break;
 		default:	break;
 	}

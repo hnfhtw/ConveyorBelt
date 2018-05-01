@@ -106,8 +106,6 @@ ConveyorBelt_partialImage/Debug/Objects/ConveyorBelt/main.o: \
   C:/Windriver/vxworks-6.9/target/h/sioLibCommon.h \
   C:/Windriver/vxworks-6.9/target/h/drv/timer/timerDev.h \
   C:/_HP/ConveyorBelt/hwfiles/hwFunc.h \
-  C:/_HP/ConveyorBelt/statemachine/ifLib.h \
-  C:/Windriver/vxworks-6.9/target/h/wrn/coreip/netVersion.h \
   C:/_HP/ConveyorBelt/statemachine/systemManager.h \
   C:/_HP/ConveyorBelt/statemachine/stateMachine.h \
   C:/Windriver/diab/5.9.1.0/include/cpp/queue \
@@ -372,10 +370,6 @@ C:/Windriver/vxworks-6.9/target/h/sioLibCommon.h:
 C:/Windriver/vxworks-6.9/target/h/drv/timer/timerDev.h:
 
 C:/_HP/ConveyorBelt/hwfiles/hwFunc.h:
-
-C:/_HP/ConveyorBelt/statemachine/ifLib.h:
-
-C:/Windriver/vxworks-6.9/target/h/wrn/coreip/netVersion.h:
 
 C:/_HP/ConveyorBelt/statemachine/systemManager.h:
 

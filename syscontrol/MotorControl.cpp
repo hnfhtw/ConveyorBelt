@@ -74,11 +74,13 @@ int MotorControl::getTargetSpeed(){
 }
 
 void MotorControl::increaseSpeed(){
-	
+	int stepSize = m_MotorSpeedFinal/20;
+	m_TargetSpeed += stepSize;
 }
 
 void MotorControl::decreaseSpeed(){
-	
+	int stepSize = m_MotorSpeedFinal/20;
+	m_TargetSpeed -= stepSize;	
 }
 
 

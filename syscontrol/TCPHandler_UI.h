@@ -21,10 +21,7 @@ class TCPHandler_UI{		// todo: update class diagram
 private:
 	MotorControl*	m_pMotorControl;	
 	SysControl*		m_pSysControl;		
-	int				m_BufferSpeed;
-	bool			m_Direction;
 	string			m_AddrUser;
-	char			m_Buffer;
 	void startClient();
 public:
 	TCPHandler_UI(SysControl* pSctrl, MotorControl* pMctrl);

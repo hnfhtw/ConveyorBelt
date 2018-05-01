@@ -18,9 +18,6 @@ class KeyboardHandler{			// todo: update class diagram
 private:
 	MotorControl*	m_pMotorControl;
 	SysControl*		m_pSysControl;
-	int				m_BufferSpeed;
-	bool			m_Direction;
-	char			m_Buffer;
 public:
 	KeyboardHandler(SysControl* pSctrl, MotorControl* pMctrl);
 	~KeyboardHandler();

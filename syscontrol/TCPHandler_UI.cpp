@@ -12,10 +12,7 @@ using namespace std;
 TCPHandler_UI::TCPHandler_UI(SysControl* pSctrl, MotorControl* pMctrl){
 	m_pSysControl = pSctrl;
 	m_pMotorControl = pMctrl;
-	m_BufferSpeed = 0;
-	m_Direction = false;
 	m_AddrUser = "";
-	m_Buffer = 0;
 }
 
 TCPHandler_UI::~TCPHandler_UI(){
