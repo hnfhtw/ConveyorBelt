@@ -32,7 +32,6 @@ static char replyMsg[] =	"YOU ARE NOW CONNECTED TO THE CONVEYOR BELT \n"
 							"slow  : To start the belt in slow motion \n"
 							"stop  : To stop the belt \n";
 
-StateMachine* pStateMachine;
 STATUS tskTCPServerUI (TCPHandler_UI* pHandler);
 
 TCPHandler_UI::TCPHandler_UI(SysControl* pSctrl, MotorControl* pMctrl){
@@ -55,11 +54,11 @@ void TCPHandler_UI::startServer(){
 void TCPHandler_UI::processRequest(char myBuffer[80], int sFd){
 	
 	if(strncmp(myBuffer, "mode1",5)==0){
-		pStateMachine->sendEvent("setOpMode(OPMODE_LOCAL)");
+		m_pSysControl->getStateMachine()->sendEvent("setOpMode(OPMODE_LOCAL)");
 		sprintf(myBuffer ,"CHANGE TO LOCAL MODE REQUESTED \n");
 	}
 	else if(strncmp(myBuffer, "mode2",5)==0){
-		pStateMachine->sendEvent("setOpMode(OPMODE_CHAIN)");
+		m_pSysControl->getStateMachine()->sendEvent("setOpMode(OPMODE_CHAIN)");
 		sprintf(myBuffer ,"CHANGE TO CHAIN MODE REQUESTED \n");
 	}
 	else if(m_pSysControl->getOpMode() == OPMODE_LOCAL){
@@ -114,7 +113,7 @@ void TCPHandler_UI::processRequest(char myBuffer[80], int sFd){
 		// start motor
 		else if(strncmp(myBuffer, "start",5)==0){
 			if(m_pMotorControl->getMotorState() == MOTOR_STOP){
-				pStateMachine->sendEvent("startRamp()");
+				m_pSysControl->getStateMachine()->sendEvent("startRamp()");
 				sprintf(myBuffer ,"MOTOR STARTED!\n");
 			}
 			else{
@@ -124,7 +123,7 @@ void TCPHandler_UI::processRequest(char myBuffer[80], int sFd){
 		// start stop
 		else if(strncmp(myBuffer, "stop",4)==0){
 			if(m_pMotorControl->getMotorState() == MOTOR_SLOW){
-				pStateMachine->sendEvent("stop()");
+				m_pSysControl->getStateMachine()->sendEvent("stop()");
 				sprintf(myBuffer ,"MOTOR STOPED!\n");
 			}
 			else{
@@ -134,7 +133,7 @@ void TCPHandler_UI::processRequest(char myBuffer[80], int sFd){
 		// start motor slow
 		else if(strncmp(myBuffer, "slow",4)==0){
 			if(m_pMotorControl->getMotorState() == MOTOR_STOP){
-				pStateMachine->sendEvent("moveSlow()");
+				m_pSysControl->getStateMachine()->sendEvent("moveSlow()");
 				sprintf(myBuffer ,"MOTOR STARTED ON SLOW!\n");
 			}
 			else{

@@ -13,11 +13,9 @@
 extern "C"{
 	#include "hwFunc.h"
 }
-#include "systemManager.h"
-#include "stateMachine.h"
-
-SystemManager * pSystemManager;
-StateMachine * pStateMachine;
+#include "SysControl.h"
+#include "MotorControl.h"
+#include "DisplayControl.h"
 
 void setLocalIp();
 
@@ -28,12 +26,25 @@ int main (void) {
 	// Set local IP address according to MAC table
 	setLocalIp();
 	
-  // Initialize target hardware
+	// Initialize target hardware
 	initHardware(0);
 	     
-	// Create instance of top class
-  pSystemManager = new SystemManager;
-
+	// Create instances of top classes
+	DisplayControl* pDisplayControl = new DisplayControl;
+	MotorControl* pMotorControl = new MotorControl(pDisplayControl);
+	SysControl* pSysControl = new SysControl(pMotorControl, pDisplayControl);
+   
+	// Create state machine
+	pSysControl->createStateMachine();
+	
+    // Add missing links between objects
+	pDisplayControl->setMotorControl(pMotorControl);
+	pDisplayControl->setSysControl(pSysControl);
+	pMotorControl->setSysControl(pSysControl);
+	
+	// Initial update of display
+	pDisplayControl->updateDisplay();
+	
 	// Start the state machine. This method blocks, so no while(1) is needed.
-  pStateMachine->runToCompletion();
+	pSysControl->getStateMachine()->runToCompletion();
 }

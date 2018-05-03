@@ -16,10 +16,12 @@
 #include "OpMode.h"
 #include "SysState.h"
 #include "Command.h"
+#include "stateMachine.h"
 
 class KeyboardHandler;
 class TCPHandler_Chain;
 class TCPHandler_UI;
+class StateMachine;
 
 class SysControl{			// todo: update class diagram
 private:
@@ -28,24 +30,25 @@ private:
 	KeyboardHandler*	m_pKeyboardHandler;
 	MotorControl*		m_pMotorControl;
 	DisplayControl*		m_pDisplayControl;
+	StateMachine* 		m_pStateMachine;
 	OpMode				m_StateOpMode;
 	SysState			m_StateSysState;
 	bool				m_RequestPending;
 public:
-	int					cReceiveTime; // = 1000;
 	SysControl(MotorControl* pMctrl, DisplayControl* pDctrl);
 	~SysControl();
-	void setCommand(Command cmd);
+	void createStateMachine();
 	void setOpMode(OpMode mode);
 	void setSysState(SysState state);
 	OpMode getOpMode();
 	SysState getSysState();
 	TCPHandler_Chain* getTCPHandler_Chain();
 	KeyboardHandler* getKeyboardHandler();
+	MotorControl* getMotorControl();
+	DisplayControl* getDisplayControl();
+	StateMachine* getStateMachine();
 	void setRequestPending(bool req);
 	bool getRequestPending();
-	//void setMotorControl(MotorControl* pMctrl);		// not needed as provided in constructor
-	//void setDisplayControl(DisplayControl* pDctrl);
 };
 
 #endif /* SYSCONTROL_H_ */

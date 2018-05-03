@@ -6,8 +6,8 @@ TableEntry :: TableEntry (
 	std::string _nextState,
 	std::string _myEvent,
 	int _eventTime,
-	void (*_action)(),
-	bool (*_condition)()
+	void (*_action)(SysControl* pSysControl),
+	bool (*_condition)(SysControl* pSysControl)
 ) {
 	actState = _actState;
 	nextState = _nextState;

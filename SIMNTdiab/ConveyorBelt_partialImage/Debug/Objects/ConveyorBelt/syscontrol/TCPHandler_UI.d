@@ -107,8 +107,7 @@ ConveyorBelt_partialImage/Debug/Objects/ConveyorBelt/syscontrol/TCPHandler_UI.o:
   C:/_HP/ConveyorBelt/syscontrol/DisplayControl.h \
   C:/_HP/ConveyorBelt/syscontrol/OpMode.h \
   C:/_HP/ConveyorBelt/syscontrol/SysState.h \
-  C:/_HP/ConveyorBelt/syscontrol/MotorState.h \
-  C:/_HP/ConveyorBelt/statemachine/Statemachine.h \
+  C:/_HP/ConveyorBelt/statemachine/stateMachine.h \
   C:/Windriver/diab/5.9.1.0/include/cpp/queue \
   C:/Windriver/diab/5.9.1.0/include/cpp/algorithm \
   C:/Windriver/diab/5.9.1.0/include/cpp/memory \
@@ -120,6 +119,7 @@ ConveyorBelt_partialImage/Debug/Objects/ConveyorBelt/syscontrol/TCPHandler_UI.o:
   C:/_HP/ConveyorBelt/statemachine/diaTimer.h \
   C:/Windriver/vxworks-6.9/target/h/wdLib.h \
   C:/_HP/ConveyorBelt/statemachine/stateTable.h \
+  C:/_HP/ConveyorBelt/syscontrol/MotorState.h \
   C:/Windriver/vxworks-6.9/target/h/wrn/coreip/inetLib.h \
   C:/Windriver/vxworks-6.9/target/h/wrn/coreip/netinet/in.h \
   C:/Windriver/vxworks-6.9/target/h/wrn/coreip/net/mbuf.h \
@@ -401,9 +401,7 @@ C:/_HP/ConveyorBelt/syscontrol/OpMode.h:
 
 C:/_HP/ConveyorBelt/syscontrol/SysState.h:
 
-C:/_HP/ConveyorBelt/syscontrol/MotorState.h:
-
-C:/_HP/ConveyorBelt/statemachine/Statemachine.h:
+C:/_HP/ConveyorBelt/statemachine/stateMachine.h:
 
 C:/Windriver/diab/5.9.1.0/include/cpp/queue:
 
@@ -426,6 +424,8 @@ C:/_HP/ConveyorBelt/statemachine/diaTimer.h:
 C:/Windriver/vxworks-6.9/target/h/wdLib.h:
 
 C:/_HP/ConveyorBelt/statemachine/stateTable.h:
+
+C:/_HP/ConveyorBelt/syscontrol/MotorState.h:
 
 C:/Windriver/vxworks-6.9/target/h/wrn/coreip/inetLib.h:
 

@@ -107,7 +107,21 @@ ConveyorBelt_partialImage/Debug/Objects/ConveyorBelt/syscontrol/SysControl.o: \
   C:/_HP/ConveyorBelt/syscontrol/MotorState.h \
   C:/_HP/ConveyorBelt/syscontrol/KeyboardHandler.h \
   C:/_HP/ConveyorBelt/syscontrol/OpMode.h \
-  C:/_HP/ConveyorBelt/syscontrol/SysState.h
+  C:/_HP/ConveyorBelt/syscontrol/SysState.h \
+  C:/_HP/ConveyorBelt/statemachine/stateMachine.h \
+  C:/Windriver/diab/5.9.1.0/include/cpp/queue \
+  C:/Windriver/diab/5.9.1.0/include/cpp/algorithm \
+  C:/Windriver/diab/5.9.1.0/include/cpp/memory \
+  C:/Windriver/diab/5.9.1.0/include/cpp/deque \
+  C:/Windriver/diab/5.9.1.0/include/cpp/functional \
+  C:/Windriver/diab/5.9.1.0/include/cpp/vector \
+  C:/Windriver/vxworks-6.9/target/h/semLib.h \
+  C:/Windriver/vxworks-6.9/target/h/semLibCommon.h \
+  C:/_HP/ConveyorBelt/statemachine/diaTimer.h \
+  C:/Windriver/vxworks-6.9/target/h/wdLib.h \
+  C:/_HP/ConveyorBelt/statemachine/stateTable.h \
+  C:/_HP/ConveyorBelt/statemachine/myFunctions.h \
+  C:/_HP/ConveyorBelt/hwfiles/hwFunc.h
 
 C:/_HP/ConveyorBelt/syscontrol/SysControl.h:
 
@@ -324,4 +338,32 @@ C:/_HP/ConveyorBelt/syscontrol/KeyboardHandler.h:
 C:/_HP/ConveyorBelt/syscontrol/OpMode.h:
 
 C:/_HP/ConveyorBelt/syscontrol/SysState.h:
+
+C:/_HP/ConveyorBelt/statemachine/stateMachine.h:
+
+C:/Windriver/diab/5.9.1.0/include/cpp/queue:
+
+C:/Windriver/diab/5.9.1.0/include/cpp/algorithm:
+
+C:/Windriver/diab/5.9.1.0/include/cpp/memory:
+
+C:/Windriver/diab/5.9.1.0/include/cpp/deque:
+
+C:/Windriver/diab/5.9.1.0/include/cpp/functional:
+
+C:/Windriver/diab/5.9.1.0/include/cpp/vector:
+
+C:/Windriver/vxworks-6.9/target/h/semLib.h:
+
+C:/Windriver/vxworks-6.9/target/h/semLibCommon.h:
+
+C:/_HP/ConveyorBelt/statemachine/diaTimer.h:
+
+C:/Windriver/vxworks-6.9/target/h/wdLib.h:
+
+C:/_HP/ConveyorBelt/statemachine/stateTable.h:
+
+C:/_HP/ConveyorBelt/statemachine/myFunctions.h:
+
+C:/_HP/ConveyorBelt/hwfiles/hwFunc.h:
 

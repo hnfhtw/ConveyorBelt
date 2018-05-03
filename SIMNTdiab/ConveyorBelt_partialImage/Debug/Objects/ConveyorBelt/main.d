@@ -106,45 +106,39 @@ ConveyorBelt_partialImage/Debug/Objects/ConveyorBelt/main.o: \
   C:/Windriver/vxworks-6.9/target/h/sioLibCommon.h \
   C:/Windriver/vxworks-6.9/target/h/drv/timer/timerDev.h \
   C:/_HP/ConveyorBelt/hwfiles/hwFunc.h \
-  C:/_HP/ConveyorBelt/statemachine/systemManager.h \
-  C:/_HP/ConveyorBelt/statemachine/stateMachine.h \
-  C:/Windriver/diab/5.9.1.0/include/cpp/queue \
-  C:/Windriver/diab/5.9.1.0/include/cpp/algorithm \
-  C:/Windriver/diab/5.9.1.0/include/cpp/memory \
-  C:/Windriver/diab/5.9.1.0/include/cpp/xmemory \
-  C:/Windriver/diab/5.9.1.0/include/cpp/cstdlib \
-  C:/Windriver/diab/5.9.1.0/include/cpp/yvals.h \
-  C:/Windriver/diab/5.9.1.0/include/cpp/new \
-  C:/Windriver/diab/5.9.1.0/include/cpp/std/exception \
-  C:/Windriver/diab/5.9.1.0/include/cpp/xstddef \
-  C:/Windriver/diab/5.9.1.0/include/cpp/cstddef \
-  C:/Windriver/diab/5.9.1.0/include/cpp/xutility \
-  C:/Windriver/diab/5.9.1.0/include/cpp/climits \
-  C:/Windriver/vxworks-6.9/target/h/limits.h \
-  C:/Windriver/vxworks-6.9/target/h/tool/diab/limits.h \
-  C:/Windriver/diab/5.9.1.0/include/cpp/utility \
-  C:/Windriver/diab/5.9.1.0/include/cpp/std/iosfwd \
-  C:/Windriver/diab/5.9.1.0/include/cpp/cstdio \
-  C:/Windriver/diab/5.9.1.0/include/cpp/cstring \
-  C:/Windriver/vxworks-6.9/target/h/string.h \
-  C:/Windriver/diab/5.9.1.0/include/cpp/cwchar \
-  C:/Windriver/diab/5.9.1.0/include/diab/wchar.h \
-  C:/Windriver/diab/5.9.1.0/include/cpp/deque \
-  C:/Windriver/diab/5.9.1.0/include/cpp/stdexcept \
-  C:/Windriver/diab/5.9.1.0/include/cpp/std/xstring \
-  C:/Windriver/diab/5.9.1.0/include/cpp/functional \
-  C:/Windriver/diab/5.9.1.0/include/cpp/vector \
-  C:/_HP/ConveyorBelt/statemachine/diaTimer.h \
+  C:/_HP/ConveyorBelt/syscontrol/SysControl.h \
+  C:/_HP/ConveyorBelt/syscontrol/TCPHandler_Chain.h \
+  C:/_HP/ConveyorBelt/syscontrol/Command.h \
   C:/Windriver/diab/5.9.1.0/include/cpp/std/string \
   C:/Windriver/diab/5.9.1.0/include/cpp/std/istream \
   C:/Windriver/diab/5.9.1.0/include/cpp/std/ostream \
   C:/Windriver/diab/5.9.1.0/include/cpp/std/ios \
   C:/Windriver/diab/5.9.1.0/include/cpp/std/xlocnum \
+  C:/Windriver/diab/5.9.1.0/include/cpp/climits \
+  C:/Windriver/diab/5.9.1.0/include/cpp/yvals.h \
+  C:/Windriver/vxworks-6.9/target/h/limits.h \
+  C:/Windriver/vxworks-6.9/target/h/tool/diab/limits.h \
   C:/Windriver/diab/5.9.1.0/include/cpp/cmath \
   C:/Windriver/vxworks-6.9/target/h/math.h \
+  C:/Windriver/diab/5.9.1.0/include/cpp/cstdio \
+  C:/Windriver/diab/5.9.1.0/include/cpp/cstdlib \
   C:/Windriver/diab/5.9.1.0/include/cpp/std/streambuf \
   C:/Windriver/diab/5.9.1.0/include/cpp/std/xiosbase \
   C:/Windriver/diab/5.9.1.0/include/cpp/xlocale \
+  C:/Windriver/diab/5.9.1.0/include/cpp/cstring \
+  C:/Windriver/vxworks-6.9/target/h/string.h \
+  C:/Windriver/diab/5.9.1.0/include/cpp/stdexcept \
+  C:/Windriver/diab/5.9.1.0/include/cpp/std/exception \
+  C:/Windriver/diab/5.9.1.0/include/cpp/xstddef \
+  C:/Windriver/diab/5.9.1.0/include/cpp/cstddef \
+  C:/Windriver/diab/5.9.1.0/include/cpp/std/xstring \
+  C:/Windriver/diab/5.9.1.0/include/cpp/xmemory \
+  C:/Windriver/diab/5.9.1.0/include/cpp/new \
+  C:/Windriver/diab/5.9.1.0/include/cpp/xutility \
+  C:/Windriver/diab/5.9.1.0/include/cpp/utility \
+  C:/Windriver/diab/5.9.1.0/include/cpp/std/iosfwd \
+  C:/Windriver/diab/5.9.1.0/include/cpp/cwchar \
+  C:/Windriver/diab/5.9.1.0/include/diab/wchar.h \
   C:/Windriver/diab/5.9.1.0/include/cpp/typeinfo \
   C:/Windriver/diab/5.9.1.0/include/cpp/xdebug \
   C:/Windriver/diab/5.9.1.0/include/cpp/xlocinfo \
@@ -156,6 +150,21 @@ ConveyorBelt_partialImage/Debug/Objects/ConveyorBelt/main.o: \
   C:/Windriver/vxworks-6.9/target/h/time.h \
   C:/Windriver/vxworks-6.9/target/h/base/b_struct_timespec.h \
   C:/Windriver/diab/5.9.1.0/include/cpp/xlocinfo.h \
+  C:/_HP/ConveyorBelt/syscontrol/TCPHandler_UI.h \
+  C:/_HP/ConveyorBelt/syscontrol/MotorControl.h \
+  C:/_HP/ConveyorBelt/syscontrol/DisplayControl.h \
+  C:/_HP/ConveyorBelt/syscontrol/MotorState.h \
+  C:/_HP/ConveyorBelt/syscontrol/KeyboardHandler.h \
+  C:/_HP/ConveyorBelt/syscontrol/OpMode.h \
+  C:/_HP/ConveyorBelt/syscontrol/SysState.h \
+  C:/_HP/ConveyorBelt/statemachine/stateMachine.h \
+  C:/Windriver/diab/5.9.1.0/include/cpp/queue \
+  C:/Windriver/diab/5.9.1.0/include/cpp/algorithm \
+  C:/Windriver/diab/5.9.1.0/include/cpp/memory \
+  C:/Windriver/diab/5.9.1.0/include/cpp/deque \
+  C:/Windriver/diab/5.9.1.0/include/cpp/functional \
+  C:/Windriver/diab/5.9.1.0/include/cpp/vector \
+  C:/_HP/ConveyorBelt/statemachine/diaTimer.h \
   C:/Windriver/vxworks-6.9/target/h/wdLib.h \
   C:/_HP/ConveyorBelt/statemachine/stateTable.h
 
@@ -371,63 +380,11 @@ C:/Windriver/vxworks-6.9/target/h/drv/timer/timerDev.h:
 
 C:/_HP/ConveyorBelt/hwfiles/hwFunc.h:
 
-C:/_HP/ConveyorBelt/statemachine/systemManager.h:
+C:/_HP/ConveyorBelt/syscontrol/SysControl.h:
 
-C:/_HP/ConveyorBelt/statemachine/stateMachine.h:
+C:/_HP/ConveyorBelt/syscontrol/TCPHandler_Chain.h:
 
-C:/Windriver/diab/5.9.1.0/include/cpp/queue:
-
-C:/Windriver/diab/5.9.1.0/include/cpp/algorithm:
-
-C:/Windriver/diab/5.9.1.0/include/cpp/memory:
-
-C:/Windriver/diab/5.9.1.0/include/cpp/xmemory:
-
-C:/Windriver/diab/5.9.1.0/include/cpp/cstdlib:
-
-C:/Windriver/diab/5.9.1.0/include/cpp/yvals.h:
-
-C:/Windriver/diab/5.9.1.0/include/cpp/new:
-
-C:/Windriver/diab/5.9.1.0/include/cpp/std/exception:
-
-C:/Windriver/diab/5.9.1.0/include/cpp/xstddef:
-
-C:/Windriver/diab/5.9.1.0/include/cpp/cstddef:
-
-C:/Windriver/diab/5.9.1.0/include/cpp/xutility:
-
-C:/Windriver/diab/5.9.1.0/include/cpp/climits:
-
-C:/Windriver/vxworks-6.9/target/h/limits.h:
-
-C:/Windriver/vxworks-6.9/target/h/tool/diab/limits.h:
-
-C:/Windriver/diab/5.9.1.0/include/cpp/utility:
-
-C:/Windriver/diab/5.9.1.0/include/cpp/std/iosfwd:
-
-C:/Windriver/diab/5.9.1.0/include/cpp/cstdio:
-
-C:/Windriver/diab/5.9.1.0/include/cpp/cstring:
-
-C:/Windriver/vxworks-6.9/target/h/string.h:
-
-C:/Windriver/diab/5.9.1.0/include/cpp/cwchar:
-
-C:/Windriver/diab/5.9.1.0/include/diab/wchar.h:
-
-C:/Windriver/diab/5.9.1.0/include/cpp/deque:
-
-C:/Windriver/diab/5.9.1.0/include/cpp/stdexcept:
-
-C:/Windriver/diab/5.9.1.0/include/cpp/std/xstring:
-
-C:/Windriver/diab/5.9.1.0/include/cpp/functional:
-
-C:/Windriver/diab/5.9.1.0/include/cpp/vector:
-
-C:/_HP/ConveyorBelt/statemachine/diaTimer.h:
+C:/_HP/ConveyorBelt/syscontrol/Command.h:
 
 C:/Windriver/diab/5.9.1.0/include/cpp/std/string:
 
@@ -439,15 +396,55 @@ C:/Windriver/diab/5.9.1.0/include/cpp/std/ios:
 
 C:/Windriver/diab/5.9.1.0/include/cpp/std/xlocnum:
 
+C:/Windriver/diab/5.9.1.0/include/cpp/climits:
+
+C:/Windriver/diab/5.9.1.0/include/cpp/yvals.h:
+
+C:/Windriver/vxworks-6.9/target/h/limits.h:
+
+C:/Windriver/vxworks-6.9/target/h/tool/diab/limits.h:
+
 C:/Windriver/diab/5.9.1.0/include/cpp/cmath:
 
 C:/Windriver/vxworks-6.9/target/h/math.h:
+
+C:/Windriver/diab/5.9.1.0/include/cpp/cstdio:
+
+C:/Windriver/diab/5.9.1.0/include/cpp/cstdlib:
 
 C:/Windriver/diab/5.9.1.0/include/cpp/std/streambuf:
 
 C:/Windriver/diab/5.9.1.0/include/cpp/std/xiosbase:
 
 C:/Windriver/diab/5.9.1.0/include/cpp/xlocale:
+
+C:/Windriver/diab/5.9.1.0/include/cpp/cstring:
+
+C:/Windriver/vxworks-6.9/target/h/string.h:
+
+C:/Windriver/diab/5.9.1.0/include/cpp/stdexcept:
+
+C:/Windriver/diab/5.9.1.0/include/cpp/std/exception:
+
+C:/Windriver/diab/5.9.1.0/include/cpp/xstddef:
+
+C:/Windriver/diab/5.9.1.0/include/cpp/cstddef:
+
+C:/Windriver/diab/5.9.1.0/include/cpp/std/xstring:
+
+C:/Windriver/diab/5.9.1.0/include/cpp/xmemory:
+
+C:/Windriver/diab/5.9.1.0/include/cpp/new:
+
+C:/Windriver/diab/5.9.1.0/include/cpp/xutility:
+
+C:/Windriver/diab/5.9.1.0/include/cpp/utility:
+
+C:/Windriver/diab/5.9.1.0/include/cpp/std/iosfwd:
+
+C:/Windriver/diab/5.9.1.0/include/cpp/cwchar:
+
+C:/Windriver/diab/5.9.1.0/include/diab/wchar.h:
 
 C:/Windriver/diab/5.9.1.0/include/cpp/typeinfo:
 
@@ -470,6 +467,36 @@ C:/Windriver/vxworks-6.9/target/h/time.h:
 C:/Windriver/vxworks-6.9/target/h/base/b_struct_timespec.h:
 
 C:/Windriver/diab/5.9.1.0/include/cpp/xlocinfo.h:
+
+C:/_HP/ConveyorBelt/syscontrol/TCPHandler_UI.h:
+
+C:/_HP/ConveyorBelt/syscontrol/MotorControl.h:
+
+C:/_HP/ConveyorBelt/syscontrol/DisplayControl.h:
+
+C:/_HP/ConveyorBelt/syscontrol/MotorState.h:
+
+C:/_HP/ConveyorBelt/syscontrol/KeyboardHandler.h:
+
+C:/_HP/ConveyorBelt/syscontrol/OpMode.h:
+
+C:/_HP/ConveyorBelt/syscontrol/SysState.h:
+
+C:/_HP/ConveyorBelt/statemachine/stateMachine.h:
+
+C:/Windriver/diab/5.9.1.0/include/cpp/queue:
+
+C:/Windriver/diab/5.9.1.0/include/cpp/algorithm:
+
+C:/Windriver/diab/5.9.1.0/include/cpp/memory:
+
+C:/Windriver/diab/5.9.1.0/include/cpp/deque:
+
+C:/Windriver/diab/5.9.1.0/include/cpp/functional:
+
+C:/Windriver/diab/5.9.1.0/include/cpp/vector:
+
+C:/_HP/ConveyorBelt/statemachine/diaTimer.h:
 
 C:/Windriver/vxworks-6.9/target/h/wdLib.h:
 

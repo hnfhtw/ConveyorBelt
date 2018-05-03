@@ -23,18 +23,6 @@ MotorControl::~MotorControl(){
 	m_pSysControl = NULL;
 }
 
-void MotorControl::moveSlow(){
-	// do something
-}
-
-void MotorControl::startRamp(){
-	// do something
-}
-
-void MotorControl::stop(){
-	// do something
-}
-
 void MotorControl::setMotorState(MotorState state){
 	 m_MotorState = state;
 }

@@ -23,7 +23,6 @@
 static char errorMsg[] = 	"ERROR: >> INVALID INPUT!\n";
 static char replyMsg[] =	"YOU ARE CONNECTED TO CHAIN-MODE SERVER\n";
 
-StateMachine* pStateMachine;
 STATUS tskTCPServerChain (TCPHandler_Chain* pHandler);
 STATUS tskTCPClientChain(TCPHandler_Chain* pHandler);
 
@@ -120,7 +119,7 @@ void TCPHandler_Chain::processMasterRequest(char myBuffer[80], int sFd){
 		m_AddrRCBset = true;
 		m_AddrMaster = "";			// DEBUG ONLY - to work as RCB from same computer as before as Master
 		startClient();
-		pStateMachine->sendEvent("setOpMode(OPMODE_CHAIN)");
+		m_pSysControl->getStateMachine()->sendEvent("setOpMode(OPMODE_CHAIN)");
 		sprintf(myBuffer ,"RIGHT NEIGHBOR ADRESS SET TO : %s!\n", m_AddrRCB.c_str());
 		printf(myBuffer);					/* print to console    */
 	}
@@ -134,22 +133,22 @@ void TCPHandler_Chain::processClientRequest(char myBuffer[80], int sFd){
 	printf("RECEIVED REQUEST FROM Client!\n");	/* print to console    */
 	
 	if(strncmp(myBuffer, "Request",7)==0){
-		pStateMachine->sendEvent("setCommand(REQUEST)");
+		m_pSysControl->getStateMachine()->sendEvent("setCommand(REQUEST)");
 		sprintf(myBuffer ,">>REQUEST<< RECEIVED FROM CLIENT!\n");
 		printf(myBuffer);					/* print to console    */
 	}
 	else if(strncmp(myBuffer, "Ready",5)==0){
-		pStateMachine->sendEvent("setCommand(READY)");
+		m_pSysControl->getStateMachine()->sendEvent("setCommand(READY)");
 		sprintf(myBuffer ,">>READY<< RECEIVED FROM CLIENT!\n");
 		printf(myBuffer);					/* print to console    */
 	}
 	else if(strncmp(myBuffer, "Release",7)==0){
-		pStateMachine->sendEvent("setCommand(RELEASE)");
+		m_pSysControl->getStateMachine()->sendEvent("setCommand(RELEASE)");
 		sprintf(myBuffer ,">>RELEASE<< RECEIVED FROM CLIENT!\n");
 		printf(myBuffer);					/* print to console    */
 	}
 	else if(strncmp(myBuffer, "Wait",4)==0){
-		pStateMachine->sendEvent("setCommand(WAIT)");
+		m_pSysControl->getStateMachine()->sendEvent("setCommand(WAIT)");
 		sprintf(myBuffer ,">>WAIT<< RECEIVED FROM CLIENT!\n");
 		printf(myBuffer);					/* print to console    */
 	}

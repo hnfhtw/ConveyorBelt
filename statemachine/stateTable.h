@@ -15,6 +15,8 @@ int lines[MAXDIA];
 
 int diagrams;
 
+class SysControl;
+
 class TableEntry {
 public:
 	TableEntry(	
@@ -22,15 +24,15 @@ public:
 	std::string _nextState,
 	std::string _myEvent,
 	int _eventTime,
-	void (*_action)(),
-	bool (*_condition)()
+	void (*_action)(SysControl* pSysControl),
+	bool (*_condition)(SysControl* pSysControl)
 	);
 	std::string actState;
 	std::string nextState;
 	std::string myEvent;
 	int eventTime;
-	void (*action)();
-	bool (*condition)();
+	void (*action)(SysControl* pSysControl);
+	bool (*condition)(SysControl* pSysControl);
 };
 
 TableEntry * tab[MAXDIA][MAXLINES];

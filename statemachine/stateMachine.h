@@ -9,9 +9,11 @@
 #include "diaTimer.h"
 #include "stateTable.h"
 
+class SysControl;
+
 class StateMachine {
 public:
-	StateMachine();
+	StateMachine(SysControl* pSysControl);
 	~StateMachine();
 	void sendEvent(std::string myEvent);
 	void runToCompletion();
@@ -23,6 +25,7 @@ private:
 	void putEvent(std::string myEvent);
 	std::string getEvent();
 	std::queue<std::string> queue;
+	SysControl* m_pSysControl;
 };
 
 #endif // STATEMACHINE_H_

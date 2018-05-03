@@ -11,8 +11,6 @@ extern "C"{
 	#include "hwFunc.h"
 }
 
-StateMachine* pStateMachine;
-
 KeyboardHandler::KeyboardHandler(SysControl* pSctrl, MotorControl* pMctrl){
 	m_pMotorControl = pMctrl;
 	m_pSysControl = pSctrl;
@@ -29,10 +27,10 @@ void KeyboardHandler::evaluateKey(){
 	int finalSpeed;
 
 	switch(ch){
-		case 'A':	pStateMachine->sendEvent("setOpMode(OPMODE_LOCAL)");
+		case 'A':	m_pSysControl->getStateMachine()->sendEvent("setOpMode(OPMODE_LOCAL)");
 					printf("Key A pressed\n");
 					break;
-		case 'B':	pStateMachine->sendEvent("setOpMode(OPMODE_CHAIN)");
+		case 'B':	m_pSysControl->getStateMachine()->sendEvent("setOpMode(OPMODE_CHAIN)");
 					printf("Key B pressed\n");
 					break;
 		case 'D':	if( (m_pSysControl->getOpMode() == OPMODE_LOCAL) && (m_pMotorControl->getMotorState() == MOTOR_STOP) ){
@@ -54,7 +52,7 @@ void KeyboardHandler::evaluateKey(){
 					}
 					break;
 		case 'E':	if( (m_pSysControl->getOpMode() == OPMODE_LOCAL) && (m_pMotorControl->getMotorState() == MOTOR_STOP) ){
-						pStateMachine->sendEvent("startRamp()");
+						m_pSysControl->getStateMachine()->sendEvent("startRamp()");
 					}
 					break;
 		default:	break;

@@ -54,9 +54,13 @@ void _STI___16_stateMachine_cpp_7f75c8d8();
 
 void _STI___14_stateTable_cpp_7f75c8d8();
 
-void _STI___17_systemManager_cpp_7f75c8d8();
+void _STI___18_DisplayControl_cpp_7f75c8d8();
 
 void _STI___19_KeyboardHandler_cpp_7f75c8d8();
+
+void _STI___16_MotorControl_cpp_7f75c8d8();
+
+void _STI___14_SysControl_cpp_7f75c8d8();
 
 void _STI___20_TCPHandler_Chain_cpp_7f75c8d8();
 
@@ -70,8 +74,10 @@ void (*_ctors[])() =
     _STI___12_diaTimer_cpp_7f75c8d8,
     _STI___16_stateMachine_cpp_7f75c8d8,
     _STI___14_stateTable_cpp_7f75c8d8,
-    _STI___17_systemManager_cpp_7f75c8d8,
+    _STI___18_DisplayControl_cpp_7f75c8d8,
     _STI___19_KeyboardHandler_cpp_7f75c8d8,
+    _STI___16_MotorControl_cpp_7f75c8d8,
+    _STI___14_SysControl_cpp_7f75c8d8,
     _STI___20_TCPHandler_Chain_cpp_7f75c8d8,
     _STI___17_TCPHandler_UI_cpp_7f75c8d8,
     0
