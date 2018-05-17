@@ -641,6 +641,7 @@
             <stringAttribute key="BLD::Info|Macro|LIBS|value|SIMNTdiab" value=""/>
             <listAttribute key="BLD::Info|Incl|SIMNTdiab">
                 <stringAttribute value="-I$(WIND_BASE)/target/h"/>
+                <stringAttribute value="-IC:/_HP/ConveyorBelt/pictrl"/>
                 <stringAttribute value="-IC:/_HP/ConveyorBelt/hwfiles"/>
                 <stringAttribute value="-IC:/_HP/ConveyorBelt/statemachine"/>
                 <stringAttribute value="-IC:/_HP/ConveyorBelt/syscontrol"/>

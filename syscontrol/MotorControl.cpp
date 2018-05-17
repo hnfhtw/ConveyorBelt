@@ -6,7 +6,10 @@
  */
 
 #include "MotorControl.h"
-
+extern "C"{
+	#include "piCtrl.h"
+}
+#include "taskLib.h"
 using namespace std;
 
 MotorControl::MotorControl(DisplayControl* pDctrl){
@@ -16,6 +19,8 @@ MotorControl::MotorControl(DisplayControl* pDctrl){
 	m_Direction = true;			// TRUE = clockwise, FALSE = counter clockwise
 	m_MotorSpeedFinal = 1800;
 	m_TargetSpeed = 0;
+	
+	taskSpawn ("piCtrl", 111, 0,0x1000, (FUNCPTR) piCtrl_main,110,0,0,0,0,0,0,0,0,0);
 }
 
 MotorControl::~MotorControl(){
