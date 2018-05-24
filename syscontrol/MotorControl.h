@@ -25,6 +25,7 @@ private:
 public:
 	MotorControl(DisplayControl* pDctrl);
 	~MotorControl();
+	void startPICtrl();
 	void setMotorState(MotorState state);
 	MotorState getMotorState();
 	void setMotorSpeedFinal(int speed);

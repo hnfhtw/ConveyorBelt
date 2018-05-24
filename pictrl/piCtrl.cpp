@@ -45,12 +45,13 @@ void piCtrl_step(void)
    *  Inport: '<Root>/In2'
    */
   rtb_Sum = 8.0E-6 * piCtrl_U.In2 + piCtrl_DWork.Integrator_DSTATE;
-
+  //rtb_Sum = 0.02175 * piCtrl_U.In2 + piCtrl_DWork.Integrator_DSTATE;
+  
   /* Saturate: '<S2>/Saturate' */
-  if (rtb_Sum > 18.0) {
-    rtb_Saturate = 18.0;
-  } else if (rtb_Sum < -18.0) {
-    rtb_Saturate = -18.0;
+  if (rtb_Sum > 13.0) {
+    rtb_Saturate = 13.0;
+  } else if (rtb_Sum < -10.0) {
+    rtb_Saturate = -10.0;
   } else {
     rtb_Saturate = rtb_Sum;
   }
@@ -69,6 +70,8 @@ void piCtrl_step(void)
    */
   piCtrl_DWork.Integrator_DSTATE += ((rtb_Saturate - rtb_Sum) * 0.015625 +
     0.015625 * piCtrl_U.In2) * 0.015625;
+  /*piCtrl_DWork.Integrator_DSTATE += ((rtb_Saturate - rtb_Sum) * 0.1 +
+    0.1 * piCtrl_U.In2) * 0.015625;*/
 }
 
 /* Model initialize function */

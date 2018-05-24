@@ -28,7 +28,8 @@ int main (void) {
 	
 	// Initialize target hardware
 	initHardware(0);
-	     
+	motorOn();	// switch on motor
+	    
 	// Create instances of top classes
 	DisplayControl* pDisplayControl = new DisplayControl;
 	MotorControl* pMotorControl = new MotorControl(pDisplayControl);
@@ -44,6 +45,9 @@ int main (void) {
 	
 	// Initial update of display
 	pDisplayControl->updateDisplay();
+	
+	// Start PI controller for motor
+	pMotorControl->startPICtrl();
 	
 	// Start the state machine. This method blocks, so no while(1) is needed.
 	pSysControl->getStateMachine()->runToCompletion();

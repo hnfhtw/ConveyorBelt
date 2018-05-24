@@ -5,11 +5,12 @@
  *      Author: HN / MG
  */
 
-#include "MotorControl.h"
 extern "C"{
-	#include "piCtrl.h"
+	#include "hwFunc.h"
 }
+#include "MotorControl.h"
 #include "taskLib.h"
+#include "piCtrl.h"
 using namespace std;
 
 MotorControl::MotorControl(DisplayControl* pDctrl){
@@ -20,12 +21,16 @@ MotorControl::MotorControl(DisplayControl* pDctrl){
 	m_MotorSpeedFinal = 1800;
 	m_TargetSpeed = 0;
 	
-	taskSpawn ("piCtrl", 111, 0,0x1000, (FUNCPTR) piCtrl_main,110,0,0,0,0,0,0,0,0,0);
+	//taskSpawn ("piCtrl", 111, 0,0x1000, (FUNCPTR) piCtrl_main,110,(int) this,0,0,0,0,0,0,0,0);
 }
 
 MotorControl::~MotorControl(){
 	m_pDisplayControl = NULL;
 	m_pSysControl = NULL;
+}
+
+void MotorControl::startPICtrl(){
+	taskSpawn ("piCtrl", 111, 0,0x1000, (FUNCPTR) piCtrl_main,110,(int) this,0,0,0,0,0,0,0,0);
 }
 
 void MotorControl::setMotorState(MotorState state){
@@ -59,6 +64,12 @@ void MotorControl::setSysControl(SysControl* pSysctrl){
 }
 
 void MotorControl::setTargetSpeed(int speed){
+	/*if(speed == 0){
+		motorOff();
+	}
+	else if(speed > 0 && m_TargetSpeed == 0){
+		motorOn();
+	}*/
 	m_TargetSpeed = speed;	// todo: maybe add error handling
 }
 
@@ -68,12 +79,12 @@ int MotorControl::getTargetSpeed(){
 
 void MotorControl::increaseSpeed(){
 	int stepSize = m_MotorSpeedFinal/20;
-	m_TargetSpeed += stepSize;
+	setTargetSpeed(m_TargetSpeed + stepSize);
 }
 
 void MotorControl::decreaseSpeed(){
 	int stepSize = m_MotorSpeedFinal/20;
-	m_TargetSpeed -= stepSize;	
+	setTargetSpeed(m_TargetSpeed - stepSize);
 }
 
 

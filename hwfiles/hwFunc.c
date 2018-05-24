@@ -40,9 +40,13 @@ int initHardware (UCHAR board)
 	sysOutByte (aioBase + cnt2Address, 0xFF);
 
 	// Digital IOs:
-	if (board == 0)
+	if (board == 0) {
 		/* Digital IOs: A input, B output, C half input, half output */
 		sysOutByte (aioBase + ioCntrlReg, 0x91);
+		fd = open ("/tyCo/0", O_RDWR, 0);
+		ioctl (fd, FIOBAUDRATE, 115200);
+	}
+		
 	else if (board == 1) {
 		/* Digital IOs: A input, B output, C entirely input */
 		sysOutByte (aioBase + ioCntrlReg, 0x99);

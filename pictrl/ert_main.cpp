@@ -18,9 +18,12 @@
  */
 
 #include <stddef.h>
+extern "C"{
+	#include "rtwtypes.h"
+	#include "hwFunc.h"
+}
+#include "MotorControl.h"
 #include "piCtrl.h"                    /* Model's header file */
-#include "rtwtypes.h"
-#include "hwFunc.h"
 
 /* ANSI C headers */
 #include <float.h>
@@ -45,15 +48,16 @@
 #define STACK_SIZE                     16384
 #endif
 
-int targetSpeed = 100;
+//int targetSpeed = 100;
 
-static int_T tBaseRate(SEM_ID sem, SEM_ID startStopSem)
+static int_T tBaseRate(SEM_ID sem, SEM_ID startStopSem, MotorControl* pMotorControl)
 {
   int_T i;
   int speedRpm;
   double motorVoltage;
   int voltageDig;
   double pulseCnt;
+  int targetSpeed;
   
   while (1) {
     if (rtmGetErrorStatus(piCtrl_M) != (NULL)) {
@@ -70,15 +74,28 @@ static int_T tBaseRate(SEM_ID sem, SEM_ID startStopSem)
 
     /* Set model inputs here */
     pulseCnt = (double) getEncoderPulsesZeroCorrected();
-    speedRpm = (int) (pulseCnt * 60.0 / (0.015625 * 64)); 
+    speedRpm = (int) (getRotationDirection(0) * pulseCnt * 60.0 / (0.015625 * 64)); 
+    targetSpeed = pMotorControl->getTargetSpeed();
+    if(!pMotorControl->getDirection()){
+    	targetSpeed *= -1;
+    }
     
     piCtrl_U.In2 = targetSpeed - speedRpm;		// set target speed - current speed
+    
     /* Step the model */
     piCtrl_step();
 
     /* Get model outputs here */
     motorVoltage = piCtrl_Y.u_ref;
-    voltageDig = 2048 + (int)(2047.0*(motorVoltage / 10.0)); 
+    //printf("%.2f %.2f %.2f\n",  piCtrl_U.In2, piCtrl_Y.u_ref, pulseCnt);
+    printf("%d;%d\n",  targetSpeed, speedRpm);
+    voltageDig = 2048 - (int)(motorVoltage * 220.0); 
+    if (voltageDig > 4095) {
+      voltageDig = 4095;
+    }
+    else if (voltageDig < 0) {
+      voltageDig = 0;
+    }
     writeAnalog(0,voltageDig);
   }
 
@@ -89,7 +106,7 @@ static int_T tBaseRate(SEM_ID sem, SEM_ID startStopSem)
  * Spawn piCtrl_main as an independent VxWorks task from your
  * application code, specifying its O/S priority
  */
-int_T piCtrl_main(int_T priority)
+int_T piCtrl_main(int_T priority, MotorControl* pMotorControl)
 {
   const char *status;
   real_T requestedSR, actualSR;
@@ -115,7 +132,8 @@ int_T piCtrl_main(int_T priority)
   printf("Actual sample rate in Hertz: %f\n",actualSR);
   VxWorksTIDs[0] = taskSpawn("tBaseRate",
     priority, VX_FP_TASK, STACK_SIZE, (FUNCPTR)tBaseRate, (int_T) rtClockSem,
-    (int_T) startStopSem, (int_T) rtTaskSemaphoreList, 0, 0, 0, 0, 0, 0, 0);
+    //(int_T) startStopSem, (int_T) rtTaskSemaphoreList, (int) pMotorControl, 0, 0, 0, 0, 0, 0);
+    (int_T) startStopSem, (int) pMotorControl, 0, 0, 0, 0, 0, 0, 0);
   if (sysAuxClkConnect((FUNCPTR) semGive, (int_T) rtClockSem) == OK) {
     rebootHookAdd((FUNCPTR) sysAuxClkDisable);
     printf("\nSimulation starting\n");

@@ -48,6 +48,10 @@ static void _STD__cxa_finalize()
 
 void _STI___8_main_cpp_7f75c8d8();
 
+void _STI___12_ert_main_cpp_7f75c8d8();
+
+void _STI___10_piCtrl_cpp_7f75c8d8();
+
 void _STI___12_diaTimer_cpp_7f75c8d8();
 
 void _STI___16_stateMachine_cpp_7f75c8d8();
@@ -71,6 +75,8 @@ void (*_ctors[])() =
     {
     _STI__15_ctors,
     _STI___8_main_cpp_7f75c8d8,
+    _STI___12_ert_main_cpp_7f75c8d8,
+    _STI___10_piCtrl_cpp_7f75c8d8,
     _STI___12_diaTimer_cpp_7f75c8d8,
     _STI___16_stateMachine_cpp_7f75c8d8,
     _STI___14_stateTable_cpp_7f75c8d8,

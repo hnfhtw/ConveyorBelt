@@ -27,6 +27,7 @@
 #endif                                 /* piCtrl_COMMON_INCLUDES_ */
 
 #include "piCtrl_types.h"
+#include "MotorControl.h"
 
 /* Macros for accessing real-time model data structure */
 #ifndef rtmGetErrorStatus
@@ -70,7 +71,8 @@ extern ExternalOutputs_piCtrl piCtrl_Y;
 extern void piCtrl_initialize(void);
 extern void piCtrl_step(void);
 extern void piCtrl_terminate(void);
-int_T piCtrl_main(int_T priority);
+//int_T piCtrl_main(int_T priority);
+int_T piCtrl_main(int_T priority, MotorControl* pMotorControl);
 
 /* Real-time Model object */
 extern RT_MODEL_piCtrl *const piCtrl_M;

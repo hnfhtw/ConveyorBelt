@@ -1,19 +1,7 @@
 ConveyorBelt_partialImage/Debug/Objects/ConveyorBelt/syscontrol/MotorControl.o: \
   C:/_HP/ConveyorBelt/syscontrol/MotorControl.cpp \
-  C:/_HP/ConveyorBelt/syscontrol/MotorControl.h \
-  C:/_HP/ConveyorBelt/syscontrol/SysControl.h \
-  C:/_HP/ConveyorBelt/syscontrol/TCPHandler_Chain.h \
-  C:/_HP/ConveyorBelt/syscontrol/Command.h \
-  C:/Windriver/diab/5.9.1.0/include/cpp/std/string \
-  C:/Windriver/diab/5.9.1.0/include/cpp/std/istream \
-  C:/Windriver/diab/5.9.1.0/include/cpp/std/ostream \
-  C:/Windriver/diab/5.9.1.0/include/cpp/std/ios \
-  C:/Windriver/diab/5.9.1.0/include/cpp/std/xlocnum \
-  C:/Windriver/diab/5.9.1.0/include/cpp/climits \
-  C:/Windriver/diab/5.9.1.0/include/cpp/yvals.h \
-  C:/Windriver/diab/5.9.1.0/include/diab/stdarg.h \
-  C:/Windriver/diab/5.9.1.0/include/diab/va_list.h \
-  C:/Windriver/vxworks-6.9/target/h/limits.h \
+  C:/_HP/ConveyorBelt/hwfiles/hwFunc.h \
+  C:/Windriver/vxworks-6.9/target/h/stdio.h \
   C:/Windriver/vxworks-6.9/target/h/types/vxANSI.h \
   C:/Windriver/vxworks-6.9/target/h/stdint.h \
   C:/Windriver/vxworks-6.9/target/h/vsbConfig.h \
@@ -27,11 +15,6 @@ ConveyorBelt_partialImage/Debug/Objects/ConveyorBelt/syscontrol/MotorControl.o: 
   C:/Windriver/vxworks-6.9/target/h/types/vxTypesBase.h \
   C:/Windriver/diab/5.9.1.0/include/diab/stddef.h \
   C:/Windriver/diab/5.9.1.0/include/diab/xmacros.h \
-  C:/Windriver/vxworks-6.9/target/h/tool/diab/limits.h \
-  C:/Windriver/diab/5.9.1.0/include/cpp/cmath \
-  C:/Windriver/vxworks-6.9/target/h/math.h \
-  C:/Windriver/diab/5.9.1.0/include/cpp/cstdio \
-  C:/Windriver/vxworks-6.9/target/h/stdio.h \
   C:/Windriver/vxworks-6.9/target/h/errno.h \
   C:/Windriver/vxworks-6.9/target/h/private/handleLibP.h \
   C:/Windriver/vxworks-6.9/target/h/vxWorks.h \
@@ -69,6 +52,24 @@ ConveyorBelt_partialImage/Debug/Objects/ConveyorBelt/syscontrol/MotorControl.o: 
   C:/Windriver/vxworks-6.9/target/h/tool/diab/toolMacros.h \
   C:/Windriver/vxworks-6.9/target/h/tool/common/private/toolMacrosP.h \
   C:/Windriver/vxworks-6.9/target/h/version.h \
+  C:/Windriver/diab/5.9.1.0/include/diab/stdarg.h \
+  C:/Windriver/diab/5.9.1.0/include/diab/va_list.h \
+  C:/_HP/ConveyorBelt/syscontrol/MotorControl.h \
+  C:/_HP/ConveyorBelt/syscontrol/SysControl.h \
+  C:/_HP/ConveyorBelt/syscontrol/TCPHandler_Chain.h \
+  C:/_HP/ConveyorBelt/syscontrol/Command.h \
+  C:/Windriver/diab/5.9.1.0/include/cpp/std/string \
+  C:/Windriver/diab/5.9.1.0/include/cpp/std/istream \
+  C:/Windriver/diab/5.9.1.0/include/cpp/std/ostream \
+  C:/Windriver/diab/5.9.1.0/include/cpp/std/ios \
+  C:/Windriver/diab/5.9.1.0/include/cpp/std/xlocnum \
+  C:/Windriver/diab/5.9.1.0/include/cpp/climits \
+  C:/Windriver/diab/5.9.1.0/include/cpp/yvals.h \
+  C:/Windriver/vxworks-6.9/target/h/limits.h \
+  C:/Windriver/vxworks-6.9/target/h/tool/diab/limits.h \
+  C:/Windriver/diab/5.9.1.0/include/cpp/cmath \
+  C:/Windriver/vxworks-6.9/target/h/math.h \
+  C:/Windriver/diab/5.9.1.0/include/cpp/cstdio \
   C:/Windriver/diab/5.9.1.0/include/cpp/cstdlib \
   C:/Windriver/vxworks-6.9/target/h/stdlib.h \
   C:/Windriver/diab/5.9.1.0/include/cpp/std/streambuf \
@@ -120,9 +121,6 @@ ConveyorBelt_partialImage/Debug/Objects/ConveyorBelt/syscontrol/MotorControl.o: 
   C:/Windriver/vxworks-6.9/target/h/wdLib.h \
   C:/_HP/ConveyorBelt/statemachine/stateTable.h \
   C:/_HP/ConveyorBelt/syscontrol/MotorState.h \
-  C:/_HP/ConveyorBelt/pictrl/piCtrl.h \
-  C:/_HP/ConveyorBelt/pictrl/rtwtypes.h \
-  C:/_HP/ConveyorBelt/pictrl/piCtrl_types.h \
   C:/Windriver/vxworks-6.9/target/h/taskLib.h \
   C:/Windriver/vxworks-6.9/target/h/classLib.h \
   C:/Windriver/vxworks-6.9/target/h/regs.h \
@@ -161,35 +159,14 @@ ConveyorBelt_partialImage/Debug/Objects/ConveyorBelt/syscontrol/MotorControl.o: 
   C:/Windriver/vxworks-6.9/target/h/cpusetCommon.h \
   C:/Windriver/vxworks-6.9/target/h/ffsLib.h \
   C:/Windriver/vxworks-6.9/target/h/vxCpuLib.h \
-  C:/Windriver/vxworks-6.9/target/h/logLib.h
+  C:/Windriver/vxworks-6.9/target/h/logLib.h \
+  C:/_HP/ConveyorBelt/pictrl/piCtrl.h \
+  C:/_HP/ConveyorBelt/pictrl/rtwtypes.h \
+  C:/_HP/ConveyorBelt/pictrl/piCtrl_types.h
 
-C:/_HP/ConveyorBelt/syscontrol/MotorControl.h:
+C:/_HP/ConveyorBelt/hwfiles/hwFunc.h:
 
-C:/_HP/ConveyorBelt/syscontrol/SysControl.h:
-
-C:/_HP/ConveyorBelt/syscontrol/TCPHandler_Chain.h:
-
-C:/_HP/ConveyorBelt/syscontrol/Command.h:
-
-C:/Windriver/diab/5.9.1.0/include/cpp/std/string:
-
-C:/Windriver/diab/5.9.1.0/include/cpp/std/istream:
-
-C:/Windriver/diab/5.9.1.0/include/cpp/std/ostream:
-
-C:/Windriver/diab/5.9.1.0/include/cpp/std/ios:
-
-C:/Windriver/diab/5.9.1.0/include/cpp/std/xlocnum:
-
-C:/Windriver/diab/5.9.1.0/include/cpp/climits:
-
-C:/Windriver/diab/5.9.1.0/include/cpp/yvals.h:
-
-C:/Windriver/diab/5.9.1.0/include/diab/stdarg.h:
-
-C:/Windriver/diab/5.9.1.0/include/diab/va_list.h:
-
-C:/Windriver/vxworks-6.9/target/h/limits.h:
+C:/Windriver/vxworks-6.9/target/h/stdio.h:
 
 C:/Windriver/vxworks-6.9/target/h/types/vxANSI.h:
 
@@ -216,16 +193,6 @@ C:/Windriver/vxworks-6.9/target/h/types/vxTypesBase.h:
 C:/Windriver/diab/5.9.1.0/include/diab/stddef.h:
 
 C:/Windriver/diab/5.9.1.0/include/diab/xmacros.h:
-
-C:/Windriver/vxworks-6.9/target/h/tool/diab/limits.h:
-
-C:/Windriver/diab/5.9.1.0/include/cpp/cmath:
-
-C:/Windriver/vxworks-6.9/target/h/math.h:
-
-C:/Windriver/diab/5.9.1.0/include/cpp/cstdio:
-
-C:/Windriver/vxworks-6.9/target/h/stdio.h:
 
 C:/Windriver/vxworks-6.9/target/h/errno.h:
 
@@ -300,6 +267,42 @@ C:/Windriver/vxworks-6.9/target/h/tool/diab/toolMacros.h:
 C:/Windriver/vxworks-6.9/target/h/tool/common/private/toolMacrosP.h:
 
 C:/Windriver/vxworks-6.9/target/h/version.h:
+
+C:/Windriver/diab/5.9.1.0/include/diab/stdarg.h:
+
+C:/Windriver/diab/5.9.1.0/include/diab/va_list.h:
+
+C:/_HP/ConveyorBelt/syscontrol/MotorControl.h:
+
+C:/_HP/ConveyorBelt/syscontrol/SysControl.h:
+
+C:/_HP/ConveyorBelt/syscontrol/TCPHandler_Chain.h:
+
+C:/_HP/ConveyorBelt/syscontrol/Command.h:
+
+C:/Windriver/diab/5.9.1.0/include/cpp/std/string:
+
+C:/Windriver/diab/5.9.1.0/include/cpp/std/istream:
+
+C:/Windriver/diab/5.9.1.0/include/cpp/std/ostream:
+
+C:/Windriver/diab/5.9.1.0/include/cpp/std/ios:
+
+C:/Windriver/diab/5.9.1.0/include/cpp/std/xlocnum:
+
+C:/Windriver/diab/5.9.1.0/include/cpp/climits:
+
+C:/Windriver/diab/5.9.1.0/include/cpp/yvals.h:
+
+C:/Windriver/vxworks-6.9/target/h/limits.h:
+
+C:/Windriver/vxworks-6.9/target/h/tool/diab/limits.h:
+
+C:/Windriver/diab/5.9.1.0/include/cpp/cmath:
+
+C:/Windriver/vxworks-6.9/target/h/math.h:
+
+C:/Windriver/diab/5.9.1.0/include/cpp/cstdio:
 
 C:/Windriver/diab/5.9.1.0/include/cpp/cstdlib:
 
@@ -403,12 +406,6 @@ C:/_HP/ConveyorBelt/statemachine/stateTable.h:
 
 C:/_HP/ConveyorBelt/syscontrol/MotorState.h:
 
-C:/_HP/ConveyorBelt/pictrl/piCtrl.h:
-
-C:/_HP/ConveyorBelt/pictrl/rtwtypes.h:
-
-C:/_HP/ConveyorBelt/pictrl/piCtrl_types.h:
-
 C:/Windriver/vxworks-6.9/target/h/taskLib.h:
 
 C:/Windriver/vxworks-6.9/target/h/classLib.h:
@@ -486,4 +483,10 @@ C:/Windriver/vxworks-6.9/target/h/ffsLib.h:
 C:/Windriver/vxworks-6.9/target/h/vxCpuLib.h:
 
 C:/Windriver/vxworks-6.9/target/h/logLib.h:
+
+C:/_HP/ConveyorBelt/pictrl/piCtrl.h:
+
+C:/_HP/ConveyorBelt/pictrl/rtwtypes.h:
+
+C:/_HP/ConveyorBelt/pictrl/piCtrl_types.h:
 
