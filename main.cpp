@@ -44,11 +44,11 @@ int main (void) {
 	pMotorControl->setSysControl(pSysControl);
 	
 	// Initial update of display
-	pDisplayControl->updateDisplay();
+	pDisplayControl->updateDisplay(false);
 	
 	// Start PI controller for motor
 	pMotorControl->startPICtrl();
-	
+		
 	// Start the state machine. This method blocks, so no while(1) is needed.
 	pSysControl->getStateMachine()->runToCompletion();
 }

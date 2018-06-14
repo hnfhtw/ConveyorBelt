@@ -21,7 +21,7 @@ private:
 public:
 	DisplayControl();
 	~DisplayControl();
-	void updateDisplay();
+	void updateDisplay(bool setTime);
 	void setMotorControl(MotorControl* pMctrl);
 	void setSysControl(SysControl* pSctrl);
 };

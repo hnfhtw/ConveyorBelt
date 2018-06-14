@@ -59,37 +59,39 @@ string TCPHandler_Chain::getAddrRCB(){
 }
 
 void TCPHandler_Chain::sendToRCB(Command cmd){
-	char command[9];
 	switch(cmd){
-		case READY:		sprintf(command , "Ready\r\n  ");
+		case READY:		write(m_SocketRCB, "Ready\r\n", 7);
+						printf("MESSAGE TO RCB: Ready\n");
 						break;
-		case REQUEST:	sprintf(command , "Request\r\n");
+		case REQUEST:	write(m_SocketRCB, "Request\r\n", 9);
+						printf("MESSAGE TO RCB: Request\n");
 						break;
-		case WAIT:		sprintf(command , "Wait\r\n   ");
+		case WAIT:		write(m_SocketRCB, "Wait\r\n", 6);
+						printf("MESSAGE TO RCB: Wait\n");
 						break;
-		case RELEASE:	sprintf(command , "Release\r\n");
+		case RELEASE:	write(m_SocketRCB, "Release\r\n", 9);
+						printf("MESSAGE TO RCB: Release\n");
 						break;
 		default:		return;
 	}
-	printf ("MESSAGE TO RCB: %s\n", command); 
-	 write(m_SocketRCB, command, sizeof (command));
 }
 
 void TCPHandler_Chain::sendToLCB(Command cmd){
-	char command[9];
 	switch(cmd){
-		case READY:		sprintf(command , "Ready\r\n  ");
+		case READY:		write(m_SocketLCB, "Ready\r\n", 7);
+						printf("MESSAGE TO LCB: Ready\n");
 						break;
-		case REQUEST:	sprintf(command , "Request\r\n");
+		case REQUEST:	write(m_SocketLCB, "Request\r\n", 9);
+						printf("MESSAGE TO RCB: Request\n");
 						break;
-		case WAIT:		sprintf(command , "Wait\r\n   ");
+		case WAIT:		write(m_SocketLCB, "Wait\r\n", 6);
+						printf("MESSAGE TO RCB: Wait\n");
 						break;
-		case RELEASE:	sprintf(command , "Release\r\n");
+		case RELEASE:	write(m_SocketLCB, "Release\r\n", 9);
+						printf("MESSAGE TO LCB: Release\n");
 						break;
-		default:		return;
+		default:		return;	
 	}
-	printf ("MESSAGE TO LCB: %s\n", command); 
-	 write(m_SocketLCB, command, sizeof (command));
 }
 
 void TCPHandler_Chain::setSocketRCB(int sFd){

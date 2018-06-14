@@ -49,6 +49,7 @@ public:
 	StateMachine* getStateMachine();
 	void setRequestPending(bool req);
 	bool getRequestPending();
+	void startPTP();
 };
 
 #endif /* SYSCONTROL_H_ */

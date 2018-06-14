@@ -1,18 +1,7 @@
-ConveyorBelt_partialImage/Debug/Objects/ConveyorBelt/syscontrol/SysControl.o: \
-  C:/_HP/ConveyorBelt/syscontrol/SysControl.cpp \
-  C:/_HP/ConveyorBelt/syscontrol/SysControl.h \
-  C:/_HP/ConveyorBelt/syscontrol/TCPHandler_Chain.h \
-  C:/_HP/ConveyorBelt/syscontrol/Command.h \
-  C:/Windriver/diab/5.9.1.0/include/cpp/std/string \
-  C:/Windriver/diab/5.9.1.0/include/cpp/std/istream \
-  C:/Windriver/diab/5.9.1.0/include/cpp/std/ostream \
-  C:/Windriver/diab/5.9.1.0/include/cpp/std/ios \
-  C:/Windriver/diab/5.9.1.0/include/cpp/std/xlocnum \
-  C:/Windriver/diab/5.9.1.0/include/cpp/climits \
-  C:/Windriver/diab/5.9.1.0/include/cpp/yvals.h \
-  C:/Windriver/diab/5.9.1.0/include/diab/stdarg.h \
-  C:/Windriver/diab/5.9.1.0/include/diab/va_list.h \
-  C:/Windriver/vxworks-6.9/target/h/limits.h \
+ConveyorBelt_partialImage/Debug/Objects/ConveyorBelt/ptp/ptpSlave.o: \
+  C:/_HP/ConveyorBelt/ptp/ptpSlave.c \
+  C:/_HP/ConveyorBelt/ptp/ptpIncludes.h \
+  C:/Windriver/vxworks-6.9/target/h/stdio.h \
   C:/Windriver/vxworks-6.9/target/h/types/vxANSI.h \
   C:/Windriver/vxworks-6.9/target/h/stdint.h \
   C:/Windriver/vxworks-6.9/target/h/vsbConfig.h \
@@ -26,11 +15,6 @@ ConveyorBelt_partialImage/Debug/Objects/ConveyorBelt/syscontrol/SysControl.o: \
   C:/Windriver/vxworks-6.9/target/h/types/vxTypesBase.h \
   C:/Windriver/diab/5.9.1.0/include/diab/stddef.h \
   C:/Windriver/diab/5.9.1.0/include/diab/xmacros.h \
-  C:/Windriver/vxworks-6.9/target/h/tool/diab/limits.h \
-  C:/Windriver/diab/5.9.1.0/include/cpp/cmath \
-  C:/Windriver/vxworks-6.9/target/h/math.h \
-  C:/Windriver/diab/5.9.1.0/include/cpp/cstdio \
-  C:/Windriver/vxworks-6.9/target/h/stdio.h \
   C:/Windriver/vxworks-6.9/target/h/errno.h \
   C:/Windriver/vxworks-6.9/target/h/private/handleLibP.h \
   C:/Windriver/vxworks-6.9/target/h/vxWorks.h \
@@ -68,76 +52,73 @@ ConveyorBelt_partialImage/Debug/Objects/ConveyorBelt/syscontrol/SysControl.o: \
   C:/Windriver/vxworks-6.9/target/h/tool/diab/toolMacros.h \
   C:/Windriver/vxworks-6.9/target/h/tool/common/private/toolMacrosP.h \
   C:/Windriver/vxworks-6.9/target/h/version.h \
-  C:/Windriver/diab/5.9.1.0/include/cpp/cstdlib \
+  C:/Windriver/diab/5.9.1.0/include/diab/stdarg.h \
+  C:/Windriver/diab/5.9.1.0/include/diab/va_list.h \
   C:/Windriver/vxworks-6.9/target/h/stdlib.h \
-  C:/Windriver/diab/5.9.1.0/include/cpp/std/streambuf \
-  C:/Windriver/diab/5.9.1.0/include/cpp/std/xiosbase \
-  C:/Windriver/diab/5.9.1.0/include/cpp/xlocale \
-  C:/Windriver/diab/5.9.1.0/include/cpp/cstring \
-  C:/Windriver/vxworks-6.9/target/h/string.h \
-  C:/Windriver/diab/5.9.1.0/include/cpp/stdexcept \
-  C:/Windriver/diab/5.9.1.0/include/cpp/std/exception \
-  C:/Windriver/diab/5.9.1.0/include/cpp/xstddef \
-  C:/Windriver/diab/5.9.1.0/include/cpp/cstddef \
-  C:/Windriver/diab/5.9.1.0/include/cpp/std/xstring \
-  C:/Windriver/diab/5.9.1.0/include/cpp/xmemory \
-  C:/Windriver/diab/5.9.1.0/include/cpp/new \
-  C:/Windriver/diab/5.9.1.0/include/cpp/xutility \
-  C:/Windriver/diab/5.9.1.0/include/cpp/utility \
-  C:/Windriver/diab/5.9.1.0/include/cpp/std/iosfwd \
-  C:/Windriver/diab/5.9.1.0/include/cpp/cwchar \
-  C:/Windriver/diab/5.9.1.0/include/diab/wchar.h \
-  C:/Windriver/diab/5.9.1.0/include/cpp/typeinfo \
-  C:/Windriver/diab/5.9.1.0/include/cpp/xdebug \
-  C:/Windriver/diab/5.9.1.0/include/cpp/xlocinfo \
-  C:/Windriver/diab/5.9.1.0/include/cpp/cctype \
-  C:/Windriver/vxworks-6.9/target/h/ctype.h \
-  C:/Windriver/diab/5.9.1.0/include/cpp/clocale \
-  C:/Windriver/vxworks-6.9/target/h/locale.h \
-  C:/Windriver/diab/5.9.1.0/include/cpp/ctime \
+  C:/Windriver/vxworks-6.9/target/h/wrn/coreip/sockLib.h \
+  C:/Windriver/vxworks-6.9/target/h/sys/times.h \
+  C:/Windriver/vxworks-6.9/target/h/sys/time.h \
+  C:/Windriver/vxworks-6.9/target/h/wrn/coreip/sys/socket.h \
+  C:/Windriver/vxworks-6.9/target/h/wrn/coreip/netVersion.h \
+  C:/Windriver/vxworks-6.9/target/h/wrn/coreip/sockFunc.h \
+  C:/Windriver/vxworks-6.9/target/h/ioLib.h \
+  C:/Windriver/vxworks-6.9/target/h/vwModNum.h \
+  C:/Windriver/vxworks-6.9/target/h/limits.h \
+  C:/Windriver/vxworks-6.9/target/h/tool/diab/limits.h \
+  C:/Windriver/vxworks-6.9/target/h/wrn/coreip/net/uio.h \
+  C:/Windriver/vxworks-6.9/target/h/wrn/coreip/sys/cdefs.h \
+  C:/Windriver/vxworks-6.9/target/h/fcntl.h \
+  C:/Windriver/vxworks-6.9/target/h/sys/fcntlcom.h \
+  C:/Windriver/vxworks-6.9/target/h/unistd.h \
+  C:/Windriver/vxworks-6.9/target/h/dllLib.h \
+  C:/Windriver/vxworks-6.9/target/h/sys/resource.h \
+  C:/Windriver/vxworks-6.9/target/h/wrn/coreip/inetLib.h \
+  C:/Windriver/vxworks-6.9/target/h/wrn/coreip/netinet/in.h \
+  C:/Windriver/vxworks-6.9/target/h/wrn/coreip/net/mbuf.h \
+  C:/Windriver/vxworks-6.9/target/h/wrn/coreip/netBufLib.h \
+  C:/Windriver/vxworks-6.9/target/h/wrn/coreip/cfgDefs.h \
+  C:/Windriver/vxworks-6.9/target/h/memLib.h \
+  C:/Windriver/vxworks-6.9/target/h/wrn/coreip/netffs.h \
+  C:/Windriver/vxworks-6.9/target/h/spinLockLib.h \
   C:/Windriver/vxworks-6.9/target/h/time.h \
   C:/Windriver/vxworks-6.9/target/h/objLib.h \
   C:/Windriver/vxworks-6.9/target/h/objLibCommon.h \
-  C:/Windriver/vxworks-6.9/target/h/vwModNum.h \
   C:/Windriver/vxworks-6.9/target/h/base/b_struct_timespec.h \
-  C:/Windriver/diab/5.9.1.0/include/cpp/xlocinfo.h \
-  C:/_HP/ConveyorBelt/syscontrol/TCPHandler_UI.h \
-  C:/_HP/ConveyorBelt/syscontrol/MotorControl.h \
-  C:/_HP/ConveyorBelt/syscontrol/DisplayControl.h \
-  C:/_HP/ConveyorBelt/syscontrol/MotorState.h \
-  C:/_HP/ConveyorBelt/syscontrol/KeyboardHandler.h \
-  C:/_HP/ConveyorBelt/syscontrol/OpMode.h \
-  C:/_HP/ConveyorBelt/syscontrol/SysState.h \
-  C:/_HP/ConveyorBelt/statemachine/stateMachine.h \
-  C:/Windriver/diab/5.9.1.0/include/cpp/queue \
-  C:/Windriver/diab/5.9.1.0/include/cpp/algorithm \
-  C:/Windriver/diab/5.9.1.0/include/cpp/memory \
-  C:/Windriver/diab/5.9.1.0/include/cpp/deque \
-  C:/Windriver/diab/5.9.1.0/include/cpp/functional \
-  C:/Windriver/diab/5.9.1.0/include/cpp/vector \
-  C:/Windriver/vxworks-6.9/target/h/semLib.h \
-  C:/Windriver/vxworks-6.9/target/h/semLibCommon.h \
-  C:/_HP/ConveyorBelt/statemachine/diaTimer.h \
-  C:/Windriver/vxworks-6.9/target/h/wdLib.h \
-  C:/_HP/ConveyorBelt/statemachine/stateTable.h \
-  C:/_HP/ConveyorBelt/statemachine/myFunctions.h \
-  C:/Windriver/vxworks-6.9/target/h/taskLib.h \
-  C:/Windriver/vxworks-6.9/target/h/classLib.h \
+  C:/Windriver/vxworks-6.9/target/h/spinlockIsrNdLib.h \
+  C:/Windriver/vxworks-6.9/target/h/intLib.h \
   C:/Windriver/vxworks-6.9/target/h/regs.h \
   C:/Windriver/vxworks-6.9/target/h/arch/simnt/regsSimnt.h \
+  C:/Windriver/vxworks-6.9/target/h/vxInline.h \
+  C:/Windriver/vxworks-6.9/target/h/arch/simnt/vxInlineArch.h \
+  C:/Windriver/vxworks-6.9/target/h/wrn/coreip/netinet6/in6.h \
+  C:/Windriver/vxworks-6.9/target/h/wrn/coreip/net/route.h \
+  C:/Windriver/vxworks-6.9/target/h/wrn/coreip/arpa/inet.h \
+  C:/Windriver/vxworks-6.9/target/h/wrn/coreip/hostLib.h \
+  C:/Windriver/vxworks-6.9/target/h/wrn/coreip/wrapper/wrapperHostLib.h \
+  C:/Windriver/vxworks-6.9/target/h/wrn/coreip/netdb.h \
+  C:/Windriver/vxworks-6.9/target/h/lstLib.h \
+  C:/Windriver/vxworks-6.9/target/h/wrn/coreip/net/if.h \
+  C:/Windriver/vxworks-6.9/target/h/wrn/coreip/sys/queue.h \
+  C:/Windriver/vxworks-6.9/target/h/wrn/coreip/net/if_var.h \
+  C:/Windriver/vxworks-6.9/target/h/stdioLib.h \
+  C:/Windriver/vxworks-6.9/target/h/strLib.h \
+  C:/Windriver/vxworks-6.9/target/h/string.h \
+  C:/Windriver/vxworks-6.9/target/h/fioLib.h \
+  C:/_HP/ConveyorBelt/ptp/ptpUDPdefs.h \
+  C:/_HP/ConveyorBelt/ptp/ptpUDP.h C:/_HP/ConveyorBelt/hwfiles/FHV.h \
+  C:/Windriver/vxworks-6.9/target/h/taskLib.h \
+  C:/Windriver/vxworks-6.9/target/h/classLib.h \
   C:/Windriver/vxworks-6.9/target/h/excLib.h \
   C:/Windriver/vxworks-6.9/target/h/arch/simnt/excSimntLib.h \
   C:/Windriver/vxworks-6.9/target/h/private/qLibP.h \
-  C:/Windriver/vxworks-6.9/target/h/dllLib.h \
   C:/Windriver/vxworks-6.9/target/h/private/eventP.h \
   C:/Windriver/vxworks-6.9/target/h/private/eventDefsP.h \
   C:/Windriver/vxworks-6.9/target/h/private/funcBindP.h \
   C:/Windriver/vxworks-6.9/target/h/private/objLibP.h \
   C:/Windriver/vxworks-6.9/target/h/private/intMicroLibP.h \
-  C:/Windriver/vxworks-6.9/target/h/vxInline.h \
-  C:/Windriver/vxworks-6.9/target/h/arch/simnt/vxInlineArch.h \
   C:/Windriver/vxworks-6.9/target/h/private/classLibP.h \
-  C:/Windriver/vxworks-6.9/target/h/memLib.h \
+  C:/Windriver/vxworks-6.9/target/h/semLib.h \
+  C:/Windriver/vxworks-6.9/target/h/semLibCommon.h \
   C:/Windriver/vxworks-6.9/target/h/private/eventPointStubLibP.h \
   C:/Windriver/vxworks-6.9/target/h/vxAtomicLib.h \
   C:/Windriver/vxworks-6.9/target/h/arch/simnt/vxAtomicArchLib.h \
@@ -159,35 +140,11 @@ ConveyorBelt_partialImage/Debug/Objects/ConveyorBelt/syscontrol/SysControl.o: \
   C:/Windriver/vxworks-6.9/target/h/cpusetCommon.h \
   C:/Windriver/vxworks-6.9/target/h/ffsLib.h \
   C:/Windriver/vxworks-6.9/target/h/vxCpuLib.h \
-  C:/Windriver/vxworks-6.9/target/h/logLib.h \
-  C:/_HP/ConveyorBelt/hwfiles/hwFunc.h \
-  C:/_HP/ConveyorBelt/ptp/ptpSlave.h
+  C:/Windriver/vxworks-6.9/target/h/logLib.h
 
-C:/_HP/ConveyorBelt/syscontrol/SysControl.h:
+C:/_HP/ConveyorBelt/ptp/ptpIncludes.h:
 
-C:/_HP/ConveyorBelt/syscontrol/TCPHandler_Chain.h:
-
-C:/_HP/ConveyorBelt/syscontrol/Command.h:
-
-C:/Windriver/diab/5.9.1.0/include/cpp/std/string:
-
-C:/Windriver/diab/5.9.1.0/include/cpp/std/istream:
-
-C:/Windriver/diab/5.9.1.0/include/cpp/std/ostream:
-
-C:/Windriver/diab/5.9.1.0/include/cpp/std/ios:
-
-C:/Windriver/diab/5.9.1.0/include/cpp/std/xlocnum:
-
-C:/Windriver/diab/5.9.1.0/include/cpp/climits:
-
-C:/Windriver/diab/5.9.1.0/include/cpp/yvals.h:
-
-C:/Windriver/diab/5.9.1.0/include/diab/stdarg.h:
-
-C:/Windriver/diab/5.9.1.0/include/diab/va_list.h:
-
-C:/Windriver/vxworks-6.9/target/h/limits.h:
+C:/Windriver/vxworks-6.9/target/h/stdio.h:
 
 C:/Windriver/vxworks-6.9/target/h/types/vxANSI.h:
 
@@ -214,16 +171,6 @@ C:/Windriver/vxworks-6.9/target/h/types/vxTypesBase.h:
 C:/Windriver/diab/5.9.1.0/include/diab/stddef.h:
 
 C:/Windriver/diab/5.9.1.0/include/diab/xmacros.h:
-
-C:/Windriver/vxworks-6.9/target/h/tool/diab/limits.h:
-
-C:/Windriver/diab/5.9.1.0/include/cpp/cmath:
-
-C:/Windriver/vxworks-6.9/target/h/math.h:
-
-C:/Windriver/diab/5.9.1.0/include/cpp/cstdio:
-
-C:/Windriver/vxworks-6.9/target/h/stdio.h:
 
 C:/Windriver/vxworks-6.9/target/h/errno.h:
 
@@ -299,59 +246,61 @@ C:/Windriver/vxworks-6.9/target/h/tool/common/private/toolMacrosP.h:
 
 C:/Windriver/vxworks-6.9/target/h/version.h:
 
-C:/Windriver/diab/5.9.1.0/include/cpp/cstdlib:
+C:/Windriver/diab/5.9.1.0/include/diab/stdarg.h:
+
+C:/Windriver/diab/5.9.1.0/include/diab/va_list.h:
 
 C:/Windriver/vxworks-6.9/target/h/stdlib.h:
 
-C:/Windriver/diab/5.9.1.0/include/cpp/std/streambuf:
+C:/Windriver/vxworks-6.9/target/h/wrn/coreip/sockLib.h:
 
-C:/Windriver/diab/5.9.1.0/include/cpp/std/xiosbase:
+C:/Windriver/vxworks-6.9/target/h/sys/times.h:
 
-C:/Windriver/diab/5.9.1.0/include/cpp/xlocale:
+C:/Windriver/vxworks-6.9/target/h/sys/time.h:
 
-C:/Windriver/diab/5.9.1.0/include/cpp/cstring:
+C:/Windriver/vxworks-6.9/target/h/wrn/coreip/sys/socket.h:
 
-C:/Windriver/vxworks-6.9/target/h/string.h:
+C:/Windriver/vxworks-6.9/target/h/wrn/coreip/netVersion.h:
 
-C:/Windriver/diab/5.9.1.0/include/cpp/stdexcept:
+C:/Windriver/vxworks-6.9/target/h/wrn/coreip/sockFunc.h:
 
-C:/Windriver/diab/5.9.1.0/include/cpp/std/exception:
+C:/Windriver/vxworks-6.9/target/h/ioLib.h:
 
-C:/Windriver/diab/5.9.1.0/include/cpp/xstddef:
+C:/Windriver/vxworks-6.9/target/h/vwModNum.h:
 
-C:/Windriver/diab/5.9.1.0/include/cpp/cstddef:
+C:/Windriver/vxworks-6.9/target/h/limits.h:
 
-C:/Windriver/diab/5.9.1.0/include/cpp/std/xstring:
+C:/Windriver/vxworks-6.9/target/h/tool/diab/limits.h:
 
-C:/Windriver/diab/5.9.1.0/include/cpp/xmemory:
+C:/Windriver/vxworks-6.9/target/h/wrn/coreip/net/uio.h:
 
-C:/Windriver/diab/5.9.1.0/include/cpp/new:
+C:/Windriver/vxworks-6.9/target/h/wrn/coreip/sys/cdefs.h:
 
-C:/Windriver/diab/5.9.1.0/include/cpp/xutility:
+C:/Windriver/vxworks-6.9/target/h/fcntl.h:
 
-C:/Windriver/diab/5.9.1.0/include/cpp/utility:
+C:/Windriver/vxworks-6.9/target/h/sys/fcntlcom.h:
 
-C:/Windriver/diab/5.9.1.0/include/cpp/std/iosfwd:
+C:/Windriver/vxworks-6.9/target/h/unistd.h:
 
-C:/Windriver/diab/5.9.1.0/include/cpp/cwchar:
+C:/Windriver/vxworks-6.9/target/h/dllLib.h:
 
-C:/Windriver/diab/5.9.1.0/include/diab/wchar.h:
+C:/Windriver/vxworks-6.9/target/h/sys/resource.h:
 
-C:/Windriver/diab/5.9.1.0/include/cpp/typeinfo:
+C:/Windriver/vxworks-6.9/target/h/wrn/coreip/inetLib.h:
 
-C:/Windriver/diab/5.9.1.0/include/cpp/xdebug:
+C:/Windriver/vxworks-6.9/target/h/wrn/coreip/netinet/in.h:
 
-C:/Windriver/diab/5.9.1.0/include/cpp/xlocinfo:
+C:/Windriver/vxworks-6.9/target/h/wrn/coreip/net/mbuf.h:
 
-C:/Windriver/diab/5.9.1.0/include/cpp/cctype:
+C:/Windriver/vxworks-6.9/target/h/wrn/coreip/netBufLib.h:
 
-C:/Windriver/vxworks-6.9/target/h/ctype.h:
+C:/Windriver/vxworks-6.9/target/h/wrn/coreip/cfgDefs.h:
 
-C:/Windriver/diab/5.9.1.0/include/cpp/clocale:
+C:/Windriver/vxworks-6.9/target/h/memLib.h:
 
-C:/Windriver/vxworks-6.9/target/h/locale.h:
+C:/Windriver/vxworks-6.9/target/h/wrn/coreip/netffs.h:
 
-C:/Windriver/diab/5.9.1.0/include/cpp/ctime:
+C:/Windriver/vxworks-6.9/target/h/spinLockLib.h:
 
 C:/Windriver/vxworks-6.9/target/h/time.h:
 
@@ -359,67 +308,63 @@ C:/Windriver/vxworks-6.9/target/h/objLib.h:
 
 C:/Windriver/vxworks-6.9/target/h/objLibCommon.h:
 
-C:/Windriver/vxworks-6.9/target/h/vwModNum.h:
-
 C:/Windriver/vxworks-6.9/target/h/base/b_struct_timespec.h:
 
-C:/Windriver/diab/5.9.1.0/include/cpp/xlocinfo.h:
+C:/Windriver/vxworks-6.9/target/h/spinlockIsrNdLib.h:
 
-C:/_HP/ConveyorBelt/syscontrol/TCPHandler_UI.h:
-
-C:/_HP/ConveyorBelt/syscontrol/MotorControl.h:
-
-C:/_HP/ConveyorBelt/syscontrol/DisplayControl.h:
-
-C:/_HP/ConveyorBelt/syscontrol/MotorState.h:
-
-C:/_HP/ConveyorBelt/syscontrol/KeyboardHandler.h:
-
-C:/_HP/ConveyorBelt/syscontrol/OpMode.h:
-
-C:/_HP/ConveyorBelt/syscontrol/SysState.h:
-
-C:/_HP/ConveyorBelt/statemachine/stateMachine.h:
-
-C:/Windriver/diab/5.9.1.0/include/cpp/queue:
-
-C:/Windriver/diab/5.9.1.0/include/cpp/algorithm:
-
-C:/Windriver/diab/5.9.1.0/include/cpp/memory:
-
-C:/Windriver/diab/5.9.1.0/include/cpp/deque:
-
-C:/Windriver/diab/5.9.1.0/include/cpp/functional:
-
-C:/Windriver/diab/5.9.1.0/include/cpp/vector:
-
-C:/Windriver/vxworks-6.9/target/h/semLib.h:
-
-C:/Windriver/vxworks-6.9/target/h/semLibCommon.h:
-
-C:/_HP/ConveyorBelt/statemachine/diaTimer.h:
-
-C:/Windriver/vxworks-6.9/target/h/wdLib.h:
-
-C:/_HP/ConveyorBelt/statemachine/stateTable.h:
-
-C:/_HP/ConveyorBelt/statemachine/myFunctions.h:
-
-C:/Windriver/vxworks-6.9/target/h/taskLib.h:
-
-C:/Windriver/vxworks-6.9/target/h/classLib.h:
+C:/Windriver/vxworks-6.9/target/h/intLib.h:
 
 C:/Windriver/vxworks-6.9/target/h/regs.h:
 
 C:/Windriver/vxworks-6.9/target/h/arch/simnt/regsSimnt.h:
+
+C:/Windriver/vxworks-6.9/target/h/vxInline.h:
+
+C:/Windriver/vxworks-6.9/target/h/arch/simnt/vxInlineArch.h:
+
+C:/Windriver/vxworks-6.9/target/h/wrn/coreip/netinet6/in6.h:
+
+C:/Windriver/vxworks-6.9/target/h/wrn/coreip/net/route.h:
+
+C:/Windriver/vxworks-6.9/target/h/wrn/coreip/arpa/inet.h:
+
+C:/Windriver/vxworks-6.9/target/h/wrn/coreip/hostLib.h:
+
+C:/Windriver/vxworks-6.9/target/h/wrn/coreip/wrapper/wrapperHostLib.h:
+
+C:/Windriver/vxworks-6.9/target/h/wrn/coreip/netdb.h:
+
+C:/Windriver/vxworks-6.9/target/h/lstLib.h:
+
+C:/Windriver/vxworks-6.9/target/h/wrn/coreip/net/if.h:
+
+C:/Windriver/vxworks-6.9/target/h/wrn/coreip/sys/queue.h:
+
+C:/Windriver/vxworks-6.9/target/h/wrn/coreip/net/if_var.h:
+
+C:/Windriver/vxworks-6.9/target/h/stdioLib.h:
+
+C:/Windriver/vxworks-6.9/target/h/strLib.h:
+
+C:/Windriver/vxworks-6.9/target/h/string.h:
+
+C:/Windriver/vxworks-6.9/target/h/fioLib.h:
+
+C:/_HP/ConveyorBelt/ptp/ptpUDPdefs.h:
+
+C:/_HP/ConveyorBelt/ptp/ptpUDP.h:
+
+C:/_HP/ConveyorBelt/hwfiles/FHV.h:
+
+C:/Windriver/vxworks-6.9/target/h/taskLib.h:
+
+C:/Windriver/vxworks-6.9/target/h/classLib.h:
 
 C:/Windriver/vxworks-6.9/target/h/excLib.h:
 
 C:/Windriver/vxworks-6.9/target/h/arch/simnt/excSimntLib.h:
 
 C:/Windriver/vxworks-6.9/target/h/private/qLibP.h:
-
-C:/Windriver/vxworks-6.9/target/h/dllLib.h:
 
 C:/Windriver/vxworks-6.9/target/h/private/eventP.h:
 
@@ -431,13 +376,11 @@ C:/Windriver/vxworks-6.9/target/h/private/objLibP.h:
 
 C:/Windriver/vxworks-6.9/target/h/private/intMicroLibP.h:
 
-C:/Windriver/vxworks-6.9/target/h/vxInline.h:
-
-C:/Windriver/vxworks-6.9/target/h/arch/simnt/vxInlineArch.h:
-
 C:/Windriver/vxworks-6.9/target/h/private/classLibP.h:
 
-C:/Windriver/vxworks-6.9/target/h/memLib.h:
+C:/Windriver/vxworks-6.9/target/h/semLib.h:
+
+C:/Windriver/vxworks-6.9/target/h/semLibCommon.h:
 
 C:/Windriver/vxworks-6.9/target/h/private/eventPointStubLibP.h:
 
@@ -482,8 +425,4 @@ C:/Windriver/vxworks-6.9/target/h/ffsLib.h:
 C:/Windriver/vxworks-6.9/target/h/vxCpuLib.h:
 
 C:/Windriver/vxworks-6.9/target/h/logLib.h:
-
-C:/_HP/ConveyorBelt/hwfiles/hwFunc.h:
-
-C:/_HP/ConveyorBelt/ptp/ptpSlave.h:
 

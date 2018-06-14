@@ -8,8 +8,10 @@
 #include "SysControl.h"
 #include "stateMachine.h"	// provided statemachine framework
 #include "myFunctions.h"	// declaration of action and condition functions for statemachine framework
+#include "taskLib.h"
 extern "C"{
 	#include "hwFunc.h"
+	#include "ptpSlave.h"
 }
 using namespace std;
 
@@ -30,6 +32,7 @@ SysControl::SysControl(MotorControl* pMctrl, DisplayControl* pDctrl){
 	m_RequestPending = false;
 	m_pTCPHandler_UI->startServer();
 	m_pTCPHandler_Chain->startServer();
+	this->startPTP();
 }
 
 SysControl::~SysControl(){
@@ -151,23 +154,27 @@ bool SysControl::getRequestPending(){
 	return m_RequestPending;
 }
 
+void SysControl::startPTP(){
+	taskSpawn ("PTP", 140, 0,0x1000, (FUNCPTR) syncClk,0,0,0,0,0,0,0,0,0,0);	// set first parameter != 0 to output debug PTP debug values
+}
+
 void trig00_action(SysControl* pSysControl){
 	pSysControl->setOpMode(OPMODE_CHAIN);
 	pSysControl->getMotorControl()->setMotorSpeedFinal(1800);
 	pSysControl->getMotorControl()->setDirection(TRUE);	
-	pSysControl->getDisplayControl()->updateDisplay();
+	pSysControl->getDisplayControl()->updateDisplay(false);
 	return;
 }
 
 void trig01_action(SysControl* pSysControl){
 	pSysControl->setOpMode(OPMODE_LOCAL);
-	pSysControl->getDisplayControl()->updateDisplay();
+	pSysControl->getDisplayControl()->updateDisplay(false);
 	return;
 }
 
 void trig02_action(SysControl* pSysControl){
 	pSysControl->setOpMode(OPMODE_LOCAL);
-	pSysControl->getDisplayControl()->updateDisplay();
+	pSysControl->getDisplayControl()->updateDisplay(false);
 	return;
 }
 
@@ -175,72 +182,72 @@ void trig03_action(SysControl* pSysControl){
 	pSysControl->setOpMode(OPMODE_CHAIN);
 	pSysControl->getMotorControl()->setMotorSpeedFinal(1800);
 	pSysControl->getMotorControl()->setDirection(TRUE);	
-	pSysControl->getDisplayControl()->updateDisplay();
+	pSysControl->getDisplayControl()->updateDisplay(false);
 	return;
 }
 
 void trig10_action(SysControl* pSysControl){
 	pSysControl->setSysState(STATE_RECEIVEPACKET);
 	pSysControl->getTCPHandler_Chain()->sendToLCB(READY);
-	pSysControl->getDisplayControl()->updateDisplay();
+	pSysControl->getDisplayControl()->updateDisplay(false);
 	pSysControl->getStateMachine()->sendEvent("moveSlow()");
 	return;
 }
 
 void trig11_action(SysControl* pSysControl){
 	pSysControl->setRequestPending(true);
-	pSysControl->getDisplayControl()->updateDisplay();
+	pSysControl->getDisplayControl()->updateDisplay(false);
 	return;
 }
 
 void trig12_action(SysControl* pSysControl){
 	pSysControl->setSysState(STATE_TRANSFERPACKET);
 	pSysControl->getTCPHandler_Chain()->sendToLCB(RELEASE);
-	pSysControl->getDisplayControl()->updateDisplay();
+	pSysControl->getDisplayControl()->updateDisplay(true);
 	pSysControl->getStateMachine()->sendEvent("startRamp()");
 	return;
 }
 
 void trig13_action(SysControl* pSysControl){
 	pSysControl->setRequestPending(true);
-	pSysControl->getDisplayControl()->updateDisplay();
+	pSysControl->getDisplayControl()->updateDisplay(false);
 	return;
 }
 
 void trig14_action(SysControl* pSysControl){
 	pSysControl->setSysState(STATE_WAITFORRCB);
 	pSysControl->getTCPHandler_Chain()->sendToRCB(REQUEST);
-	pSysControl->getDisplayControl()->updateDisplay();
+	pSysControl->getDisplayControl()->updateDisplay(false);
 	return;
 }
 
 void trig15_action(SysControl* pSysControl){
 	pSysControl->setRequestPending(true);
-	pSysControl->getDisplayControl()->updateDisplay();
+	pSysControl->getDisplayControl()->updateDisplay(false);
 	return;
 }
 
 void trig16_action(SysControl* pSysControl){
-	pSysControl->getDisplayControl()->updateDisplay();
+	pSysControl->getDisplayControl()->updateDisplay(false);
 	return;
 }
 
 void trig17_action(SysControl* pSysControl){
 	pSysControl->setSysState(STATE_DELIVERPACKET);
-	pSysControl->getDisplayControl()->updateDisplay();
+	pSysControl->getDisplayControl()->updateDisplay(false);
 	pSysControl->getStateMachine()->sendEvent("moveSlow()");
 	return;
 }
 
 void trig18_action(SysControl* pSysControl){
 	pSysControl->setRequestPending(true);
-	pSysControl->getDisplayControl()->updateDisplay();
+	pSysControl->getDisplayControl()->updateDisplay(false);
 	return;
 }
 
 void trig19_action(SysControl* pSysControl){
 	pSysControl->setSysState(STATE_IDLE);
-	pSysControl->getDisplayControl()->updateDisplay();
+	pSysControl->getDisplayControl()->updateDisplay(false);
 	pSysControl->getStateMachine()->sendEvent("stop()");
 	return;
 }
@@ -249,7 +256,7 @@ void trig110_action(SysControl* pSysControl){
 	pSysControl->setSysState(STATE_RECEIVEPACKET);
 	pSysControl->setRequestPending(false);
 	pSysControl->getTCPHandler_Chain()->sendToLCB(READY);
-	pSysControl->getDisplayControl()->updateDisplay();
+	pSysControl->getDisplayControl()->updateDisplay(false);
 	pSysControl->getStateMachine()->sendEvent("moveSlow()");
 	return;
 }
@@ -257,51 +264,51 @@ void trig110_action(SysControl* pSysControl){
 void trig20_action(SysControl* pSysControl){
 	pSysControl->getMotorControl()->setMotorState(MOTOR_SLOW);
 	pSysControl->getMotorControl()->setTargetSpeed(100);
-	pSysControl->getDisplayControl()->updateDisplay();
+	pSysControl->getDisplayControl()->updateDisplay(false);
 	return;
 }
 
 void trig21_action(SysControl* pSysControl){
 	pSysControl->getMotorControl()->setMotorState(MOTOR_RAMPUP);
-	pSysControl->getDisplayControl()->updateDisplay();
+	pSysControl->getDisplayControl()->updateDisplay(false);
 	return;
 }
 
 void trig22_action(SysControl* pSysControl){
 	pSysControl->getMotorControl()->setMotorState(MOTOR_STOP);
 	pSysControl->getMotorControl()->setTargetSpeed(0);
-	pSysControl->getDisplayControl()->updateDisplay();
+	pSysControl->getDisplayControl()->updateDisplay(false);
 	return;
 }
 
 void trig23_action(SysControl* pSysControl){
 	pSysControl->getMotorControl()->setMotorState(MOTOR_RAMPUP);
-	pSysControl->getDisplayControl()->updateDisplay();
+	pSysControl->getDisplayControl()->updateDisplay(false);
 	return;
 }
 
 void trig24_action(SysControl* pSysControl){
 	pSysControl->getMotorControl()->increaseSpeed();
-	pSysControl->getDisplayControl()->updateDisplay();
+	pSysControl->getDisplayControl()->updateDisplay(false);
 	return;
 }
 
 void trig25_action(SysControl* pSysControl){
 	pSysControl->getMotorControl()->setMotorState(MOTOR_FULLSPEED);
 	pSysControl->getMotorControl()->setTargetSpeed(pSysControl->getMotorControl()->getMotorSpeedFinal());
-	pSysControl->getDisplayControl()->updateDisplay();
+	pSysControl->getDisplayControl()->updateDisplay(false);
 	return;
 }
 
 void trig26_action(SysControl* pSysControl){
 	pSysControl->getMotorControl()->setMotorState(MOTOR_RAMPDOWN);
-	pSysControl->getDisplayControl()->updateDisplay();
+	pSysControl->getDisplayControl()->updateDisplay(false);
 	return;
 }
 
 void trig27_action(SysControl* pSysControl){
 	pSysControl->getMotorControl()->decreaseSpeed();
-	pSysControl->getDisplayControl()->updateDisplay();
+	pSysControl->getDisplayControl()->updateDisplay(false);
 	return;
 }
 
@@ -312,7 +319,7 @@ void trig28_action(SysControl* pSysControl){
 		pSysControl->setSysState(STATE_WAITFORRCB);
 		pSysControl->getStateMachine()->sendEvent("setSysState(STATE_WAITFORRCB)");
 	}
-	pSysControl->getDisplayControl()->updateDisplay();
+	pSysControl->getDisplayControl()->updateDisplay(false);
 	return;
 }
 

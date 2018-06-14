@@ -88,7 +88,7 @@ static int_T tBaseRate(SEM_ID sem, SEM_ID startStopSem, MotorControl* pMotorCont
     /* Get model outputs here */
     motorVoltage = piCtrl_Y.u_ref;
     //printf("%.2f %.2f %.2f\n",  piCtrl_U.In2, piCtrl_Y.u_ref, pulseCnt);
-    //printf("%d;%d\n",  targetSpeed, speedRpm);
+    printf("%d;%d\n",  targetSpeed, speedRpm);
     voltageDig = 2048 - (int)(motorVoltage * 220.0); 
     if (voltageDig > 4095) {
       voltageDig = 4095;

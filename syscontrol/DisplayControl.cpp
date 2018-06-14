@@ -12,6 +12,7 @@
 extern "C"{
 	#include "hwFunc.h"
 }
+extern int timeOffset;
 
 using namespace std;
 
@@ -25,7 +26,7 @@ DisplayControl::~DisplayControl(){
 	m_pMotorControl = NULL;
 }
 
-void DisplayControl::updateDisplay(){
+void DisplayControl::updateDisplay(bool setTime){
 	SysState state = m_pSysControl->getSysState();
 	OpMode mode = m_pSysControl->getOpMode();
 	MotorState motorState = m_pMotorControl->getMotorState();
@@ -77,6 +78,7 @@ void DisplayControl::updateDisplay(){
 		writeToDisplay (16, 5, "Increase Final Speed with 'F', Decrease Final Speed with 'C'");
 
 		writeToDisplay(18, 5, "Start Movement with 'E'");
+		writeToDisplay(20, 5, "                                                                 ");
 	}
 	else if(mode == OPMODE_CHAIN){
 		switch(state){
@@ -94,7 +96,7 @@ void DisplayControl::updateDisplay(){
 		}
 		char adr[80];
 		if(m_pSysControl->getTCPHandler_Chain()->getAddrRCBset()){
-			sprintf(adr, "Address of RCB:             %s                      ", m_pSysControl->getTCPHandler_Chain()->getAddrRCB().c_str());
+			sprintf(adr, "Address of RCB:             %s                        ", m_pSysControl->getTCPHandler_Chain()->getAddrRCB().c_str());
 			writeToDisplay (16, 5, adr);
 		}
 		else{
@@ -102,6 +104,12 @@ void DisplayControl::updateDisplay(){
 		}
 		writeToDisplay (15, 5, "                         ");	// clear display contents from local mode   
 		writeToDisplay(18, 5, "                       "); 		// clear display contents from local mode
+		if(setTime){
+			char timeMsg[80];
+			sprintf(timeMsg, "Packet received at master-time %ds                         ", (time(NULL)-timeOffset));
+			writeToDisplay(20, 5, timeMsg);
+			//writeToDisplay(20, 5, "Packet received at master-time %d ");
+		}
 	}						  
 }
 

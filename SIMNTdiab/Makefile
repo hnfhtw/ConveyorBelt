@@ -58,7 +58,7 @@ VSB_CONFIG_FILE = $(VSB_DIR)/h/config/vsbConfig.h
 LIBPATH = 
 LIBS = 
 
-IDE_INCLUDES = -I$(WIND_BASE)/target/h -IC:/_HP/ConveyorBelt/pictrl -IC:/_HP/ConveyorBelt/hwfiles -IC:/_HP/ConveyorBelt/statemachine -IC:/_HP/ConveyorBelt/syscontrol -I$(WIND_BASE)/target/h/wrn/coreip 
+IDE_INCLUDES = -I$(WIND_BASE)/target/h -IC:/_HP/ConveyorBelt/ptp -IC:/_HP/ConveyorBelt/pictrl -IC:/_HP/ConveyorBelt/hwfiles -IC:/_HP/ConveyorBelt/statemachine -IC:/_HP/ConveyorBelt/syscontrol -I$(WIND_BASE)/target/h/wrn/coreip 
 
 IDE_LIBRARIES = 
 
@@ -107,7 +107,7 @@ ConveyorBelt/$(MODE_DIR)/% : DEBUGFLAGS_Partial-Image-Linker =
 ConveyorBelt/$(MODE_DIR)/% : DEBUGFLAGS_Librarian = 
 ConveyorBelt/$(MODE_DIR)/% : DEBUGFLAGS_Assembler =  -XO -Xsize-opt 
 endif
-ConveyorBelt/$(MODE_DIR)/% : IDE_INCLUDES = -I$(WIND_BASE)/target/h -IC:/_HP/ConveyorBelt/pictrl -IC:/_HP/ConveyorBelt/hwfiles -IC:/_HP/ConveyorBelt/statemachine -IC:/_HP/ConveyorBelt/syscontrol -I$(WIND_BASE)/target/h/wrn/coreip 
+ConveyorBelt/$(MODE_DIR)/% : IDE_INCLUDES = -I$(WIND_BASE)/target/h -IC:/_HP/ConveyorBelt/ptp -IC:/_HP/ConveyorBelt/pictrl -IC:/_HP/ConveyorBelt/hwfiles -IC:/_HP/ConveyorBelt/statemachine -IC:/_HP/ConveyorBelt/syscontrol -I$(WIND_BASE)/target/h/wrn/coreip 
 ConveyorBelt/$(MODE_DIR)/% : IDE_LIBRARIES = 
 ConveyorBelt/$(MODE_DIR)/% : IDE_DEFINES = -DCPU=_VX_$(CPU) -DTOOL_FAMILY=$(TOOL_FAMILY) -DTOOL=$(TOOL) -D_WRS_KERNEL -D_VSB_CONFIG_FILE=\"$(VSB_DIR)/h/config/vsbConfig.h\"   -DIP_PORT_VXWORKS=69 
 ConveyorBelt/$(MODE_DIR)/% : PROJECT_TYPE = DKM
@@ -159,7 +159,7 @@ ConveyorBelt_partialImage/$(MODE_DIR)/% : DEBUGFLAGS_Partial-Image-Linker =
 ConveyorBelt_partialImage/$(MODE_DIR)/% : DEBUGFLAGS_Librarian = 
 ConveyorBelt_partialImage/$(MODE_DIR)/% : DEBUGFLAGS_Assembler =  -XO -Xsize-opt 
 endif
-ConveyorBelt_partialImage/$(MODE_DIR)/% : IDE_INCLUDES = -I$(WIND_BASE)/target/h -IC:/_HP/ConveyorBelt/pictrl -IC:/_HP/ConveyorBelt/hwfiles -IC:/_HP/ConveyorBelt/statemachine -IC:/_HP/ConveyorBelt/syscontrol -I$(WIND_BASE)/target/h/wrn/coreip 
+ConveyorBelt_partialImage/$(MODE_DIR)/% : IDE_INCLUDES = -I$(WIND_BASE)/target/h -IC:/_HP/ConveyorBelt/ptp -IC:/_HP/ConveyorBelt/pictrl -IC:/_HP/ConveyorBelt/hwfiles -IC:/_HP/ConveyorBelt/statemachine -IC:/_HP/ConveyorBelt/syscontrol -I$(WIND_BASE)/target/h/wrn/coreip 
 ConveyorBelt_partialImage/$(MODE_DIR)/% : IDE_LIBRARIES = 
 ConveyorBelt_partialImage/$(MODE_DIR)/% : IDE_DEFINES = -DCPU=_VX_$(CPU) -DTOOL_FAMILY=$(TOOL_FAMILY) -DTOOL=$(TOOL) -D_WRS_KERNEL -D_VSB_CONFIG_FILE=\"$(VSB_DIR)/h/config/vsbConfig.h\"   -DIP_PORT_VXWORKS=69 
 ConveyorBelt_partialImage/$(MODE_DIR)/% : PROJECT_TYPE = DKM
@@ -199,6 +199,14 @@ ConveyorBelt_partialImage/$(MODE_DIR)/Objects/ConveyorBelt/pictrl/ert_main.o : $
 
 ConveyorBelt_partialImage/$(MODE_DIR)/Objects/ConveyorBelt/pictrl/piCtrl.o : $(PRJ_ROOT_DIR)/pictrl/piCtrl.cpp $(FORCE_FILE_BUILD)
 	$(TRACE_FLAG)if [ ! -d "`dirname "$@"`" ]; then mkdir -p "`dirname "$@"`"; fi;echo "building $@"; $(TOOL_PATH)dcc $(DEBUGFLAGS_C++-Compiler) $(CC_ARCH_SPEC) -W:c:,-Xclib-optim-off -W:c++:,-Xclib-optim-off -Xansi -Xlocal-data-area-static-only  -W:c++:.CPP -ei1518,4177,4223,4301,4550,5409,1606 -ei4193,4826,4381,4237,1573,4007,4082,4177,4223,4260,4550,5361,5828,2273,5387,5388 -ei1522,4092,4111,4152,4167,4171,4174,4186,4188,4191,4192,4223,4231,4236,4284,4375,4494,4513,5152,5457 -Xforce-declarations   -Xmake-dependency=0xd $(IDE_DEFINES) $(DEFINES) $(ADDED_C++FLAGS) $(IDE_INCLUDES) $(ADDED_INCLUDES) -o "$@" -c "$<"
+
+
+ConveyorBelt_partialImage/$(MODE_DIR)/Objects/ConveyorBelt/ptp/ptpSlave.o : $(PRJ_ROOT_DIR)/ptp/ptpSlave.c $(FORCE_FILE_BUILD)
+	$(TRACE_FLAG)if [ ! -d "`dirname "$@"`" ]; then mkdir -p "`dirname "$@"`"; fi;echo "building $@"; $(TOOL_PATH)dcc $(DEBUGFLAGS_C-Compiler) $(CC_ARCH_SPEC) -W:c:,-Xclib-optim-off -W:c++:,-Xclib-optim-off -Xansi -Xlocal-data-area-static-only  -W:c++:.CPP -Xc-new -Xdialect-c89  -ei1518,4177,4223,4301,4550,5409,1606 -ei4193,4826,4381,4237,1573,4007,4082,4177,4223,4260,4550,5361,5828,2273,5387,5388 -ei1522,4092,4111,4152,4167,4171,4174,4186,4188,4191,4192,4223,4231,4236,4284,4375,4494,4513,5152,5457 -Xforce-declarations   -Xmake-dependency=0xd $(IDE_DEFINES) $(DEFINES) $(ADDED_CFLAGS) $(IDE_INCLUDES) $(ADDED_INCLUDES) -o "$@" -c "$<"
+
+
+ConveyorBelt_partialImage/$(MODE_DIR)/Objects/ConveyorBelt/ptp/ptpUDP.o : $(PRJ_ROOT_DIR)/ptp/ptpUDP.c $(FORCE_FILE_BUILD)
+	$(TRACE_FLAG)if [ ! -d "`dirname "$@"`" ]; then mkdir -p "`dirname "$@"`"; fi;echo "building $@"; $(TOOL_PATH)dcc $(DEBUGFLAGS_C-Compiler) $(CC_ARCH_SPEC) -W:c:,-Xclib-optim-off -W:c++:,-Xclib-optim-off -Xansi -Xlocal-data-area-static-only  -W:c++:.CPP -Xc-new -Xdialect-c89  -ei1518,4177,4223,4301,4550,5409,1606 -ei4193,4826,4381,4237,1573,4007,4082,4177,4223,4260,4550,5361,5828,2273,5387,5388 -ei1522,4092,4111,4152,4167,4171,4174,4186,4188,4191,4192,4223,4231,4236,4284,4375,4494,4513,5152,5457 -Xforce-declarations   -Xmake-dependency=0xd $(IDE_DEFINES) $(DEFINES) $(ADDED_CFLAGS) $(IDE_INCLUDES) $(ADDED_INCLUDES) -o "$@" -c "$<"
 
 
 ConveyorBelt_partialImage/$(MODE_DIR)/Objects/ConveyorBelt/statemachine/diaTimer.o : $(PRJ_ROOT_DIR)/statemachine/diaTimer.cpp $(FORCE_FILE_BUILD)
@@ -247,6 +255,8 @@ OBJECTS_ConveyorBelt_partialImage = ConveyorBelt_partialImage/$(MODE_DIR)/Object
 	 ConveyorBelt_partialImage/$(MODE_DIR)/Objects/ConveyorBelt/main.o \
 	 ConveyorBelt_partialImage/$(MODE_DIR)/Objects/ConveyorBelt/pictrl/ert_main.o \
 	 ConveyorBelt_partialImage/$(MODE_DIR)/Objects/ConveyorBelt/pictrl/piCtrl.o \
+	 ConveyorBelt_partialImage/$(MODE_DIR)/Objects/ConveyorBelt/ptp/ptpSlave.o \
+	 ConveyorBelt_partialImage/$(MODE_DIR)/Objects/ConveyorBelt/ptp/ptpUDP.o \
 	 ConveyorBelt_partialImage/$(MODE_DIR)/Objects/ConveyorBelt/statemachine/diaTimer.o \
 	 ConveyorBelt_partialImage/$(MODE_DIR)/Objects/ConveyorBelt/statemachine/setMyIP.o \
 	 ConveyorBelt_partialImage/$(MODE_DIR)/Objects/ConveyorBelt/statemachine/stateMachine.o \
@@ -281,10 +291,10 @@ TARGET_JOBS_RULE?=echo "Update the makefile template via File > Import > Build S
 
 DEP_FILES := ConveyorBelt_partialImage/$(MODE_DIR)/Objects/ConveyorBelt/hwfiles/disp.d ConveyorBelt_partialImage/$(MODE_DIR)/Objects/ConveyorBelt/hwfiles/hwFunc.d ConveyorBelt_partialImage/$(MODE_DIR)/Objects/ConveyorBelt/hwfiles/kbd.d \
 	 ConveyorBelt_partialImage/$(MODE_DIR)/Objects/ConveyorBelt/main.d ConveyorBelt_partialImage/$(MODE_DIR)/Objects/ConveyorBelt/pictrl/ert_main.d ConveyorBelt_partialImage/$(MODE_DIR)/Objects/ConveyorBelt/pictrl/piCtrl.d \
-	 ConveyorBelt_partialImage/$(MODE_DIR)/Objects/ConveyorBelt/statemachine/diaTimer.d ConveyorBelt_partialImage/$(MODE_DIR)/Objects/ConveyorBelt/statemachine/setMyIP.d ConveyorBelt_partialImage/$(MODE_DIR)/Objects/ConveyorBelt/statemachine/stateMachine.d \
-	 ConveyorBelt_partialImage/$(MODE_DIR)/Objects/ConveyorBelt/statemachine/stateTable.d ConveyorBelt_partialImage/$(MODE_DIR)/Objects/ConveyorBelt/syscontrol/DisplayControl.d ConveyorBelt_partialImage/$(MODE_DIR)/Objects/ConveyorBelt/syscontrol/KeyboardHandler.d \
-	 ConveyorBelt_partialImage/$(MODE_DIR)/Objects/ConveyorBelt/syscontrol/MotorControl.d ConveyorBelt_partialImage/$(MODE_DIR)/Objects/ConveyorBelt/syscontrol/SysControl.d ConveyorBelt_partialImage/$(MODE_DIR)/Objects/ConveyorBelt/syscontrol/TCPHandler_Chain.d \
-	 ConveyorBelt_partialImage/$(MODE_DIR)/Objects/ConveyorBelt/syscontrol/TCPHandler_UI.d
+	 ConveyorBelt_partialImage/$(MODE_DIR)/Objects/ConveyorBelt/ptp/ptpSlave.d ConveyorBelt_partialImage/$(MODE_DIR)/Objects/ConveyorBelt/ptp/ptpUDP.d ConveyorBelt_partialImage/$(MODE_DIR)/Objects/ConveyorBelt/statemachine/diaTimer.d \
+	 ConveyorBelt_partialImage/$(MODE_DIR)/Objects/ConveyorBelt/statemachine/setMyIP.d ConveyorBelt_partialImage/$(MODE_DIR)/Objects/ConveyorBelt/statemachine/stateMachine.d ConveyorBelt_partialImage/$(MODE_DIR)/Objects/ConveyorBelt/statemachine/stateTable.d \
+	 ConveyorBelt_partialImage/$(MODE_DIR)/Objects/ConveyorBelt/syscontrol/DisplayControl.d ConveyorBelt_partialImage/$(MODE_DIR)/Objects/ConveyorBelt/syscontrol/KeyboardHandler.d ConveyorBelt_partialImage/$(MODE_DIR)/Objects/ConveyorBelt/syscontrol/MotorControl.d \
+	 ConveyorBelt_partialImage/$(MODE_DIR)/Objects/ConveyorBelt/syscontrol/SysControl.d ConveyorBelt_partialImage/$(MODE_DIR)/Objects/ConveyorBelt/syscontrol/TCPHandler_Chain.d ConveyorBelt_partialImage/$(MODE_DIR)/Objects/ConveyorBelt/syscontrol/TCPHandler_UI.d
 -include $(DEP_FILES)
 
 

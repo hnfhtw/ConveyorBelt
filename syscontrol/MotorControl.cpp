@@ -43,7 +43,7 @@ MotorState MotorControl::getMotorState(){
 
 void MotorControl::setMotorSpeedFinal(int speed){
 	m_MotorSpeedFinal = speed;	// todo: maybe add error handling
-	m_pDisplayControl->updateDisplay();
+	m_pDisplayControl->updateDisplay(false);
 }
 
 int MotorControl::getMotorSpeedFinal(){
@@ -52,7 +52,7 @@ int MotorControl::getMotorSpeedFinal(){
 
 void MotorControl::setDirection(bool dir){
 	m_Direction = dir;
-	m_pDisplayControl->updateDisplay();
+	m_pDisplayControl->updateDisplay(false);
 }
 
 bool MotorControl::getDirection(){
