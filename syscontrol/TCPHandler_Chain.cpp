@@ -113,47 +113,18 @@ int TCPHandler_Chain::getSocketLCB(){
 /****************************************************************************
  * --------------------------  Input Processing -------------------------
  ***************************************************************************/
-void TCPHandler_Chain::processMasterRequest(char myBuffer[80], int sFd){
-	//printf("RECEIVED REQUEST FROM MASTER!\n");	/* print to console    */
-	if(strncmp(myBuffer, "Right ",6)==0){
-		//>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> TRIGGER STATE EVENT
-		m_AddrRCB = string(myBuffer+6, 8);
-		m_AddrRCBset = true;
-		//m_AddrMaster = "";			// DEBUG ONLY - to work as RCB from same computer as before as Master
-		startClient();
-		m_pSysControl->getStateMachine()->sendEvent("setOpMode(OPMODE_CHAIN)");
-		//sprintf(myBuffer ,"RIGHT NEIGHBOR ADRESS SET TO : %s!\n", m_AddrRCB.c_str());
-		//printf(myBuffer);					/* print to console    */
-	}
-	else{
-		processClientRequest(myBuffer, sFd);
-		//sprintf(myBuffer ,"%s“Right 91.0.0.k, where k is the address of the right neighbor!\n");
-	} 
-	//write (sFd, myBuffer, strlen (myBuffer));	/* print to TCP-Client */
-}
-
 void TCPHandler_Chain::processClientRequest(char myBuffer[80], int sFd){
-	//printf("RECEIVED REQUEST FROM Client!\n");	/* print to console    */
-	
 	if(strncmp(myBuffer, "Request",7)==0){
 		m_pSysControl->getStateMachine()->sendEvent("setCommand(REQUEST)");
-		//sprintf(myBuffer ,">>REQUEST<< RECEIVED FROM CLIENT!\n");
-		//printf(myBuffer);					/* print to console    */
 	}
 	else if(strncmp(myBuffer, "Ready",5)==0){
 		m_pSysControl->getStateMachine()->sendEvent("setCommand(READY)");
-		//sprintf(myBuffer ,">>READY<< RECEIVED FROM CLIENT!\n");
-		//printf(myBuffer);					/* print to console    */
 	}
 	else if(strncmp(myBuffer, "Release",7)==0){
 		m_pSysControl->getStateMachine()->sendEvent("setCommand(RELEASE)");
-		//sprintf(myBuffer ,">>RELEASE<< RECEIVED FROM CLIENT!\n");
-		//printf(myBuffer);					/* print to console    */
 	}
 	else if(strncmp(myBuffer, "Wait",4)==0){
 		m_pSysControl->getStateMachine()->sendEvent("setCommand(WAIT)");
-		//sprintf(myBuffer ,">>WAIT<< RECEIVED FROM CLIENT!\n");
-		//printf(myBuffer);					/* print to console    */
 	}
 	else if(strncmp(myBuffer, "Right ",6)==0){
 		m_AddrRCB = string(myBuffer+6, 8);
@@ -162,10 +133,7 @@ void TCPHandler_Chain::processClientRequest(char myBuffer[80], int sFd){
 		m_pSysControl->getStateMachine()->sendEvent("setOpMode(OPMODE_CHAIN)");
 	}
 	else{
-		//sprintf(myBuffer ,errorMsg);
-		//printf(myBuffer);					/* print to console    */
 	} 
-	//write (sFd, myBuffer, strlen (myBuffer));	/* print to TCP-Client */
 }
 
 /****************************************************************************
@@ -175,29 +143,17 @@ void TCPHandler_Chain::processClientRequest(char myBuffer[80], int sFd){
 void tcpServerChainWorkTask(int sFd, char* address, u_short port, TCPHandler_Chain* pHandler){ // server's socket fd,  client's socket address, client's socket port
 	char myBuffer[80];
     int nRead;          /* number of bytes read */ 
-    
-    //write (sFd, replyMsg, sizeof (replyMsg));	// send reply message to client
-    
-    //while(true){		// DEBUG - leave connection alive
+        
 	while ( (nRead = fioRdString (sFd, myBuffer, sizeof (myBuffer))) > 0 ){
-    //if( (nRead = fioRdString (sFd, myBuffer, sizeof (myBuffer))) > 0 ){
-			// Ausgabe in der Konsole
-			printf ("MESSAGE FROM CLIENT (Internet Address %s, port %d): %s\n", address, port, myBuffer); 
-			/************ porcessing of received Input ************************/
-			//Request from Master?
-			/*if(strcmp(address, (pHandler->getAddrMaster()).c_str())==0){
-				pHandler->processMasterRequest(myBuffer, sFd);
-				
-			}
-			else{*/
-				pHandler->processClientRequest(myBuffer, sFd);
-				pHandler->setSocketLCB(sFd);
-			//}
-			/******************************************************************/
+		printf ("MESSAGE FROM CLIENT (Internet Address %s, port %d): %s\n", address, port, myBuffer); 
+		/************ porcessing of received Input ************************/
+		pHandler->processClientRequest(myBuffer, sFd);
+		pHandler->setSocketLCB(sFd);
+		/******************************************************************/
     }
- 
-    //if (nRead == ERROR)                 /* error from read() */ 
-        //perror ("read"); 
+
+    if (nRead == ERROR)                 /* error from read() */ 
+        perror ("read"); 
  
     close (sFd);						/* close server socket connection */    
 }

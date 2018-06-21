@@ -16,7 +16,7 @@ using namespace std;
 
 class MotorControl;
 
-class TCPHandler_UI{		// todo: update class diagram
+class TCPHandler_UI{
 private:
 	MotorControl*	m_pMotorControl;	
 	SysControl*		m_pSysControl;		

@@ -48,8 +48,6 @@ extern "C"{
 #define STACK_SIZE                     16384
 #endif
 
-//int targetSpeed = 100;
-
 static int_T tBaseRate(SEM_ID sem, SEM_ID startStopSem, MotorControl* pMotorControl)
 {
   int_T i;
@@ -87,9 +85,9 @@ static int_T tBaseRate(SEM_ID sem, SEM_ID startStopSem, MotorControl* pMotorCont
 
     /* Get model outputs here */
     motorVoltage = piCtrl_Y.u_ref;
-    //printf("%.2f %.2f %.2f\n",  piCtrl_U.In2, piCtrl_Y.u_ref, pulseCnt);
-    printf("%d;%d\n",  targetSpeed, speedRpm);
-    voltageDig = 2048 - (int)(motorVoltage * 220.0); 
+    //printf("%d;%d\n",  targetSpeed, speedRpm);		// HN-DEBUG - to get ramp and step response
+    voltageDig = 2048 - (int)(motorVoltage * 220.0);	// Depending on the setup used 0rpm is at approximately 2600, not at 2048
+    //printf("%d;%d;%d\n",  targetSpeed, speedRpm, voltageDig);		// HN-DEBUG - to get ramp and step response
     if (voltageDig > 4095) {
       voltageDig = 4095;
     }
@@ -132,7 +130,6 @@ int_T piCtrl_main(int_T priority, MotorControl* pMotorControl)
   printf("Actual sample rate in Hertz: %f\n",actualSR);
   VxWorksTIDs[0] = taskSpawn("tBaseRate",
     priority, VX_FP_TASK, STACK_SIZE, (FUNCPTR)tBaseRate, (int_T) rtClockSem,
-    //(int_T) startStopSem, (int_T) rtTaskSemaphoreList, (int) pMotorControl, 0, 0, 0, 0, 0, 0);
     (int_T) startStopSem, (int) pMotorControl, 0, 0, 0, 0, 0, 0, 0);
   if (sysAuxClkConnect((FUNCPTR) semGive, (int_T) rtClockSem) == OK) {
     rebootHookAdd((FUNCPTR) sysAuxClkDisable);

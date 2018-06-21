@@ -23,7 +23,7 @@ class TCPHandler_Chain;
 class TCPHandler_UI;
 class StateMachine;
 
-class SysControl{			// todo: update class diagram
+class SysControl{
 private:
 	TCPHandler_Chain*	m_pTCPHandler_Chain;
 	TCPHandler_UI*		m_pTCPHandler_UI;

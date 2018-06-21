@@ -20,8 +20,6 @@ MotorControl::MotorControl(DisplayControl* pDctrl){
 	m_Direction = true;			// TRUE = clockwise, FALSE = counter clockwise
 	m_MotorSpeedFinal = 1800;
 	m_TargetSpeed = 0;
-	
-	//taskSpawn ("piCtrl", 111, 0,0x1000, (FUNCPTR) piCtrl_main,110,(int) this,0,0,0,0,0,0,0,0);
 }
 
 MotorControl::~MotorControl(){
@@ -42,7 +40,7 @@ MotorState MotorControl::getMotorState(){
 }
 
 void MotorControl::setMotorSpeedFinal(int speed){
-	m_MotorSpeedFinal = speed;	// todo: maybe add error handling
+	m_MotorSpeedFinal = speed;
 	m_pDisplayControl->updateDisplay(false);
 }
 
@@ -64,13 +62,7 @@ void MotorControl::setSysControl(SysControl* pSysctrl){
 }
 
 void MotorControl::setTargetSpeed(int speed){
-	/*if(speed == 0){
-		motorOff();
-	}
-	else if(speed > 0 && m_TargetSpeed == 0){
-		motorOn();
-	}*/
-	m_TargetSpeed = speed;	// todo: maybe add error handling
+	m_TargetSpeed = speed;
 }
 
 int MotorControl::getTargetSpeed(){

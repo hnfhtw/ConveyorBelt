@@ -14,7 +14,7 @@
 
 class DisplayControl;
 
-class MotorControl{		// todo: update class diagram
+class MotorControl{
 private:
 	DisplayControl*	m_pDisplayControl;
 	SysControl*		m_pSysControl;
@@ -32,7 +32,6 @@ public:
 	int getMotorSpeedFinal();
 	void setDirection(bool dir);
 	bool getDirection();
-	//void setDisplayControl(DisplayControl* pDctrl);	// pointer provided in constructor already
 	void setSysControl(SysControl* pSysctrl);
 	void setTargetSpeed(int speed);
 	int getTargetSpeed();

@@ -108,7 +108,6 @@ void DisplayControl::updateDisplay(bool setTime){
 			char timeMsg[80];
 			sprintf(timeMsg, "Packet received at master-time %ds                         ", (time(NULL)-timeOffset));
 			writeToDisplay(20, 5, timeMsg);
-			//writeToDisplay(20, 5, "Packet received at master-time %d ");
 		}
 	}						  
 }

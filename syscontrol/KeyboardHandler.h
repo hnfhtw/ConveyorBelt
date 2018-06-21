@@ -14,7 +14,7 @@
 class MotorControl;
 class SysControl;
 
-class KeyboardHandler{			// todo: update class diagram
+class KeyboardHandler{
 private:
 	MotorControl*	m_pMotorControl;
 	SysControl*		m_pSysControl;

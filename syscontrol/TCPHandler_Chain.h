@@ -15,7 +15,7 @@ using namespace std;
 
 class SysControl;
 
-class TCPHandler_Chain{				// todo: update class diagram
+class TCPHandler_Chain{
 private:
 	SysControl*	m_pSysControl;
 	string		m_AddrMaster;
@@ -34,7 +34,6 @@ public:
 	string getAddrRCB();
 	void sendToRCB(Command cmd);
 	void sendToLCB(Command cmd);
-	void processMasterRequest(char myBuffer[80], int sFd);
 	void processClientRequest(char myBuffer[80], int sFd);
 	void setSocketRCB(int sFd);
 	void setSocketLCB(int sFd);
